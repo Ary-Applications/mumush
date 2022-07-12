@@ -4,6 +4,7 @@ import 'package:mumush/src/di/injection.dart';
 
 void main() {
   // Set up injectable
+  //
   configureDependencies();
 
   runApp(const Mumush());

@@ -20,7 +20,7 @@ class _MapViewState extends State<MapView> {
         return SafeArea(
           child: Center(
             child: Text(viewModel.testTitle),
-          ),
+          ), 
         );
       },
     );

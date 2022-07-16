@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/home/home_view.dart';
+import '../screens/home/timeline_view.dart';
 
 class Mumush extends StatelessWidget {
   const Mumush({Key? key}) : super(key: key);

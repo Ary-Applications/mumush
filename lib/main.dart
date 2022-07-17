@@ -1,34 +1,32 @@
-import 'package:first/square_widget.dart';
-import 'package:first/timeline_view.dart';
+import 'package:mumush/src/screens/timeline/event.dart';
+import 'package:mumush/src/screens/timeline/square_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:first/event.dart';
+import 'package:mumush/src/screens/timeline/timeline_view.dart';
 
 
-void main() => runApp(MyApp());
+void main() => runApp(Mumush());
 
-class MyApp extends StatelessWidget {
+class Mumush extends StatelessWidget {
+  const Mumush({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
-    var event = "Event";
-    var time = "Time";
-    var location = "Location";
 
     return MaterialApp(
       theme: ThemeData(fontFamily: 'SpaceMono'),
       home: Scaffold(
         backgroundColor: Colors.grey,
         bottomNavigationBar: BottomNavigationBar(
-          selectedLabelStyle: TextStyle(color: Colors.pinkAccent),
+          selectedLabelStyle: const TextStyle(color: Colors.pinkAccent),
           selectedItemColor: Colors.pinkAccent,
           backgroundColor: Colors.white38,
           currentIndex: 0,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon:Icon(Icons.calendar_month),
               label: 'Schedule',
               backgroundColor: Colors.white,
-
             ),
             BottomNavigationBarItem(
               icon:Icon(Icons.location_on),
@@ -64,7 +62,7 @@ class MyApp extends StatelessWidget {
             SquareWidget(event: Event("Event", "Okay", "Time")),
             SquareWidget(event: Event("Event", "Okay", "Time")),
           ],
-          items: ['Gargantua','Arboretum','Arts & Crafts','Circus','Kid s Area','Healing'],
+          items: const ['Gargantua','Arboretum','Arts & Crafts','Circus','Kid s Area','Healing'],
           selectedItem: 'Gargantua',
           day1: 'Day1',
           day2: 'Day2',

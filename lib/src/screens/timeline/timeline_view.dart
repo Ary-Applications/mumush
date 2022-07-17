@@ -1,18 +1,17 @@
-import 'package:first/square_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mumush/src/screens/timeline/square_widget.dart';
 
 class TimelineView extends StatefulWidget {
   TimelineView(
       {Key? key,
-        required this.squareList,
-        required this.items,
-        required this.selectedItem,
-        required this.day1,
-        required this.day2,
-        required this.day3,
-        required this.day4,
-        required this.day5})
+      required this.squareList,
+      required this.items,
+      required this.selectedItem,
+      required this.day1,
+      required this.day2,
+      required this.day3,
+      required this.day4,
+      required this.day5})
       : super(key: key);
 
   final List<SquareWidget> squareList;
@@ -31,38 +30,38 @@ class _TimelineViewState extends State<TimelineView> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Padding(
-          padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
           child: Container(
               height: 80,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Center(
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     value: widget.selectedItem,
                     isExpanded: true,
                     iconSize: 40,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_drop_down,
                       color: Colors.black26,
                     ),
                     items: widget.items
                         .map((item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: Container(
-                          height: 80,
-                          child: Center(
-                              child: Text(
-                                item,
-                                style: TextStyle(
-                                    fontSize: 40.0,
-                                    fontWeight: FontWeight.bold),
-                                overflow: TextOverflow.visible,
-                              ))),
-                    ))
+                              value: item,
+                              child: SizedBox(
+                                  height: 80,
+                                  child: Center(
+                                      child: Text(
+                                    item,
+                                    style: const TextStyle(
+                                        fontSize: 40.0,
+                                        fontWeight: FontWeight.bold),
+                                    overflow: TextOverflow.visible,
+                                  ))),
+                            ))
                         .toList(),
                     onChanged: (item) {
                       setState(() {
-                        this.widget.selectedItem = item;
+                        widget.selectedItem = item;
                       });
                     },
                   ),
@@ -71,18 +70,18 @@ class _TimelineViewState extends State<TimelineView> {
         ),
         Center(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(8, 20, 0, 0),
+            padding: const EdgeInsets.fromLTRB(8, 20, 0, 0),
             child: Row(
               children: [
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       border: Border(
-                        left: BorderSide(width: 3.0, color: Colors.black),
-                      )),
+                    left: BorderSide(width: 3.0, color: Colors.black),
+                  )),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      minimumSize: Size(10, 40),
-                      textStyle: TextStyle(fontSize: 25),
+                      minimumSize: const Size(10, 40),
+                      textStyle: const TextStyle(fontSize: 25),
                       primary: Colors.black,
                     ),
                     onPressed: () {},
@@ -90,14 +89,14 @@ class _TimelineViewState extends State<TimelineView> {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       border: Border(
-                        left: BorderSide(width: 3.0, color: Colors.black),
-                      )),
+                    left: BorderSide(width: 3.0, color: Colors.black),
+                  )),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      minimumSize: Size(10, 40),
-                      textStyle: TextStyle(fontSize: 25),
+                      minimumSize: const Size(10, 40),
+                      textStyle: const TextStyle(fontSize: 25),
                       primary: Colors.black,
                     ),
                     onPressed: () {},
@@ -105,14 +104,14 @@ class _TimelineViewState extends State<TimelineView> {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       border: Border(
-                        left: BorderSide(width: 3.0, color: Colors.black),
-                      )),
+                    left: BorderSide(width: 3.0, color: Colors.black),
+                  )),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      minimumSize: Size(10, 40),
-                      textStyle: TextStyle(fontSize: 25),
+                      minimumSize: const Size(10, 40),
+                      textStyle: const TextStyle(fontSize: 25),
                       primary: Colors.black,
                     ),
                     onPressed: () {},
@@ -120,14 +119,14 @@ class _TimelineViewState extends State<TimelineView> {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       border: Border(
-                        left: BorderSide(width: 3.0, color: Colors.black),
-                      )),
+                    left: BorderSide(width: 3.0, color: Colors.black),
+                  )),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      minimumSize: Size(10, 40),
-                      textStyle: TextStyle(fontSize: 25),
+                      minimumSize: const Size(10, 40),
+                      textStyle: const TextStyle(fontSize: 25),
                       primary: Colors.black,
                     ),
                     onPressed: () {},
@@ -135,15 +134,15 @@ class _TimelineViewState extends State<TimelineView> {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       border: Border(
-                        left: BorderSide(width: 3.0, color: Colors.black),
-                        right: BorderSide(width: 3.0, color: Colors.black),
-                      )),
+                    left: BorderSide(width: 3.0, color: Colors.black),
+                    right: BorderSide(width: 3.0, color: Colors.black),
+                  )),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      minimumSize: Size(10, 40),
-                      textStyle: TextStyle(fontSize: 25),
+                      minimumSize: const Size(10, 40),
+                      textStyle: const TextStyle(fontSize: 25),
                       primary: Colors.black,
                     ),
                     onPressed: () {},
@@ -156,18 +155,18 @@ class _TimelineViewState extends State<TimelineView> {
         ),
         Expanded(
           child: GridView.builder(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             shrinkWrap: true,
             itemCount: widget.squareList.length,
-            physics: ScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            physics: const ScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, crossAxisSpacing: 0, mainAxisSpacing: 0),
             itemBuilder: (BuildContext context, int index) {
-              return Container(
+              return SizedBox(
                   width: (MediaQuery.of(context).size.width) / 2,
                   height: 500,
                   child: Stack(children: [
-                    Container(
+                    SizedBox(
                       width: (MediaQuery.of(context).size.width) / 2,
                       height: 500,
                       child: CustomPaint(

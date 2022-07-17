@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../screens/home/timeline_view.dart';
 
 class Mumush extends StatelessWidget {
   const Mumush({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class Mumush extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       darkTheme: ThemeData.dark(),
-      home: const HomePage(title: 'Flutter Demo Home Page'),
+      home: const Mumush()
     );
   }
 }

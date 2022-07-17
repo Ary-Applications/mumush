@@ -36,6 +36,10 @@ flutter:
 
   uses-material-design: true
 
-  assets:
     # Add assets from the images directory to the application.
-    - assets/images/
+  fonts:
+    - family: SpaceMono
+      fonts:
+        - asset: assets/fonts/SpaceMono-Regular.ttf
+        - asset: assets/fonts/SpaceMono-Bold.ttf
+          weight: 700

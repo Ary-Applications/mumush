@@ -20,7 +20,7 @@ dependencies:
   # Provider
   provider: ^6.0.3
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +31,11 @@ dev_dependencies:
   # DI generators
   injectable_generator:
   build_runner:
+
+  # Maps & Location
+  google_maps_flutter: ^2.1.9
+  location: ^4.3.0
+  permission_handler: ^8.1.4+2
 
 flutter:
 

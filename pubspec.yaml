@@ -45,6 +45,7 @@ flutter:
   fonts:
     - family: SpaceMono
       fonts:
+        - asset: assets/mapStyle/map_style.txt
         - asset: assets/fonts/SpaceMono-Regular.ttf
         - asset: assets/fonts/SpaceMono-Bold.ttf
           weight: 700

@@ -49,7 +49,7 @@ class _TimelineViewState extends State<TimelineView> {
                           iconSize: 40,
                           icon: const Icon(
                             Icons.arrow_drop_down,
-                            color: Colors.black26,
+                            color: Colors.white,
                           ),
                           items: widget.items
                               .map((item) => DropdownMenuItem<String>(
@@ -75,91 +75,88 @@ class _TimelineViewState extends State<TimelineView> {
                       ),
                     )),
               ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 20, 0, 0),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                            border: Border(
-                          left: BorderSide(width: 3.0, color: Colors.black),
-                        )),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            minimumSize: const Size(10, 40),
-                            textStyle: const TextStyle(fontSize: 25),
-                            primary: Colors.black,
-                          ),
-                          onPressed: () {},
-                          child: Text(widget.day1),
-                        ),
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                            border: Border(
-                          left: BorderSide(width: 3.0, color: Colors.black),
-                        )),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            minimumSize: const Size(10, 40),
-                            textStyle: const TextStyle(fontSize: 25),
-                            primary: Colors.black,
-                          ),
-                          onPressed: () {},
-                          child: Text(widget.day2),
-                        ),
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                            border: Border(
-                          left: BorderSide(width: 3.0, color: Colors.black),
-                        )),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            minimumSize: const Size(10, 40),
-                            textStyle: const TextStyle(fontSize: 25),
-                            primary: Colors.black,
-                          ),
-                          onPressed: () {},
-                          child: Text(widget.day3),
-                        ),
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                            border: Border(
-                          left: BorderSide(width: 3.0, color: Colors.black),
-                        )),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            minimumSize: const Size(10, 40),
-                            textStyle: const TextStyle(fontSize: 25),
-                            primary: Colors.black,
-                          ),
-                          onPressed: () {},
-                          child: Text(widget.day4),
-                        ),
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                            border: Border(
-                          left: BorderSide(width: 3.0, color: Colors.black),
-                          right: BorderSide(width: 3.0, color: Colors.black),
-                        )),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            minimumSize: const Size(10, 40),
-                            textStyle: const TextStyle(fontSize: 25),
-                            primary: Colors.black,
-                          ),
-                          onPressed: () {},
-                          child: Text(widget.day5),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+               FittedBox(
+                 child: Padding(
+                   padding: const EdgeInsets.fromLTRB(2, 20, 0, 0),
+                   child: Row(
+                     children: [
+                       Container(
+
+                         child: TextButton(
+                           style: TextButton.styleFrom(
+                             minimumSize: const Size(10, 40),
+                             textStyle: const TextStyle(fontSize: 25),
+                             primary: Colors.black,
+                           ),
+                           onPressed: () {},
+                           child: Text(widget.day1),
+                         ),
+                       ),
+                       Container(
+                         decoration: const BoxDecoration(
+                             border: Border(
+                           left: BorderSide(width: 3.0, color: Colors.black),
+                         )),
+                         child: TextButton(
+                           style: TextButton.styleFrom(
+                             minimumSize: const Size(10, 40),
+                             textStyle: const TextStyle(fontSize: 25),
+                             primary: Colors.black,
+                           ),
+                           onPressed: () {},
+                           child: Text(widget.day2),
+                         ),
+                       ),
+                       Container(
+                         decoration: const BoxDecoration(
+                             border: Border(
+                           left: BorderSide(width: 3.0, color: Colors.black),
+                         )),
+                         child: TextButton(
+                           style: TextButton.styleFrom(
+                             minimumSize: const Size(10, 40),
+                             textStyle: const TextStyle(fontSize: 25),
+                             primary: Colors.black,
+                           ),
+                           onPressed: () {},
+                           child: Text(widget.day3),
+                         ),
+                       ),
+                       Container(
+                         decoration: const BoxDecoration(
+                             border: Border(
+                           left: BorderSide(width: 3.0, color: Colors.black),
+                         )),
+                         child: TextButton(
+                           style: TextButton.styleFrom(
+                             minimumSize: const Size(10, 40),
+                             textStyle: const TextStyle(fontSize: 25),
+                             primary: Colors.black,
+                           ),
+                           onPressed: () {},
+                           child: Text(widget.day4),
+                         ),
+                       ),
+                       Container(
+                         decoration: const BoxDecoration(
+                             border: Border(
+                           left: BorderSide(width: 3.0, color: Colors.black),
+                         )),
+                         child: TextButton(
+                           style: TextButton.styleFrom(
+                             minimumSize: const Size(10, 40),
+                             textStyle: const TextStyle(fontSize: 25),
+                             primary: Colors.black,
+                           ),
+                           onPressed: () {},
+                           child: Text(widget.day5),
+                         ),
+                       ),
+                     ],
+                   ),
+                 ),
+               ),
+            
               Expanded(
                 child: GridView.builder(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),

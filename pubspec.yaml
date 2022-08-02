@@ -21,6 +21,10 @@ dependencies:
   provider: ^6.0.3
 
   cupertino_icons: ^1.0.3
+  flutter_svg: ^1.1.1+1
+  flutter_signin_button: ^2.0.0
+  url_launcher: ^6.1.5
+  font_awesome_flutter: ^9.2.0
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +46,9 @@ flutter:
   uses-material-design: true
 
     # Add assets from the images directory to the application.
+  assets:
+    - assets/art/mumush.svg
+
   fonts:
     - family: SpaceMono
       fonts:

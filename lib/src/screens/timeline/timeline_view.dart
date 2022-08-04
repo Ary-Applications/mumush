@@ -85,11 +85,11 @@ class _TimelineViewState extends State<TimelineView> {
                          child: TextButton(
                            style: TextButton.styleFrom(
                              minimumSize: const Size(10, 40),
-                             textStyle: const TextStyle(fontSize: 25),
+                             textStyle: const TextStyle(fontSize: 25,fontFamily: 'SpaceMono',fontWeight: FontWeight.bold,),
                              primary: Colors.black,
                            ),
                            onPressed: () {},
-                           child: Text(widget.day1),
+                           child: Text(widget.day1, ),
                          ),
                        ),
                        Container(
@@ -100,7 +100,7 @@ class _TimelineViewState extends State<TimelineView> {
                          child: TextButton(
                            style: TextButton.styleFrom(
                              minimumSize: const Size(10, 40),
-                             textStyle: const TextStyle(fontSize: 25),
+                             textStyle: const TextStyle(fontSize: 25,fontFamily: 'SpaceMono',fontWeight: FontWeight.bold,),
                              primary: Colors.black,
                            ),
                            onPressed: () {},
@@ -115,7 +115,7 @@ class _TimelineViewState extends State<TimelineView> {
                          child: TextButton(
                            style: TextButton.styleFrom(
                              minimumSize: const Size(10, 40),
-                             textStyle: const TextStyle(fontSize: 25),
+                             textStyle: const TextStyle(fontSize: 25,fontFamily: 'SpaceMono',fontWeight: FontWeight.bold,),
                              primary: Colors.black,
                            ),
                            onPressed: () {},
@@ -130,7 +130,7 @@ class _TimelineViewState extends State<TimelineView> {
                          child: TextButton(
                            style: TextButton.styleFrom(
                              minimumSize: const Size(10, 40),
-                             textStyle: const TextStyle(fontSize: 25),
+                             textStyle: const TextStyle(fontSize: 25,fontFamily: 'SpaceMono',fontWeight: FontWeight.bold,),
                              primary: Colors.black,
                            ),
                            onPressed: () {},
@@ -145,7 +145,7 @@ class _TimelineViewState extends State<TimelineView> {
                          child: TextButton(
                            style: TextButton.styleFrom(
                              minimumSize: const Size(10, 40),
-                             textStyle: const TextStyle(fontSize: 25),
+                             textStyle:  const TextStyle(fontSize: 25,fontFamily: 'SpaceMono',fontWeight: FontWeight.bold,),
                              primary: Colors.black,
                            ),
                            onPressed: () {},

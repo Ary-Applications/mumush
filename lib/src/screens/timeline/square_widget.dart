@@ -19,7 +19,9 @@ class SquareWidget extends StatelessWidget {
               width: 150.0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.pinkAccent.withOpacity(0.2),
+                  color: Colors.transparent,
+                  border:Border.all(color: Colors.white,width: 3),
+                  borderRadius: BorderRadius.all(Radius.circular(7))
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
@@ -30,7 +32,7 @@ class SquareWidget extends StatelessWidget {
                           child: Text(
                             event.eventTitle,
                             style: const TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.bold),
+                                fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.white),
                           )),
                       const SizedBox(height: 30),
                       Row(
@@ -40,7 +42,7 @@ class SquareWidget extends StatelessWidget {
                               alignment: Alignment.topLeft,
                               child: Text(
                                 event.date,
-                                style: const TextStyle(fontSize: 10.0),
+                                style: const TextStyle(fontSize: 10.0,color: Colors.white),
                               )),
                         ],
                       ),

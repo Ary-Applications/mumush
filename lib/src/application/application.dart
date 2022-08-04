@@ -57,7 +57,7 @@ class _MumushState extends State<Mumush> {
             )
           ],
         ),
-        body: PageView(controller: pageController, children: [
+        body: PageView(controller: pageController, physics: NeverScrollableScrollPhysics(),children: [
           HomeView(),
           TimelineView(
             squareList: [

@@ -50,6 +50,8 @@ flutter:
     - assets/art/mumush.svg
     - assets/art/graund.png
     - assets/art/sky.png
+    - assets/art/backgraund.png
+
 
   fonts:
     - family: SpaceMono

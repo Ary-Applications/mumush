@@ -42,7 +42,7 @@ class _MapViewState extends State<MapView> {
       myLocationEnabled: true,
       mapToolbarEnabled: true,
       // markers: _showMarkers,
-      onMapCreated: onMapCreated,
+      onMapCreated: onMapCreated, 
       initialCameraPosition: CameraPosition(
           bearing: 0.0, target: LatLng(46.4907468, 24.8109370), zoom: 0.0),
     );

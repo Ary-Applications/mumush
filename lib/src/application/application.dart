@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mumush/src/screens/map/map_view.dart';
 
+import '../screens/home/home_view.dart';
 import '../screens/timeline/event.dart';
 import '../screens/timeline/square_widget.dart';
 import '../screens/timeline/timeline_view.dart';
@@ -14,7 +15,6 @@ class Mumush extends StatefulWidget {
 }
 
 class _MumushState extends State<Mumush> {
-
   int _selectedIndex = 0;
   PageController pageController = PageController();
 
@@ -41,26 +41,25 @@ class _MumushState extends State<Mumush> {
           currentIndex: _selectedIndex,
           items: const [
             BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Colors.white,
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.calendar_month),
               label: 'Schedule',
               backgroundColor: Colors.white,
-
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.location_on),
               label: 'Map',
               backgroundColor: Colors.white,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.phone),
-              label: 'Contact',
-              backgroundColor: Colors.white,
             )
           ],
         ),
-        body: PageView(
-          controller: pageController,
-          children: [TimelineView(
+        body: PageView(controller: pageController, children: [
+          HomeView(),
+          TimelineView(
             squareList: [
               SquareWidget(event: Event("Event", "Okay", "Time")),
               SquareWidget(event: Event("Event", "Okay", "Time")),
@@ -82,24 +81,22 @@ class _MumushState extends State<Mumush> {
               SquareWidget(event: Event("Event", "Okay", "Time")),
             ],
             items: const [
-              'Gargantua',
+              'GARGANTUA',
               'Arboretum',
               'Arts & Crafts',
               'Circus',
               'Kid s Area',
               'Healing'
             ],
-            selectedItem: 'Gargantua',
-            day1: 'Day1',
-            day2: 'Day2',
-            day3: 'Day3',
-            day4: 'Day4',
-            day5: 'Day5',
+            selectedItem: 'GARGANTUA',
+            day1: 'DAY1',
+            day2: 'DAY2',
+            day3: 'DAY3',
+            day4: 'DAY4',
+            day5: 'DAY5',
           ),
           MapView(),
-            Container(color: Colors.black),
-          ]
-        ),
+        ]),
       ),
     );
   }

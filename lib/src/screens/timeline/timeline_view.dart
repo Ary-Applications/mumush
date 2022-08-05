@@ -208,7 +208,7 @@ class _TimelineViewState extends State<TimelineView> {
 class LinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..strokeWidth = 5 ..color = Colors.white;
+    final paint = Paint()..strokeWidth = 5 ..color = Color(0xFFF67F59);
     canvas.drawLine(Offset(size.width * 0, size.height * 0.53),
         Offset(size.width * 1, size.height * 0.53), paint);
   }

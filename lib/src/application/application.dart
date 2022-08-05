@@ -35,9 +35,10 @@ class _MumushState extends State<Mumush> {
         backgroundColor: Colors.grey,
         bottomNavigationBar: BottomNavigationBar(
           selectedLabelStyle: const TextStyle(color: Colors.pinkAccent),
-          selectedItemColor: Colors.pinkAccent,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white38,
           onTap: onTapped,
-          backgroundColor: Colors.white38,
+          backgroundColor: Colors.black,
           currentIndex: _selectedIndex,
           items: const [
             BottomNavigationBarItem(

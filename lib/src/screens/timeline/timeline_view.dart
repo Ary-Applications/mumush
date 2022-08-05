@@ -55,34 +55,37 @@ class _TimelineViewState extends State<TimelineView> {
                               horizontal: 20, vertical: 10),
                           child: Center(
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                value: widget.selectedItem,
-                                isExpanded: true,
-                                iconSize: 40,
-                                icon: const Icon(
-                                  Icons.arrow_drop_down,
-                                  color: Colors.white,
+                              child: Theme(
+                                data: Theme.of(context).copyWith(canvasColor: Color(0xFF17194E)),
+                                child: DropdownButton<String>(
+                                  value: widget.selectedItem,
+                                  isExpanded: true,
+                                  iconSize: 40,
+                                  icon: const Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Colors.white,
+                                  ),
+                                  items: widget.items
+                                      .map((item) => DropdownMenuItem<String>(
+                                            value: item,
+                                            child: SizedBox(
+                                                height: 80,
+                                                child: Center(
+                                                    child: Text(
+                                                  item,
+                                                  style: const TextStyle(
+                                                      fontSize: 40.0,
+                                                      fontWeight: FontWeight.bold,color: Colors.white),
+                                                  overflow: TextOverflow.visible,
+                                                ))),
+                                          ))
+                                      .toList(),
+                                  onChanged: (item) {
+                                    setState(() {
+                                      widget.selectedItem = item;
+                                    });
+                                  },
                                 ),
-                                items: widget.items
-                                    .map((item) => DropdownMenuItem<String>(
-                                          value: item,
-                                          child: SizedBox(
-                                              height: 80,
-                                              child: Center(
-                                                  child: Text(
-                                                item,
-                                                style: const TextStyle(
-                                                    fontSize: 40.0,
-                                                    fontWeight: FontWeight.bold,color: Colors.white),
-                                                overflow: TextOverflow.visible,
-                                              ))),
-                                        ))
-                                    .toList(),
-                                onChanged: (item) {
-                                  setState(() {
-                                    widget.selectedItem = item;
-                                  });
-                                },
                               ),
                             ),
                           )),

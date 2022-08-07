@@ -14,10 +14,15 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  late HomeViewModel _viewModel;
+
   @override
   Widget build(BuildContext context) {
-    return BaseStatefulView(
+    return BaseStatefulView<HomeViewModel>(
         viewModel: getIt<HomeViewModel>(),
+        onInit: (viewModel) {
+         _viewModel = viewModel;
+        },
         builder: (context, viewModel, child) {
           return FittedBox(
             child: Container(

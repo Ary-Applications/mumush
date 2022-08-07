@@ -27,10 +27,15 @@ class TimelineView extends StatefulWidget {
 }
 
 class _TimelineViewState extends State<TimelineView> {
+  late TimelineViewModel _viewModel;
+
   @override
   Widget build(BuildContext context) {
-    return BaseStatefulView(
+    return BaseStatefulView<TimelineViewModel>(
         viewModel: getIt<TimelineViewModel>(),
+        onInit: (viewModel) {
+          _viewModel = viewModel;
+        },
         builder: (context, viewModel, child) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

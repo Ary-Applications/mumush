@@ -24,7 +24,7 @@ class _HomeViewState extends State<HomeView> {
          _viewModel = viewModel;
         },
         builder: (context, viewModel, child) {
-          return FittedBox(
+          return Flexible(
             child: Container(
               color: Color(0xFF1B0F27),
               child: Stack(
@@ -44,10 +44,9 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   Column(
                     children: [
-                      SizedBox(height: 50),
+                      SizedBox(height: 100),
                       Container(
-
-                          height: 700,
+                          height: 600,
                           width:MediaQuery.of(context).size.width,
                           child: FittedBox(
                             child: Image(image: AssetImage('assets/art/graund.png')),
@@ -56,58 +55,51 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ],
                   ),
-                  Container(
-                      color: Colors.transparent,
-                    child: Column(
-                      children:
-                      [
-                        Container(
-                          height: 150,
-                          width: 400,
-                          color: Color(0xFFEC6842),
-                          child:Column(
-                            children: [
-                              SizedBox(height: 60),
-                              Text('NEED MEDICAL ASSISTANCE?',style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,color: Colors.white),),
-                              SizedBox(height: 10,),
-                              Text('CALL:000000000000000',style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,color: Colors.white),),
+                  FittedBox(
+                    child: Container(
+                        color: Colors.transparent,
+                      child: Column(
+                        children:
+                        [
+                          Container(
+                            height: 150,
+                            width: 400,
+                            color: Color(0xFFEC6842),
+                            child:Column(
+                              children: [
+                                SizedBox(height: 60),
+                                Text('NEED MEDICAL ASSISTANCE?',style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,color: Colors.white),),
+                                SizedBox(height: 10,),
+                                Text('CALL:000000000000000',style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,color: Colors.white),),
 
-                            ],
-                          ),
-
-                          ),
-
-                        SizedBox(height: 50),
-                        Container(
-                        height: 200,
-                          width: 200,
-                          color: Colors.transparent,
-                          child: SvgPicture.asset('assets/art/mumush.svg')
-                      ),
-                      SizedBox(height: 80,),
-                      Text('HOW TO GET TO THE FESTIVAL?',style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,color: Colors.white),),
-                        SizedBox(height: 40,),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                          TextButton.icon(onPressed: () {}, icon: Icon(FontAwesomeIcons.waze,color: Colors.white,size: 50,), label: Text(''),),
-                            Link(
-                                uri:Uri.parse("https://www.google.com/maps/place/46°29'46.3%22N+24°47'29.2%22E/@46.4961944,24.7914444,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x1a29a39c83107b27!8m2!3d46.496199!4d24.791438"),
-                                target: LinkTarget.blank,
-                                builder:(context,followLink){
-                                  return TextButton.icon(onPressed: followLink, icon: Icon(Icons.location_on_outlined,color: Colors.white,size: 40,), label: Text(''),);
-                                }
+                              ],
                             ),
-                      ],),
-                     SizedBox(height: 60,),
-                      FittedBox(
-                        child: Row(
+
+                            ),
+
+                          SizedBox(height: 50),
+                          Container(
+                          height: 200,
+                            width: 200,
+                            color: Colors.transparent,
+                            child: SvgPicture.asset('assets/art/mumush.svg')
+                        ),
+                        SizedBox(height: 120,),
+                          Link(
+                              uri:Uri.parse("https://www.google.com/maps/place/46°29'46.3%22N+24°47'29.2%22E/@46.4961944,24.7914444,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x1a29a39c83107b27!8m2!3d46.496199!4d24.791438"),
+                              target: LinkTarget.blank,
+                              builder:(context,followLink){
+                                return TextButton(onPressed: followLink, child:Text('HOW TO GET TO THE FESTIVAL',style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,color: Colors.white),), );
+                              }
+                          ),
+                       SizedBox(height: 100,),
+                        Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Link(
@@ -153,10 +145,10 @@ class _HomeViewState extends State<HomeView> {
                                 }
                             ),
                           ]
-                        ),
-                      )
+                        )
 
-                      ]
+                        ]
+                      ),
                     ),
                   ),
 

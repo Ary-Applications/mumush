@@ -36,6 +36,9 @@ dev_dependencies:
   injectable_generator:
   build_runner:
 
+  # Networking
+  http: ^0.13.5
+
   # Maps & Location
   google_maps_flutter: ^2.1.9
   location: ^4.3.0

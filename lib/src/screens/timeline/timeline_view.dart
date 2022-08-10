@@ -58,19 +58,20 @@ class TimelineViewState extends State<TimelineView> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(10, 50, 10,0),
                       child: Container(
                           height: 80,
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
+                              horizontal: 20, vertical: 20),
                           child: Center(
                             child: DropdownButtonHideUnderline(
                               child: Theme(
                                 data: Theme.of(context)
                                     .copyWith(canvasColor: Color(0xFF17194E)),
                                 child: DropdownButton<String>(
-                                  value: widget.selectedItem,
+                                  value: widget.selectedItem?.toUpperCase(),
                                   isExpanded: true,
+
                                   iconSize: 40,
                                   icon: const Icon(
                                     Icons.arrow_drop_down,
@@ -78,20 +79,22 @@ class TimelineViewState extends State<TimelineView> {
                                   ),
                                   items: widget.stages
                                       .map((item) => DropdownMenuItem<String>(
-                                            value: item.attributes.name,
+                                            value: item.attributes.name?.toUpperCase(),
                                             child: SizedBox(
                                                 height: 80,
                                                 child: Center(
-                                                    child: Text(
-                                                  item.attributes.name ?? "NAME",
+                                                    child: FittedBox(
+                                                      child: Text(
+                                                  item.attributes.name?.toUpperCase()?? "NAME",
                                                   style: const TextStyle(
-                                                      fontSize: 20.0,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.white),
+                                                        fontSize:30.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.white),
                                                   overflow:
-                                                      TextOverflow.visible,
-                                                ))),
+                                                        TextOverflow.visible,
+                                                ),
+                                                    ))),
                                           ))
                                       .toList(),
                                   onChanged: (item) {

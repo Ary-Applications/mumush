@@ -30,7 +30,7 @@ class SquareWidget extends StatelessWidget {
                       Align(
                           alignment: Alignment.topCenter,
                           child: Text(
-                            event.eventTitle,
+                            event.eventTitle.toUpperCase(),
                             style: const TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.white),
                           )),

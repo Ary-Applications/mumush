@@ -43,6 +43,8 @@ class _MumushState extends State<Mumush> {
 
           _viewModel.getAllStageNames();
           _viewModel.notifyListeners();
+
+
         },
         builder: (context, viewModel, child) {
           return MaterialApp(
@@ -104,7 +106,7 @@ class _MumushState extends State<Mumush> {
                         SquareWidget(event: Event("Event", "Okay", "Time")),
                       ],
                       stages: _viewModel.stages,
-                      selectedItem: _viewModel.stages.first.attributes.name,
+                      selectedItem: _viewModel.stages.first.attributes.name?.toUpperCase(),
                       day1: 'DAY1',
                       day2: 'DAY2',
                       day3: 'DAY3',

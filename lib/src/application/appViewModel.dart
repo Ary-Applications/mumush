@@ -60,9 +60,8 @@ class AppViewModel extends BaseViewModel {
   }
 
   getAllStageNames() {
-    print("DEBUG: Stage Names");
     stages.forEach((stage) {
-      print(stage.attributes.name);
+      print(stage.attributes.name?.toUpperCase());
     });
   }
 }

@@ -14,7 +14,8 @@ import 'network_request_exception.dart';
 
 @LazySingleton(as: NetworkClient)
 class HttpClient implements NetworkClient {
-  late http.Client _httpClient;
+  final http.Client _httpClient = http.Client();
+
   static const int requestTimeout = 15;
   static const Duration requestTimeoutDuration =
       Duration(seconds: requestTimeout);
@@ -71,6 +72,7 @@ class HttpClient implements NetworkClient {
         "<-- $statusCode ${response.request!.url} (${end.difference(start).inMilliseconds}ms)");
     switch (statusCode) {
       case NetworkRequestException.successStatusCode:
+        final bodyStr = response.body.toString();
         debugPrint("Response Body: " + response.body.toString());
         return _getDecodedObj(response.body, baseResponseType);
       case NetworkRequestException.noContentBodyStatusCode:

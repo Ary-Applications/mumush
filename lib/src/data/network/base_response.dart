@@ -1,12 +1,6 @@
-
-
-
-import 'package:injectable/injectable.dart';
-
-import '../model/entity/model.dart';
+import '../model/entity/schedule_model.dart';
 import 'api_constants.dart';
 import 'decodable.dart';
-import 'network_client.dart';
 
 abstract class BaseResponse implements Decodable {}
 

@@ -20,6 +20,7 @@ class Mumush extends StatefulWidget {
 class _MumushState extends State<Mumush> {
   int _selectedIndex = 0;
   late AppViewModel _viewModel;
+  List<Performance> firstEventsToShowOnSchedule = [];
 
   PageController pageController = PageController();
 
@@ -36,12 +37,19 @@ class _MumushState extends State<Mumush> {
         viewModel: getIt<AppViewModel>(),
         onInit: (viewModel) async {
           _viewModel = viewModel;
+          _viewModel.notifyListeners();
           // TODO: If there's connection, get schedule online, if not, schedule from local db/json.
           await _viewModel.getAllSchedule();
+
           _viewModel.getAllIncluded();
           _viewModel.getAllStages();
 
           _viewModel.getAllStageNames();
+          _viewModel.getAllPerformances();
+          _viewModel.notifyListeners();
+          _viewModel.getAllDays();
+          firstEventsToShowOnSchedule =
+              _viewModel.getEventsByStageAndDay("Gargantua", 1);
           _viewModel.notifyListeners();
         },
         builder: (context, viewModel, child) {
@@ -82,34 +90,36 @@ class _MumushState extends State<Mumush> {
                   children: [
                     HomeView(),
                     TimelineView(
-                      squareList: [
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                        SquareWidget(event: Event("Event", "Okay", "Time")),
-                      ],
+                      // squareList: [
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
+                      // ],
                       stages: _viewModel.stages,
-                      selectedItem: _viewModel.stages.first.attributes.name,
-                      day1: 'DAY1',
-                      day2: 'DAY2',
-                      day3: 'DAY3',
-                      day4: 'DAY4',
-                      day5: 'DAY5'
+                      selectedItem:
+                          _viewModel.stages.first.data.attributes?.name,
+                      day1: 'THU',
+                      day2: 'FRI',
+                      day3: 'SAT',
+                      day4: 'SUN',
+                      day5: 'MON',
+                      performances: firstEventsToShowOnSchedule,
                     ),
                     MapView(),
                   ]),

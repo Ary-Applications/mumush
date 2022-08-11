@@ -6,9 +6,22 @@ import '../data/model/repository/schedule/schedule_remote_data_repository.dart';
 import '../screens/base/base_view_model.dart';
 
 class Stage {
-  ScheduleIncludedAttributes attributes;
+  ScheduleIncluded data;
   LatLng? coords;
-  Stage(this.attributes);
+
+  Stage(this.data);
+}
+
+class Performance {
+  ScheduleData data;
+
+  Performance(this.data);
+}
+
+class Day {
+  ScheduleIncluded data;
+
+  Day(this.data);
 }
 
 @injectable
@@ -20,12 +33,12 @@ class AppViewModel extends BaseViewModel {
   Schedule? schedule;
   List<ScheduleIncluded?>? included;
   List<Stage> stages = [];
+  List<Performance> allPerformances = [];
+  List<Day> days = [];
 
   getAllSchedule() async {
     try {
       await _scheduleRepository.getSchedule().then((value) => schedule = value);
-      // print("DEBUG: schedule");
-      // print(schedule);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -33,10 +46,7 @@ class AppViewModel extends BaseViewModel {
 
   getAllIncluded() {
     included = schedule?.included;
-    // print("DEBUG: included");
-    included?.forEach((element) {
-      // print(element?.attributes?.name);
-    });
+    included?.forEach((element) {});
   }
 
   getAllStages() {
@@ -44,25 +54,106 @@ class AppViewModel extends BaseViewModel {
       for (var element in included!) {
         if (element?.type == "stages") {
           if (element?.attributes != null) {
-            var stage = Stage(element!.attributes!);
+            var stage = Stage(element!);
             stages.add(stage);
           }
         }
       }
     }
+  }
 
-    //
-    // included?.forEach((element) {
-    //   if (element?.type == "stages") {
-    //     stages?.add(element);
-    //   }
-    // });
+  getAllDays() {
+    if (included != null) {
+      for (var element in included!) {
+        if (element?.type == "days") {
+          if (element?.attributes != null) {
+            var day = Day(element!);
+            days.add(day);
+          }
+        }
+      }
+    }
   }
 
   getAllStageNames() {
     print("DEBUG: Stage Names");
     stages.forEach((stage) {
-      print(stage.attributes.name);
+      print(stage.data.attributes?.name);
     });
+  }
+
+  getAllPerformances() {
+    if (schedule?.data != null) {
+      for (var element in schedule!.data!) {
+        if (element?.type == "performances") {
+          var performance = Performance(element!);
+          allPerformances.add(performance);
+        }
+      }
+      allPerformances.forEach((element) {
+        print(element.data.attributes?.activity);
+      });
+    }
+  }
+
+  List<Performance> getEventsByStageAndDay(String stageName, int dayId) {
+    Stage? stage;
+    Day? day;
+
+    List<int> eventIds = [];
+    List<Performance> eventsToReturn = [];
+    /// Get one stage by stageName
+    for (var element in stages) {
+      if (element.data.attributes?.name == stageName) {
+        stage = element;
+      }
+    }
+
+    if (stage != null) {
+      /// Get one day by dayID
+      for (var element in days) {
+        if (element.data.attributes?.id == dayId) {
+          day = element;
+        }
+      }
+      if (stage.data.relationships != null) {
+        ScheduleIncludedRelationships stageRelList = stage.data.relationships!;
+        List<ScheduleIncludedRelationshipsPerformances?>? stagePerfList =
+            stageRelList.performances;
+
+        if ((day != null) && (stagePerfList != null)) {
+          if (stage.data.relationships != null) {
+            ScheduleIncludedRelationships dayRelList = day.data.relationships!;
+            List<ScheduleIncludedRelationshipsPerformances?>? dayPerfList =
+                dayRelList.performances;
+            if (dayPerfList != null) {
+              for (var stagePerfElement in stagePerfList) {
+                for (var dayPerfElement in dayPerfList) {
+                  if (dayPerfElement?.data?.id == stagePerfElement?.data?.id) {
+                    // ScheduleIncludedRelationshipsPerformancesData = d
+                    eventIds.add(dayPerfElement!.data!.id!);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    } else {
+      print("Error: getEventsByStageAndDay: Could not find stage");
+    }
+
+    for (var performance in allPerformances) {
+      for(var eventId in eventIds) {
+        if (performance.data.id == eventId) {
+          eventsToReturn.add(performance);
+        }
+      }
+    }
+    print("DEBUG: Events to return by stage names: ");
+    for (var element in eventsToReturn) {
+      print(element.data.relationships?.artists?.data?.id);
+    }
+    return eventsToReturn;
   }
 }

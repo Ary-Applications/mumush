@@ -7,10 +7,9 @@ import 'package:mumush/src/screens/timeline/timeline_view_model.dart';
 import '../../application/appViewModel.dart';
 
 class TimelineView extends StatefulWidget {
-
   TimelineView(
       {Key? key,
-      required this.squareList,
+      required this.performances,
       required this.stages,
       required this.selectedItem,
       required this.day1,
@@ -20,7 +19,8 @@ class TimelineView extends StatefulWidget {
       required this.day5})
       : super(key: key);
 
-  List<SquareWidget> squareList;
+  List<SquareWidget> squareList = [];
+  List<Performance> performances;
   List<Stage> stages;
   String? selectedItem;
   String day1, day2, day3, day4, day5;
@@ -36,8 +36,14 @@ class TimelineViewState extends State<TimelineView> {
   Widget build(BuildContext context) {
     return BaseStatefulView<TimelineViewModel>(
         viewModel: getIt<TimelineViewModel>(),
-        onInit: (viewModel) {
+        onInit: (viewModel) async {
           _viewModel = viewModel;
+          widget.squareList = _viewModel.makeSquareListsFromPerformances(widget.performances);
+          setState(() {
+
+          });
+          _viewModel.notifyListeners();
+
           // TODO: If there's connection, get schedule online, if not, schedule from local db/json.
           // _viewModel.getSchedule();
         },
@@ -78,12 +84,13 @@ class TimelineViewState extends State<TimelineView> {
                                   ),
                                   items: widget.stages
                                       .map((item) => DropdownMenuItem<String>(
-                                            value: item.attributes.name,
+                                            value: item.data.attributes?.name,
                                             child: SizedBox(
                                                 height: 80,
                                                 child: Center(
                                                     child: Text(
-                                                  item.attributes.name ?? "NAME",
+                                                  item.data.attributes?.name ??
+                                                      "NAME",
                                                   style: const TextStyle(
                                                       fontSize: 20.0,
                                                       fontWeight:
@@ -210,6 +217,7 @@ class TimelineViewState extends State<TimelineView> {
                         ),
                       ),
                     ),
+
                     Expanded(
                       child: GridView.builder(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -222,7 +230,7 @@ class TimelineViewState extends State<TimelineView> {
                                 crossAxisSpacing: 0,
                                 mainAxisSpacing: 0),
                         itemBuilder: (BuildContext context, int index) {
-                          return SizedBox(
+                          return !widget.squareList.isEmpty ? SizedBox(
                               width: (MediaQuery.of(context).size.width) / 2,
                               height: 500,
                               child: Stack(children: [
@@ -235,7 +243,7 @@ class TimelineViewState extends State<TimelineView> {
                                   ),
                                 ),
                                 widget.squareList[index]
-                              ]));
+                              ])) : Text("waaaaa");
                         },
                       ),
                     ),

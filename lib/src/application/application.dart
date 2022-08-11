@@ -5,8 +5,6 @@ import 'package:mumush/src/screens/map/map_view.dart';
 import '../di/injection.dart';
 import '../screens/base/base.dart';
 import '../screens/home/home_view.dart';
-import '../screens/timeline/event.dart';
-import '../screens/timeline/square_widget.dart';
 import '../screens/timeline/timeline_view.dart';
 
 class Mumush extends StatefulWidget {

@@ -51,6 +51,8 @@ class _MumushState extends State<Mumush> {
           firstEventsToShowOnSchedule =
               _viewModel.getEventsByStageAndDay("Gargantua", 1);
           _viewModel.notifyListeners();
+
+
         },
         builder: (context, viewModel, child) {
           return MaterialApp(
@@ -90,27 +92,6 @@ class _MumushState extends State<Mumush> {
                   children: [
                     HomeView(),
                     TimelineView(
-                      // squareList: [
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      //   SquareWidget(event: Event("Event", "Okay", "Time")),
-                      // ],
                       stages: _viewModel.stages,
                       selectedItem:
                           _viewModel.stages.first.data.attributes?.name,

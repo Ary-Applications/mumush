@@ -21,7 +21,7 @@ class SquareWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   border:Border.all(color: Colors.white,width: 3),
-                  borderRadius: BorderRadius.all(Radius.circular(7))
+                  borderRadius: const BorderRadius.all(Radius.circular(7))
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),

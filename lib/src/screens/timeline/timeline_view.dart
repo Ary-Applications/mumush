@@ -144,14 +144,15 @@ class TimelineViewState extends State<TimelineView> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(2, 20, 0, 0),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
-                                width: 60,
+                                width: 90,
                                 child: activeDay == 1
                                     ? buldDayOneTextButton(true)
                                     : buldDayOneTextButton(false)),
                             Container(
-                              width: 60,
+                              width: 90,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
@@ -162,7 +163,7 @@ class TimelineViewState extends State<TimelineView> {
                                   : buldDayTwoTextButton(false),
                             ),
                             Container(
-                              width: 60,
+                              width: 90,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
@@ -173,7 +174,7 @@ class TimelineViewState extends State<TimelineView> {
                                   : buldDayThreeTextButton(false),
                             ),
                             Container(
-                              width: 60,
+                              width: 90,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
@@ -184,7 +185,7 @@ class TimelineViewState extends State<TimelineView> {
                                   : buldDayFourTextButton(false),
                             ),
                             Container(
-                              width: 60,
+                              width: 90,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
@@ -245,7 +246,7 @@ class TimelineViewState extends State<TimelineView> {
         style: TextButton.styleFrom(
           minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
@@ -270,7 +271,7 @@ class TimelineViewState extends State<TimelineView> {
         style: TextButton.styleFrom(
           minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
@@ -299,7 +300,7 @@ class TimelineViewState extends State<TimelineView> {
         style: TextButton.styleFrom(
           minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color:Color(0xFFF67F59)),
@@ -324,7 +325,7 @@ class TimelineViewState extends State<TimelineView> {
         style: TextButton.styleFrom(
           minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
@@ -353,7 +354,7 @@ class TimelineViewState extends State<TimelineView> {
         style: TextButton.styleFrom(
           minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
@@ -378,7 +379,7 @@ class TimelineViewState extends State<TimelineView> {
         style: TextButton.styleFrom(
           minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
@@ -407,7 +408,7 @@ class TimelineViewState extends State<TimelineView> {
         style: TextButton.styleFrom(
           minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
@@ -432,7 +433,7 @@ class TimelineViewState extends State<TimelineView> {
         style: TextButton.styleFrom(
           minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
@@ -461,7 +462,7 @@ class TimelineViewState extends State<TimelineView> {
         style: TextButton.styleFrom(
           minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color:Color(0xFFF67F59)),
@@ -486,7 +487,7 @@ class TimelineViewState extends State<TimelineView> {
         style: TextButton.styleFrom(
           minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),

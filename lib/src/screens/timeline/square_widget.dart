@@ -27,13 +27,16 @@ class SquareWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(5.0),
                   child: Column(
                     children: [
-                      Align(
-                          alignment: Alignment.topCenter,
-                          child: Text(
-                            event.eventTitle.toUpperCase(),
-                            style: const TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.white),
-                          )),
+                      Container(
+                        height: 40,
+                        child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Text(
+                              event.eventTitle.toUpperCase(),
+                              style: const TextStyle(
+                                  fontSize: 13.0, fontWeight: FontWeight.bold,color: Colors.white),
+                            )),
+                      ),
                       const SizedBox(height: 30),
                       Row(
                         children: [

@@ -146,10 +146,12 @@ class TimelineViewState extends State<TimelineView> {
                         child: Row(
                           children: [
                             Container(
+                                width: 60,
                                 child: activeDay == 1
                                     ? buldDayOneTextButton(true)
                                     : buldDayOneTextButton(false)),
                             Container(
+                              width: 60,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
@@ -160,6 +162,7 @@ class TimelineViewState extends State<TimelineView> {
                                   : buldDayTwoTextButton(false),
                             ),
                             Container(
+                              width: 60,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
@@ -170,6 +173,7 @@ class TimelineViewState extends State<TimelineView> {
                                   : buldDayThreeTextButton(false),
                             ),
                             Container(
+                              width: 60,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
@@ -180,6 +184,7 @@ class TimelineViewState extends State<TimelineView> {
                                   : buldDayFourTextButton(false),
                             ),
                             Container(
+                              width: 60,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:

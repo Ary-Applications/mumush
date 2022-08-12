@@ -28,28 +28,28 @@ class SquareWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        height: 40,
+                        height: 60,
                         child: Align(
                             alignment: Alignment.topCenter,
                             child: Text(
                               event.eventTitle.toUpperCase(),
                               style: const TextStyle(
-                                  fontSize: 13.0, fontWeight: FontWeight.bold,color: Colors.white),
+                                  fontSize: 14.0, fontWeight: FontWeight.bold,color: Colors.white),
                             )),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 2),
                           Align(
                               alignment: Alignment.topLeft,
                               child: Text(
                                 event.date,
-                                style: const TextStyle(fontSize: 10.0,color: Colors.white),
+                                style: const TextStyle(fontSize: 10.0,color: Colors.white,fontWeight: FontWeight.bold),
                               )),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 1),
                       Align(
                           alignment: Alignment.bottomRight,
                           child: TextButton(

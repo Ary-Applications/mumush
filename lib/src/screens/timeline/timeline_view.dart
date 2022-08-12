@@ -76,7 +76,7 @@ class TimelineViewState extends State<TimelineView> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
                       child: Container(
                           height: 80,
                           padding: const EdgeInsets.symmetric(
@@ -243,8 +243,8 @@ class TimelineViewState extends State<TimelineView> {
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
-              color: Colors.orange),
-          primary: Colors.orange,
+              color: Color(0xFFF67F59)),
+          primary:Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -297,8 +297,8 @@ class TimelineViewState extends State<TimelineView> {
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
-              color: Colors.orange),
-          primary: Colors.orange,
+              color:Color(0xFFF67F59)),
+          primary:Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -351,8 +351,8 @@ class TimelineViewState extends State<TimelineView> {
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
-              color: Colors.orange),
-          primary: Colors.orange,
+              color: Color(0xFFF67F59)),
+          primary: Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -405,8 +405,8 @@ class TimelineViewState extends State<TimelineView> {
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
-              color: Colors.orange),
-          primary: Colors.orange,
+              color: Color(0xFFF67F59)),
+          primary:Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -459,8 +459,8 @@ class TimelineViewState extends State<TimelineView> {
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
-              color: Colors.orange),
-          primary: Colors.orange,
+              color:Color(0xFFF67F59)),
+          primary: Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {

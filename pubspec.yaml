@@ -55,6 +55,35 @@ flutter:
     - assets/art/graund.png
     - assets/art/sky.png
     - assets/art/backgraund.png
+    - assets/map/arboretum_stage.png
+    - assets/map/artechno_tent.png
+    - assets/map/arts&crafts.png
+    - assets/map/av_install.png
+    - assets/map/bar.png
+    - assets/map/camping.png
+    - assets/map/car_parking.png
+    - assets/map/caravan_camping.png
+    - assets/map/chillzone.png
+    - assets/map/circulo_tent.png
+    - assets/map/circus&yoga.png
+    - assets/map/coffe&tea.png
+    - assets/map/community_kitchen.png
+    - assets/map/entrence.png
+    - assets/map/fire.png
+    - assets/map/fire_space.png
+    - assets/map/food_court.png
+    - assets/map/gargantua_stage.png
+    - assets/map/healing.png
+    - assets/map/info_panel.png
+    - assets/map/info_point.png
+    - assets/map/jam_stage.png
+    - assets/map/kids_are.png
+    - assets/map/medical-symbol.png
+    - assets/map/nest.png
+    - assets/map/stargate.png
+    - assets/map/toilet.png
+    - assets/map/toilets&showers.png
+    - assets/map/uv_zone.png
 
 
   fonts:

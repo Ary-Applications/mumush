@@ -36,11 +36,6 @@ class TimelineViewModel extends BaseViewModel {
       var startDate = performance.data.attributes?.start ?? "";
       var endDate = performance.data.attributes?.end ?? "";
       var startToEnd = "$startDate-$endDate";
-
-      // ScheduleIncludedRelationshipsPerformances?
-      //     // singlePerformanceDataForPerformance =
-      //     // cast<ScheduleIncludedRelationshipsPerformances>(
-      //     //     performance.included?.relationships?.performances);
       var eventName = performance.included?.attributes?.name;
       var eventShortName = performance.included?.attributes?.shortName;
       var eventLongName = performance.included?.attributes?.longName;
@@ -61,15 +56,15 @@ class TimelineViewModel extends BaseViewModel {
               singlePerformanceDataForArtist =
               cast<ScheduleIncludedRelationshipsPerformances>(
                   artist.relationships?.performances);
-          var artistdataId = singlePerformanceDataForArtist?.data?.id;
+          var artistId = singlePerformanceDataForArtist?.data?.id;
           var perfDataId = performance.data.attributes?.id;
-          if (artistdataId == perfDataId) {
+          if (artistId == perfDataId) {
             foundArtist = artist;
           }
         }
         if (foundArtist != null) {
           var name = foundArtist.attributes?.name;
-          print("DEBUG: FUCKMESIDEWAYS : $name");
+          print("DEBUG: Could find artist from artists attributes: $name");
           if (name != null) {
             var event = Event(name, "", (startToEnd));
             squaresToReturn.add(SquareWidget(event: event));
@@ -92,7 +87,7 @@ class TimelineViewModel extends BaseViewModel {
             print('DEBUG: Name found as artist data id');
           } else {
             print('DEBUG: Name found in activities');
-            if(performance.data.attributes?.activity != null) {
+            if (performance.data.attributes?.activity != null) {
               var activityName = performance.data.attributes?.activity;
               var event = Event(activityName ?? "", "", (startToEnd));
               squaresToReturn.add(SquareWidget(event: event));
@@ -126,9 +121,11 @@ class TimelineViewModel extends BaseViewModel {
     }
   }
 
+  // MARK: - Events by stage and day ids
   List<Performance> getEventsByStageAndDay(int stageId, int dayId) {
     Stage? stage;
     Day? day;
+    Day? nextDay;
 
     List<int> eventIds = [];
     List<Performance> eventsToReturn = [];
@@ -146,6 +143,9 @@ class TimelineViewModel extends BaseViewModel {
         if (element.data.attributes?.id == dayId) {
           day = element;
         }
+        if (element.data.attributes?.id == dayId + 1) {
+          nextDay = element;
+        }
       }
       if (stage.data.relationships != null) {
         ScheduleIncludedRelationships stageRelList = stage.data.relationships!;
@@ -156,6 +156,12 @@ class TimelineViewModel extends BaseViewModel {
           ScheduleIncludedRelationships dayRelList = day.data.relationships!;
           List<ScheduleIncludedRelationshipsPerformances?>? dayPerfList =
               dayRelList.performances;
+          List<ScheduleIncludedRelationshipsPerformances?>? nextDayPerfList;
+          if (nextDay != null) {
+            ScheduleIncludedRelationships nextDayRelList =
+                nextDay.data.relationships!;
+            nextDayPerfList = nextDayRelList.performances;
+          }
           if (dayPerfList != null) {
             for (var stagePerfElement in stagePerfList) {
               for (var dayPerfElement in dayPerfList) {
@@ -165,20 +171,42 @@ class TimelineViewModel extends BaseViewModel {
               }
             }
           }
+
+          List<int> nextDayIds = [];
+          if (nextDayPerfList != null) {
+            for (var stagePerfElement in stagePerfList) {
+              for (var nextDayPerf in nextDayPerfList) {
+                if (nextDayPerf?.data?.id == stagePerfElement?.data?.id) {
+                  nextDayIds.add(nextDayPerf!.data!.id!);
+                  // eventIds.add(nextDayPerf!.data!.id!);
+                }
+              }
+            }
+            print('DEBUG: FOUND NEXT DAY IDs');
+            print(nextDayIds);
+          }
+
+          for (var performance in allPerformances) {
+            for (var id in nextDayIds) {
+              if (performance.data.id == id) {
+                var nextDayEndDateFirstTwoCharacters =
+                    performance.data.attributes?.end?.substring(0, 2);
+                if (nextDayEndDateFirstTwoCharacters != null) {
+                  var nextDayEndDateInt =
+                      int.parse(nextDayEndDateFirstTwoCharacters);
+                  if (nextDayEndDateInt! < 12) {
+                    print('DEBUG: FOUND NEXT DAY End dates');
+                    print(nextDayEndDateInt);
+                    eventIds.add(id);
+                  }
+                }
+              }
+            }
+          }
         }
       }
     } else {
       print("Error: getEventsByStageAndDay: Could not find stage");
-    }
-
-    for (var description in performanceDescriptions) {
-      // Might be an array
-      ScheduleIncludedRelationshipsPerformances? singleDescription =
-          cast<ScheduleIncludedRelationshipsPerformances>(
-              description.relationships?.performances);
-      for (var eventId in eventIds) {
-        if (singleDescription?.data?.id == eventId) {}
-      }
     }
 
     for (var performance in allPerformances) {

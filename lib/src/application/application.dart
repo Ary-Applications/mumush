@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mumush/src/application/appViewModel.dart';
 import 'package:mumush/src/screens/map/map_view.dart';
 
+import '../data/model/entity/schedule_model.dart';
 import '../di/injection.dart';
 import '../screens/base/base.dart';
 import '../screens/home/home_view.dart';
-import '../screens/timeline/event.dart';
-import '../screens/timeline/square_widget.dart';
 import '../screens/timeline/timeline_view.dart';
+import 'appViewModel.dart';
 
 class Mumush extends StatefulWidget {
   const Mumush({Key? key}) : super(key: key);
@@ -19,8 +18,7 @@ class Mumush extends StatefulWidget {
 
 class _MumushState extends State<Mumush> {
   int _selectedIndex = 0;
-  late AppViewModel _viewModel;
-  List<Performance> firstEventsToShowOnSchedule = [];
+  late Schedule? schedule;
 
   PageController pageController = PageController();
 
@@ -35,25 +33,7 @@ class _MumushState extends State<Mumush> {
   Widget build(BuildContext context) {
     return BaseStatefulView<AppViewModel>(
         viewModel: getIt<AppViewModel>(),
-        onInit: (viewModel) async {
-          _viewModel = viewModel;
-          _viewModel.notifyListeners();
-          // TODO: If there's connection, get schedule online, if not, schedule from local db/json.
-          await _viewModel.getAllSchedule();
-
-          _viewModel.getAllIncluded();
-          _viewModel.getAllStages();
-
-          _viewModel.getAllStageNames();
-          _viewModel.getAllPerformances();
-          _viewModel.notifyListeners();
-          _viewModel.getAllDays();
-          firstEventsToShowOnSchedule =
-              _viewModel.getEventsByStageAndDay("Gargantua", 1);
-          _viewModel.notifyListeners();
-
-
-        },
+        onInit: (viewModel) async {},
         builder: (context, viewModel, child) {
           return MaterialApp(
             restorationScopeId: Mumush._appRestorationScopeId,
@@ -92,15 +72,11 @@ class _MumushState extends State<Mumush> {
                   children: [
                     HomeView(),
                     TimelineView(
-                      stages: _viewModel.stages,
-                      selectedItem:
-                          _viewModel.stages.first.data.attributes?.name,
                       day1: 'THU',
                       day2: 'FRI',
                       day3: 'SAT',
                       day4: 'SUN',
                       day5: 'MON',
-                      performances: firstEventsToShowOnSchedule,
                     ),
                     MapView(),
                   ]),

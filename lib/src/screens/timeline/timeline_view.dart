@@ -4,14 +4,13 @@ import 'package:mumush/src/screens/base/base.dart';
 import 'package:mumush/src/screens/timeline/square_widget.dart';
 import 'package:mumush/src/screens/timeline/timeline_view_model.dart';
 
-import '../../application/appViewModel.dart';
+import '../../data/model/entity/performance.dart';
+import '../../data/model/entity/schedule_model.dart';
+import '../../data/model/entity/stage.dart';
 
 class TimelineView extends StatefulWidget {
   TimelineView(
       {Key? key,
-      required this.performances,
-      required this.stages,
-      required this.selectedItem,
       required this.day1,
       required this.day2,
       required this.day3,
@@ -19,10 +18,6 @@ class TimelineView extends StatefulWidget {
       required this.day5})
       : super(key: key);
 
-  List<SquareWidget> squareList = [];
-  List<Performance> performances;
-  List<Stage> stages;
-  String? selectedItem;
   String day1, day2, day3, day4, day5;
 
   @override
@@ -30,7 +25,15 @@ class TimelineView extends StatefulWidget {
 }
 
 class TimelineViewState extends State<TimelineView> {
+  late List<SquareWidget> squareList = [];
+  late List<Performance> activePerformances = [];
+  late List<Stage> stages = [];
+  Stage selectedStage = Stage(ScheduleIncluded(
+      attributes: ScheduleIncludedAttributes(name: "GARGANTUA")));
+  Stage placeholderStage = Stage(ScheduleIncluded(
+      attributes: ScheduleIncludedAttributes(name: "GARGANTUA")));
   late TimelineViewModel _viewModel;
+  var activeDay = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -38,21 +41,30 @@ class TimelineViewState extends State<TimelineView> {
         viewModel: getIt<TimelineViewModel>(),
         onInit: (viewModel) async {
           _viewModel = viewModel;
-          widget.squareList = _viewModel.makeSquareListsFromPerformances(widget.performances);
-          setState(() {
-
-          });
-          _viewModel.notifyListeners();
-
+          // TODO: Add a loading
           // TODO: If there's connection, get schedule online, if not, schedule from local db/json.
-          // _viewModel.getSchedule();
+          await _viewModel.getAllSchedule();
+
+          _viewModel.getAllIncluded();
+          _viewModel.getAllStagesAndArtists();
+          _viewModel.getAllStageNames();
+          stages = _viewModel.stages;
+          _viewModel.getAllPerformances();
+          _viewModel.getAllDays();
+          _viewModel.getAllPerformanceDescriptions();
+          setState(() {});
+          activePerformances = _viewModel.getEventsByStageAndDay(
+              stages.first.data.attributes?.id ?? 1, 1);
+          squareList =
+              _viewModel.makeSquareListsFromPerformances(activePerformances);
+          setState(() {});
         },
         builder: (context, viewModel, child) {
           return Container(
             color: const Color(0xFF17194E),
             child: Stack(
               children: [
-                Container(
+                SizedBox(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: const FittedBox(
@@ -64,7 +76,7 @@ class TimelineViewState extends State<TimelineView> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 50, 10,0),
+                      padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
                       child: Container(
                           height: 80,
                           padding: const EdgeInsets.symmetric(
@@ -75,39 +87,52 @@ class TimelineViewState extends State<TimelineView> {
                                 data: Theme.of(context)
                                     .copyWith(canvasColor: Color(0xFF17194E)),
                                 child: DropdownButton<String>(
-                                  value: widget.selectedItem?.toUpperCase(),
+                                  value: selectedStage.data.attributes?.name
+                                      ?.toUpperCase(),
                                   isExpanded: true,
-
-                                  iconSize: 40,
+                                  iconSize: 30,
                                   icon: const Icon(
                                     Icons.arrow_drop_down,
                                     color: Colors.white,
                                   ),
-                                  items: widget.stages
+                                  items: stages
                                       .map((item) => DropdownMenuItem<String>(
-
-                                            value: item.data.attributes?.name?.toUpperCase(),
+                                            value: item.data.attributes?.name
+                                                ?.toUpperCase(),
                                             child: SizedBox(
                                                 height: 80,
                                                 child: Center(
                                                     child: FittedBox(
-                                                      child: Text(
-                                                  item.data.attributes?.name?.toUpperCase()?? "NAME",
-
-                                                  style: const TextStyle(
-                                                        fontSize:30.0,
+                                                  child: Text(
+                                                    item.data.attributes?.name
+                                                            ?.toUpperCase() ??
+                                                        "NAME",
+                                                    style: const TextStyle(
+                                                        fontSize: 24.0,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         color: Colors.white),
-                                                  overflow:
+                                                    overflow:
                                                         TextOverflow.visible,
-                                                ),
-                                                    ))),
+                                                  ),
+                                                ))),
                                           ))
                                       .toList(),
                                   onChanged: (item) {
                                     setState(() {
-                                      widget.selectedItem = item;
+                                      selectedStage =
+                                          _viewModel.findStageByUpperCasedTitle(
+                                                  item!) ??
+                                              placeholderStage;
+                                      activePerformances =
+                                          _viewModel.getEventsByStageAndDay(
+                                              selectedStage
+                                                      .data.attributes?.id ??
+                                                  1,
+                                              activeDay);
+                                      squareList = _viewModel
+                                          .makeSquareListsFromPerformances(
+                                              activePerformances);
                                     });
                                   },
                                 ),
@@ -119,114 +144,66 @@ class TimelineViewState extends State<TimelineView> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(2, 20, 0, 0),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  minimumSize: const Size(10, 40),
-                                  textStyle: const TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'SpaceMono',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                  primary: Colors.white,
-                                ),
-                                onPressed: () {},
-                                child: Text(
-                                  widget.day1,
-                                ),
-                              ),
-                            ),
+                                width: 90,
+                                child: activeDay == 1
+                                    ? buildDayOneTextButton(true)
+                                    : buildDayOneTextButton(false)),
                             Container(
+                              width: 90,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
                                     BorderSide(width: 3.0, color: Colors.white),
                               )),
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  minimumSize: const Size(10, 40),
-                                  textStyle: const TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'SpaceMono',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                  primary: Colors.white,
-                                ),
-                                onPressed: () {},
-                                child: Text(widget.day2),
-                              ),
+                              child: activeDay == 2
+                                  ? buildDayTwoTextButton(true)
+                                  : buildDayTwoTextButton(false),
                             ),
                             Container(
+                              width: 90,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
                                     BorderSide(width: 3.0, color: Colors.white),
                               )),
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  minimumSize: const Size(10, 40),
-                                  textStyle: const TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'SpaceMono',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                  primary: Colors.white,
-                                ),
-                                onPressed: () {},
-                                child: Text(widget.day3),
-                              ),
+                              child: activeDay == 3
+                                  ? buildDayThreeTextButton(true)
+                                  : buildDayThreeTextButton(false),
                             ),
                             Container(
+                              width: 90,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
                                     BorderSide(width: 3.0, color: Colors.white),
                               )),
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  minimumSize: const Size(10, 40),
-                                  textStyle: const TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'SpaceMono',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                  primary: Colors.white,
-                                ),
-                                onPressed: () {},
-                                child: Text(widget.day4),
-                              ),
+                              child: activeDay == 4
+                                  ? buildDayFourTextButton(true)
+                                  : buildDayFourTextButton(false),
                             ),
                             Container(
+                              width: 90,
                               decoration: const BoxDecoration(
                                   border: Border(
                                 left:
                                     BorderSide(width: 3.0, color: Colors.white),
                               )),
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  minimumSize: const Size(10, 40),
-                                  textStyle: const TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'SpaceMono',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                  primary: Colors.white,
-                                ),
-                                onPressed: () {},
-                                child: Text(widget.day5),
-                              ),
+                              child: activeDay == 5
+                                  ? buildDayFiveTextButton(true)
+                                  : buildDayFiveTextButton(false),
                             ),
                           ],
                         ),
                       ),
                     ),
-
                     Expanded(
                       child: GridView.builder(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         shrinkWrap: true,
-                        itemCount: widget.squareList.length,
+                        itemCount: squareList.length,
                         physics: const ScrollPhysics(),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
@@ -234,20 +211,28 @@ class TimelineViewState extends State<TimelineView> {
                                 crossAxisSpacing: 0,
                                 mainAxisSpacing: 0),
                         itemBuilder: (BuildContext context, int index) {
-                          return !widget.squareList.isEmpty ? SizedBox(
-                              width: (MediaQuery.of(context).size.width) / 2,
-                              height: 500,
-                              child: Stack(children: [
-                                SizedBox(
+                          return !squareList.isEmpty
+                              ? SizedBox(
                                   width:
                                       (MediaQuery.of(context).size.width) / 2,
                                   height: 500,
-                                  child: CustomPaint(
-                                    foregroundPainter: LinePainter(),
-                                  ),
-                                ),
-                                widget.squareList[index]
-                              ])) : Text("waaaaa");
+                                  child: Stack(
+                                      children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
+                                      child: SizedBox(
+                                        width:
+                                            (MediaQuery.of(context).size.width) /
+                                                2,
+                                        height: 500,
+                                        child: CustomPaint(
+                                          foregroundPainter: LinePainter(),
+                                        ),
+                                      ),
+                                    ),
+                                    squareList[index]
+                                  ]))
+                              : const Text("Error: No Data");
                         },
                       ),
                     ),
@@ -259,10 +244,274 @@ class TimelineViewState extends State<TimelineView> {
         });
   }
 
-  methodInChild(List<Stage> stages) {
-    setState(() {
-      // widget.stages = stages;
-    });
+  TextButton buildDayOneTextButton(bool active) {
+    if (active) {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(10, 40),
+          textStyle: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFF67F59)),
+          primary: Color(0xFFF67F59),
+        ),
+        autofocus: true,
+        onPressed: () {
+          activeDay = 1;
+          setState(() {
+            activePerformances = _viewModel.getEventsByStageAndDay(
+                selectedStage.data.attributes?.id ?? 1, 1);
+            squareList =
+                _viewModel.makeSquareListsFromPerformances(activePerformances);
+          });
+        },
+        child: Text(
+          widget.day1,
+        ),
+      );
+    } else {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(10, 40),
+          textStyle: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+          primary: Colors.white,
+        ),
+        autofocus: true,
+        onPressed: () {
+          activeDay = 1;
+          setState(() {
+            activePerformances = _viewModel.getEventsByStageAndDay(
+                selectedStage.data.attributes?.id ?? 1, 1);
+            squareList =
+                _viewModel.makeSquareListsFromPerformances(activePerformances);
+          });
+        },
+        child: Text(
+          widget.day1,
+        ),
+      );
+    }
+  }
+
+  TextButton buildDayTwoTextButton(bool active) {
+    if (active) {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(10, 40),
+          textStyle: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFF67F59)),
+          primary: Color(0xFFF67F59),
+        ),
+        autofocus: true,
+        onPressed: () {
+          activeDay = 2;
+          setState(() {
+            activePerformances = _viewModel.getEventsByStageAndDay(
+                selectedStage.data.attributes?.id ?? 1, 2);
+            squareList =
+                _viewModel.makeSquareListsFromPerformances(activePerformances);
+          });
+        },
+        child: Text(
+          widget.day2,
+        ),
+      );
+    } else {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(10, 40),
+          textStyle: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+          primary: Colors.white,
+        ),
+        autofocus: true,
+        onPressed: () {
+          activeDay = 2;
+          setState(() {
+            activePerformances = _viewModel.getEventsByStageAndDay(
+                selectedStage.data.attributes?.id ?? 1, 2);
+            squareList =
+                _viewModel.makeSquareListsFromPerformances(activePerformances);
+          });
+        },
+        child: Text(
+          widget.day2,
+        ),
+      );
+    }
+  }
+
+  TextButton buildDayThreeTextButton(bool active) {
+    if (active) {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(10, 40),
+          textStyle: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFF67F59)),
+          primary: Color(0xFFF67F59),
+        ),
+        autofocus: true,
+        onPressed: () {
+          activeDay = 3;
+          setState(() {
+            activePerformances = _viewModel.getEventsByStageAndDay(
+                selectedStage.data.attributes?.id ?? 1, 3);
+            squareList =
+                _viewModel.makeSquareListsFromPerformances(activePerformances);
+          });
+        },
+        child: Text(
+          widget.day3,
+        ),
+      );
+    } else {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(10, 40),
+          textStyle: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+          primary: Colors.white,
+        ),
+        autofocus: true,
+        onPressed: () {
+          activeDay = 3;
+          setState(() {
+            activePerformances = _viewModel.getEventsByStageAndDay(
+                selectedStage.data.attributes?.id ?? 1, 3);
+            squareList =
+                _viewModel.makeSquareListsFromPerformances(activePerformances);
+          });
+        },
+        child: Text(
+          widget.day3,
+        ),
+      );
+    }
+  }
+
+  TextButton buildDayFourTextButton(bool active) {
+    if (active) {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(10, 40),
+          textStyle: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFF67F59)),
+          primary: Color(0xFFF67F59),
+        ),
+        autofocus: true,
+        onPressed: () {
+          activeDay = 4;
+          setState(() {
+            activePerformances = _viewModel.getEventsByStageAndDay(
+                selectedStage.data.attributes?.id ?? 1, 4);
+            squareList =
+                _viewModel.makeSquareListsFromPerformances(activePerformances);
+          });
+        },
+        child: Text(
+          widget.day4,
+        ),
+      );
+    } else {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(10, 40),
+          textStyle: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+          primary: Colors.white,
+        ),
+        autofocus: true,
+        onPressed: () {
+          activeDay = 4;
+          setState(() {
+            activePerformances = _viewModel.getEventsByStageAndDay(
+                selectedStage.data.attributes?.id ?? 1, 4);
+            squareList =
+                _viewModel.makeSquareListsFromPerformances(activePerformances);
+          });
+        },
+        child: Text(
+          widget.day4,
+        ),
+      );
+    }
+  }
+
+  TextButton buildDayFiveTextButton(bool active) {
+    if (active) {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(10, 40),
+          textStyle: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFF67F59)),
+          primary: Color(0xFFF67F59),
+        ),
+        autofocus: true,
+        onPressed: () {
+          activeDay = 5;
+          setState(() {
+            activePerformances = _viewModel.getEventsByStageAndDay(
+                selectedStage.data.attributes?.id ?? 1, 5);
+            squareList =
+                _viewModel.makeSquareListsFromPerformances(activePerformances);
+          });
+        },
+        child: Text(
+          widget.day5,
+        ),
+      );
+    } else {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(10, 40),
+          textStyle: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+          primary: Colors.white,
+        ),
+        autofocus: true,
+        onPressed: () {
+          activeDay = 5;
+          setState(() {
+            activePerformances = _viewModel.getEventsByStageAndDay(
+                selectedStage.data.attributes?.id ?? 1, 5);
+            squareList =
+                _viewModel.makeSquareListsFromPerformances(activePerformances);
+          });
+        },
+        child: Text(
+          widget.day5,
+        ),
+      );
+    }
   }
 }
 
@@ -270,10 +519,10 @@ class LinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..strokeWidth = 5
+      ..strokeWidth = 3
       ..color = Color(0xFFF67F59);
-    canvas.drawLine(Offset(size.width * 0, size.height * 0.53),
-        Offset(size.width * 1, size.height * 0.53), paint);
+    canvas.drawLine(Offset(size.width * 0, size.height * 0.59),
+        Offset(size.width * 1, size.height * 0.59), paint);
   }
 
   @override

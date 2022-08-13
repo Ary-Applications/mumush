@@ -35,9 +35,9 @@ class _HomeViewState extends State<HomeView> {
                       Container(
                          height: 450,
                           width:MediaQuery.of(context).size.width,
-                          child: FittedBox(
+                          child: const FittedBox(
+                              fit: BoxFit.cover ,
                               child: Image(image: AssetImage('assets/art/sky.png')),
-                               fit: BoxFit.cover ,
                           )
                       ),
                     ],
@@ -48,9 +48,9 @@ class _HomeViewState extends State<HomeView> {
                       Container(
                           height: 600,
                           width:MediaQuery.of(context).size.width,
-                          child: FittedBox(
-                            child: Image(image: AssetImage('assets/art/graund.png')),
+                          child: const FittedBox(
                             fit: BoxFit.cover ,
+                            child: Image(image: AssetImage('assets/art/graund.png')),
                           )
                       ),
                     ],
@@ -106,42 +106,42 @@ class _HomeViewState extends State<HomeView> {
                                 uri:Uri.parse('https://www.facebook.com/mumush.world/'),
                                 target: LinkTarget.blank,
                                 builder:(context,followLink){
-                                  return TextButton.icon(onPressed: followLink, icon: Icon(FontAwesomeIcons.facebook,color: Colors.white,size: 40,), label: Text(''),);
+                                  return TextButton.icon(onPressed: followLink, icon: Icon(FontAwesomeIcons.facebook,color: Colors.white,size: 40,), label: const Text(''),);
                                 }
                             ),
                             Link(
                                 uri:Uri.parse('https://www.instagram.com/mumush_world/'),
                                 target: LinkTarget.blank,
                                 builder:(context,followLink){
-                                  return TextButton.icon(onPressed: followLink, icon: Icon(FontAwesomeIcons.instagram,color: Colors.white,size: 40,), label: Text(''),);
+                                  return TextButton.icon(onPressed: followLink, icon: const Icon(FontAwesomeIcons.instagram,color: Colors.white,size: 40,), label: Text(''),);
                                 }
                             ),
                             Link(
                                 uri:Uri.parse('https://open.spotify.com/user/qnfogyg7kvywbyvl4kdtlmp35'),
                                 target: LinkTarget.blank,
                                 builder:(context,followLink){
-                                  return TextButton.icon(onPressed: followLink, icon: Icon(FontAwesomeIcons.spotify,color: Colors.white,size: 40,), label: Text(''),);
+                                  return TextButton.icon(onPressed: followLink, icon: const Icon(FontAwesomeIcons.spotify,color: Colors.white,size: 40,), label: Text(''),);
                                 }
                             ),
                             Link(
                                 uri:Uri.parse('https://www.youtube.com/channel/UCipH85UPv3sr2GkpWZJIWTQ'),
                                 target: LinkTarget.blank,
                                 builder:(context,followLink){
-                                  return TextButton.icon(onPressed: followLink, icon: Icon(FontAwesomeIcons.youtube,color: Colors.white,size: 40,), label: Text(''),);
+                                  return TextButton.icon(onPressed: followLink, icon: const Icon(FontAwesomeIcons.youtube,color: Colors.white,size: 40,), label: Text(''),);
                                 }
                             ),
                             Link(
                                 uri:Uri.parse('https://soundcloud.com/soundsofmumush'),
                                 target: LinkTarget.blank,
                                 builder:(context,followLink){
-                                  return TextButton.icon(onPressed: followLink, icon: Icon(FontAwesomeIcons.soundcloud,color: Colors.white,size: 40,), label: Text(''),);
+                                  return TextButton.icon(onPressed: followLink, icon: const Icon(FontAwesomeIcons.soundcloud,color: Colors.white,size: 40,), label: Text(''),);
                                 }
                             ),
                             Link(
                                 uri:Uri.parse('https://www.mumush.world/'),
                                 target: LinkTarget.blank,
                                 builder:(context,followLink){
-                                  return TextButton.icon(onPressed: followLink, icon: Icon(FontAwesomeIcons.globe,color: Colors.white,size: 40,), label: Text(''),);
+                                  return TextButton.icon(onPressed: followLink, icon: const Icon(FontAwesomeIcons.globe,color: Colors.white,size: 40,), label: const Text(''),);
                                 }
                             ),
                           ]

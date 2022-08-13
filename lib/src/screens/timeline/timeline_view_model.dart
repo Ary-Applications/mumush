@@ -1,12 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mumush/src/screens/timeline/event.dart';
 import 'package:mumush/src/screens/timeline/square_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/model/entity/day.dart';
 import '../../data/model/entity/performance.dart';
 import '../../data/model/entity/schedule_model.dart';
 import '../../data/model/entity/stage.dart';
 import '../../data/model/repository/schedule/schedule_remote_data_repository.dart';
+import '../../data/network/api_constants.dart';
+import '../../data/network/base_response.dart';
+import '../../data/network/network_request_exception.dart';
 import '../base/base_view_model.dart';
 
 T? cast<T>(x) => x is T ? x : null;
@@ -14,6 +21,7 @@ T? cast<T>(x) => x is T ? x : null;
 @injectable
 class TimelineViewModel extends BaseViewModel {
   final ScheduleRepository _scheduleRepository;
+  SharedPreferences? prefs;
 
   Schedule? schedule;
   List<ScheduleIncluded?>? included;
@@ -105,13 +113,20 @@ class TimelineViewModel extends BaseViewModel {
 
   String formatEndDate(String endDate) {
     switch (endDate) {
-      case "24:00": return "00:00";
-      case "25:00": return "01:00";
-      case "26:00": return "02:00";
-      case "27:00": return "03:00";
-      case "28:00": return "04:00";
-      case "29:00": return "05:00";
-      default: return endDate;
+      case "24:00":
+        return "00:00";
+      case "25:00":
+        return "01:00";
+      case "26:00":
+        return "02:00";
+      case "27:00":
+        return "03:00";
+      case "28:00":
+        return "04:00";
+      case "29:00":
+        return "05:00";
+      default:
+        return endDate;
     }
   }
 
@@ -127,11 +142,51 @@ class TimelineViewModel extends BaseViewModel {
     return returnStage;
   }
 
-  getAllSchedule() async {
+  T? _getDecodedObj<T>(String responseBody, BaseResponseType baseResponseType) {
+    T? decodedObj;
     try {
-      await _scheduleRepository.getSchedule().then((value) => schedule = value);
-    } catch (e) {
-      debugPrint(e.toString());
+      var baseResponse = BaseResponseFactory.getBaseResponse(baseResponseType)!;
+      decodedObj = baseResponse.decode(responseBody) as T;
+    } catch (error) {
+      debugPrint("Decoding exception:" + error.toString());
+      throw DecodableException(error.toString());
+    }
+    return decodedObj;
+  }
+
+  getAllSchedule() async {
+
+    prefs = await SharedPreferences.getInstance();
+    final scheduleFromSharedPrefs = prefs?.getString('json');
+    if (scheduleFromSharedPrefs != null) {
+      schedule = _getDecodedObj<Schedule>(
+          scheduleFromSharedPrefs, BaseResponseType.performancesResponse);
+    }
+    try {
+      final result = await InternetAddress.lookup('api.mumush.world');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('connected');
+
+        try {
+          await _scheduleRepository
+              .getSchedule()
+              .then((value) => schedule = value);
+        } catch (e) {
+          debugPrint(e.toString());
+          if(schedule == null) {
+            final String response =
+            await rootBundle.loadString('assets/rawData.json');
+            schedule = _getDecodedObj<Schedule>(
+                response, BaseResponseType.performancesResponse);
+          }
+        }
+      }
+    } on SocketException catch (_) {
+      print('not connected');
+      final String response =
+          await rootBundle.loadString('assets/rawData.json');
+      schedule = _getDecodedObj<Schedule>(
+          response, BaseResponseType.performancesResponse);
     }
   }
 

@@ -41,8 +41,7 @@ class TimelineViewState extends State<TimelineView> {
         viewModel: getIt<TimelineViewModel>(),
         onInit: (viewModel) async {
           _viewModel = viewModel;
-          // TODO: Add a loading
-          // TODO: If there's connection, get schedule online, if not, schedule from local db/json.
+
           await _viewModel.getAllSchedule();
 
           _viewModel.getAllIncluded();

@@ -208,7 +208,7 @@ class TimelineViewModel extends BaseViewModel {
                 if (nextDayEndDateFirstTwoCharacters != null) {
                   var nextDayEndDateInt =
                       int.parse(nextDayEndDateFirstTwoCharacters);
-                  if (nextDayEndDateInt! < 12) {
+                  if (nextDayEndDateInt < 12) {
                     print('DEBUG: FOUND NEXT DAY End dates');
                     print(nextDayEndDateInt);
                     eventIds.add(id);

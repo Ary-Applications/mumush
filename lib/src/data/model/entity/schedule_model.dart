@@ -139,7 +139,7 @@ class ScheduleIncludedRelationships {
 } 
 */
 
-  List<ScheduleIncludedRelationshipsPerformances?>? performances;
+  dynamic performances;
 
   ScheduleIncludedRelationships({
     this.performances,
@@ -151,7 +151,17 @@ class ScheduleIncludedRelationships {
       v.forEach((v) {
         arr0.add(ScheduleIncludedRelationshipsPerformances.fromJson(v));
       });
+      print("DEBUG YES: deserialize json performances array $arr0");
       performances = arr0;
+    }
+    else if (json['performances'] != null) {
+      final v = json['performances'];
+      final ret = ScheduleIncludedRelationshipsPerformances.fromJson(v);
+      print("DEBUG YES: deserialize json performances $ret");
+      performances = ret;
+    }
+    else {
+      print("DEBUG ERROR: Could not deserialize json performances");
     }
   }
   Map<String, dynamic> toJson() {
@@ -178,16 +188,28 @@ class ScheduleIncludedAttributes {
 */
 
   int? id;
+  String? longName;
+  String? shortName;
+  String? origin;
+  String? link;
   String? name;
   String? year;
 
   ScheduleIncludedAttributes({
     this.id,
+    this.longName,
+    this.shortName,
+    this.origin,
+    this.link,
     this.name,
     this.year,
   });
   ScheduleIncludedAttributes.fromJson(Map<String, dynamic> json) {
     id = int.tryParse(json['id']?.toString() ?? '');
+    longName = json['longName']?.toString();
+    shortName = json['shortName']?.toString();
+    origin = json['origin']?.toString();
+    link = json['link']?.toString();
     name = json['name']?.toString();
     year = json['year']?.toString();
   }

@@ -46,13 +46,15 @@ class TimelineViewState extends State<TimelineView> {
           await _viewModel.getAllSchedule();
 
           _viewModel.getAllIncluded();
-          _viewModel.getAllStages();
+          _viewModel.getAllStagesAndArtists();
 
           _viewModel.getAllStageNames();
 
           stages = _viewModel.stages;
           _viewModel.getAllPerformances();
           _viewModel.getAllDays();
+          _viewModel.getAllPerformanceDescriptions();
+          setState(() {});
           activePerformances = _viewModel.getEventsByStageAndDay(
               stages.first.data.attributes?.id ?? 1, 1);
           squareList =
@@ -149,8 +151,8 @@ class TimelineViewState extends State<TimelineView> {
                             Container(
                                 width: 90,
                                 child: activeDay == 1
-                                    ? buldDayOneTextButton(true)
-                                    : buldDayOneTextButton(false)),
+                                    ? buildDayOneTextButton(true)
+                                    : buildDayOneTextButton(false)),
                             Container(
                               width: 90,
                               decoration: const BoxDecoration(
@@ -159,8 +161,8 @@ class TimelineViewState extends State<TimelineView> {
                                     BorderSide(width: 3.0, color: Colors.white),
                               )),
                               child: activeDay == 2
-                                  ? buldDayTwoTextButton(true)
-                                  : buldDayTwoTextButton(false),
+                                  ? buildDayTwoTextButton(true)
+                                  : buildDayTwoTextButton(false),
                             ),
                             Container(
                               width: 90,
@@ -170,8 +172,8 @@ class TimelineViewState extends State<TimelineView> {
                                     BorderSide(width: 3.0, color: Colors.white),
                               )),
                               child: activeDay == 3
-                                  ? buldDayThreeTextButton(true)
-                                  : buldDayThreeTextButton(false),
+                                  ? buildDayThreeTextButton(true)
+                                  : buildDayThreeTextButton(false),
                             ),
                             Container(
                               width: 90,
@@ -181,8 +183,8 @@ class TimelineViewState extends State<TimelineView> {
                                     BorderSide(width: 3.0, color: Colors.white),
                               )),
                               child: activeDay == 4
-                                  ? buldDayFourTextButton(true)
-                                  : buldDayFourTextButton(false),
+                                  ? buildDayFourTextButton(true)
+                                  : buildDayFourTextButton(false),
                             ),
                             Container(
                               width: 90,
@@ -192,8 +194,8 @@ class TimelineViewState extends State<TimelineView> {
                                     BorderSide(width: 3.0, color: Colors.white),
                               )),
                               child: activeDay == 5
-                                  ? buldDayFiveTextButton(true)
-                                  : buldDayFiveTextButton(false),
+                                  ? buildDayFiveTextButton(true)
+                                  : buildDayFiveTextButton(false),
                             ),
                           ],
                         ),
@@ -240,7 +242,7 @@ class TimelineViewState extends State<TimelineView> {
         });
   }
 
-  TextButton buldDayOneTextButton(bool active) {
+  TextButton buildDayOneTextButton(bool active) {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
@@ -294,7 +296,7 @@ class TimelineViewState extends State<TimelineView> {
     }
   }
 
-  TextButton buldDayTwoTextButton(bool active) {
+  TextButton buildDayTwoTextButton(bool active) {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
@@ -348,7 +350,7 @@ class TimelineViewState extends State<TimelineView> {
     }
   }
 
-  TextButton buldDayThreeTextButton(bool active) {
+  TextButton buildDayThreeTextButton(bool active) {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
@@ -402,7 +404,7 @@ class TimelineViewState extends State<TimelineView> {
     }
   }
 
-  TextButton buldDayFourTextButton(bool active) {
+  TextButton buildDayFourTextButton(bool active) {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
@@ -456,7 +458,7 @@ class TimelineViewState extends State<TimelineView> {
     }
   }
 
-  TextButton buldDayFiveTextButton(bool active) {
+  TextButton buildDayFiveTextButton(bool active) {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(

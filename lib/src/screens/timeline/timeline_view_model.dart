@@ -9,15 +9,19 @@ import '../../data/model/entity/stage.dart';
 import '../../data/model/repository/schedule/schedule_remote_data_repository.dart';
 import '../base/base_view_model.dart';
 
+T? cast<T>(x) => x is T ? x : null;
+
 @injectable
 class TimelineViewModel extends BaseViewModel {
   final ScheduleRepository _scheduleRepository;
 
   Schedule? schedule;
   List<ScheduleIncluded?>? included;
+  List<ScheduleIncluded> performanceDescriptions = [];
   Stage placeholderStage = Stage(ScheduleIncluded(
       attributes: ScheduleIncludedAttributes(name: "GARGANTUA")));
   List<Stage> stages = [];
+  List<ScheduleIncluded> artists = [];
   List<Performance> allPerformances = [];
   List<Day> days = [];
 
@@ -33,9 +37,64 @@ class TimelineViewModel extends BaseViewModel {
       var endDate = performance.data.attributes?.end ?? "";
       var startToEnd = "$startDate-$endDate";
 
-      var event = Event(performance.data.relationships?.artists?.data?.id ?? "",
-          "", (startToEnd));
-      squaresToReturn.add(SquareWidget(event: event));
+      // ScheduleIncludedRelationshipsPerformances?
+      //     // singlePerformanceDataForPerformance =
+      //     // cast<ScheduleIncludedRelationshipsPerformances>(
+      //     //     performance.included?.relationships?.performances);
+      var eventName = performance.included?.attributes?.name;
+      var eventShortName = performance.included?.attributes?.shortName;
+      var eventLongName = performance.included?.attributes?.longName;
+
+      if (eventName != null) {
+        var event = Event(eventName, "", (startToEnd));
+        squaresToReturn.add(SquareWidget(event: event));
+      } else if (eventShortName != null) {
+        var event = Event(eventShortName, "", (startToEnd));
+        squaresToReturn.add(SquareWidget(event: event));
+      } else if (eventLongName != null) {
+        var event = Event(eventLongName, "", (startToEnd));
+        squaresToReturn.add(SquareWidget(event: event));
+      } else {
+        ScheduleIncluded? foundArtist;
+        for (var artist in artists) {
+          ScheduleIncludedRelationshipsPerformances?
+              singlePerformanceDataForArtist =
+              cast<ScheduleIncludedRelationshipsPerformances>(
+                  artist.relationships?.performances);
+          var artistdataId = singlePerformanceDataForArtist?.data?.id;
+          var perfDataId = performance.data.attributes?.id;
+          if (artistdataId == perfDataId) {
+            foundArtist = artist;
+          }
+        }
+        if (foundArtist != null) {
+          var name = foundArtist.attributes?.name;
+          print("DEBUG: FUCKMESIDEWAYS : $name");
+          if (name != null) {
+            var event = Event(name, "", (startToEnd));
+            squaresToReturn.add(SquareWidget(event: event));
+          } else {
+            var maybeName = performance.data.relationships?.artists?.data?.id;
+            print(
+                "DEBUG: ERROR ERROR ERROR!!!!!!!!!!! Could not find NAME!!!!!!! Maybe this? : $maybeName");
+            if (maybeName != null) {
+              var event = Event(maybeName, "", (startToEnd));
+              squaresToReturn.add(SquareWidget(event: event));
+            }
+          }
+        } else {
+          print(
+              'DEBUG: Error: Could not find matching ids in artists and performances');
+          var maybeName = performance.data.relationships?.artists?.data?.id;
+          if (maybeName != null) {
+            var event = Event(maybeName, "", (startToEnd));
+            squaresToReturn.add(SquareWidget(event: event));
+            print('DEBUG: Name found as artist data id');
+          } else {
+            print('DEBUG: Name could not be found in artist data either');
+          }
+        }
+      }
     }
     return squaresToReturn;
   }
@@ -63,8 +122,7 @@ class TimelineViewModel extends BaseViewModel {
   List<Performance> getEventsByStageAndDay(int stageId, int dayId) {
     Stage? stage;
     Day? day;
-    // String lowercasedStageName = stageName.toLowerCase();
-    // String capitalizedStageName = lowercasedStageName.replaceFirst(lowercasedStageName[0], lowercasedStageName[0].toUpperCase());
+
     List<int> eventIds = [];
     List<Performance> eventsToReturn = [];
 
@@ -88,17 +146,14 @@ class TimelineViewModel extends BaseViewModel {
             stageRelList.performances;
 
         if ((day != null) && (stagePerfList != null)) {
-          if (stage.data.relationships != null) {
-            ScheduleIncludedRelationships dayRelList = day.data.relationships!;
-            List<ScheduleIncludedRelationshipsPerformances?>? dayPerfList =
-                dayRelList.performances;
-            if (dayPerfList != null) {
-              for (var stagePerfElement in stagePerfList) {
-                for (var dayPerfElement in dayPerfList) {
-                  if (dayPerfElement?.data?.id == stagePerfElement?.data?.id) {
-                    // ScheduleIncludedRelationshipsPerformancesData = d
-                    eventIds.add(dayPerfElement!.data!.id!);
-                  }
+          ScheduleIncludedRelationships dayRelList = day.data.relationships!;
+          List<ScheduleIncludedRelationshipsPerformances?>? dayPerfList =
+              dayRelList.performances;
+          if (dayPerfList != null) {
+            for (var stagePerfElement in stagePerfList) {
+              for (var dayPerfElement in dayPerfList) {
+                if (dayPerfElement?.data?.id == stagePerfElement?.data?.id) {
+                  eventIds.add(dayPerfElement!.data!.id!);
                 }
               }
             }
@@ -109,6 +164,16 @@ class TimelineViewModel extends BaseViewModel {
       print("Error: getEventsByStageAndDay: Could not find stage");
     }
 
+    for (var description in performanceDescriptions) {
+      // Might be an array
+      ScheduleIncludedRelationshipsPerformances? singleDescription =
+          cast<ScheduleIncludedRelationshipsPerformances>(
+              description.relationships?.performances);
+      for (var eventId in eventIds) {
+        if (singleDescription?.data?.id == eventId) {}
+      }
+    }
+
     for (var performance in allPerformances) {
       for (var eventId in eventIds) {
         if (performance.data.id == eventId) {
@@ -116,9 +181,62 @@ class TimelineViewModel extends BaseViewModel {
         }
       }
     }
-    print("DEBUG: Events to return by stage names: ");
+    List<ScheduleIncluded> includedsToAdd = [];
+    if (included != null) {
+      for (var include in included!) {
+        ScheduleIncludedRelationshipsPerformances? singlePerformanceData =
+            cast<ScheduleIncludedRelationshipsPerformances>(
+                include?.relationships?.performances);
+
+        for (var eventId in eventIds) {
+          if (singlePerformanceData?.data?.id == eventId) {
+            includedsToAdd.add(include!);
+            String? dtsg = include.attributes?.longName;
+            String? dtsggg = include.attributes?.shortName;
+            String? dtsggga = include.attributes?.name;
+            print("DEBUG: GOT SINGLE PERFORMANCE LONG NAME $dtsg");
+            print("DEBUG: ORRRRR GOT SINGLE PERFORMANCE SHORT NAME $dtsggg");
+            print("DEBUG: ORRRRR ORRRRRR GOT SINGLE PERFORMANCE NAME $dtsggga");
+          }
+        }
+      }
+    }
+
+    eventsToReturn.forEach((eventTeReturnelement) {
+      includedsToAdd.forEach((includedElement) {
+        ScheduleIncludedRelationshipsPerformances? singlePerformanceData =
+            cast<ScheduleIncludedRelationshipsPerformances>(
+                includedElement.relationships?.performances);
+        if (eventTeReturnelement.data.id == singlePerformanceData?.data?.id) {
+          eventTeReturnelement.included = includedElement;
+        }
+      });
+    });
+
+    debugPrint("DEBUG: Events to return by stage Data IDs: ");
     for (var element in eventsToReturn) {
-      print(element.data.relationships?.artists?.data?.id);
+      debugPrint(element.data.relationships?.artists?.data?.id);
+    }
+
+    debugPrint("DEBUG: Events to return by INCLUDED: ");
+    for (var element in eventsToReturn) {
+      var attributesName = element.included?.attributes?.name;
+      if ((attributesName != null) && (attributesName != "")) {
+        debugPrint("DEBUG: attributesName: $attributesName");
+      } else {
+        var attributesShortName = element.included?.attributes?.shortName;
+        if (attributesShortName != null) {
+          debugPrint("DEBUG: attributesShortName: $attributesShortName");
+        } else {
+          var attributesLongName = element.included?.attributes?.longName;
+          if (attributesLongName != null) {
+            debugPrint("DEBUG: attributesLongName: $attributesLongName");
+          } else {
+            debugPrint(
+                "DEBUG: GOT Neither name, or short or long name for: $element");
+          }
+        }
+      }
     }
     return eventsToReturn;
   }
@@ -128,8 +246,19 @@ class TimelineViewModel extends BaseViewModel {
     included?.forEach((element) {});
   }
 
-  getAllStages() {
+  getAllPerformanceDescriptions() {
+    if (included != null) {
+      for (var element in included!) {
+        if (element?.type == "performanceDescriptions") {
+          performanceDescriptions.add(element!);
+        }
+      }
+    }
+  }
+
+  getAllStagesAndArtists() {
     stages = [];
+
     if (included != null) {
       for (var element in included!) {
         if (element?.type == "stages") {
@@ -137,6 +266,9 @@ class TimelineViewModel extends BaseViewModel {
             var stage = Stage(element!);
             stages.add(stage);
           }
+        }
+        if (element?.type == "artists") {
+          artists.add(element!);
         }
       }
     }

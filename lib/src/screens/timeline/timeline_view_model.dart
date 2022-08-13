@@ -91,7 +91,14 @@ class TimelineViewModel extends BaseViewModel {
             squaresToReturn.add(SquareWidget(event: event));
             print('DEBUG: Name found as artist data id');
           } else {
-            print('DEBUG: Name could not be found in artist data either');
+            print('DEBUG: Name found in activities');
+            if(performance.data.attributes?.activity != null) {
+              var activityName = performance.data.attributes?.activity;
+              var event = Event(activityName ?? "", "", (startToEnd));
+              squaresToReturn.add(SquareWidget(event: event));
+            } else {
+              print('DEBUG: Name could not be found');
+            }
           }
         }
       }

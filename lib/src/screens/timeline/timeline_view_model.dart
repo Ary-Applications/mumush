@@ -35,6 +35,8 @@ class TimelineViewModel extends BaseViewModel {
     for (var performance in performances) {
       var startDate = performance.data.attributes?.start ?? "";
       var endDate = performance.data.attributes?.end ?? "";
+      endDate = formatEndDate(endDate);
+
       var startToEnd = "$startDate-$endDate";
       var eventName = performance.included?.attributes?.name;
       var eventShortName = performance.included?.attributes?.shortName;
@@ -101,7 +103,19 @@ class TimelineViewModel extends BaseViewModel {
     return squaresToReturn;
   }
 
-  Stage? findStageByUppercasedTitle(String title) {
+  String formatEndDate(String endDate) {
+    switch (endDate) {
+      case "24:00": return "00:00";
+      case "25:00": return "01:00";
+      case "26:00": return "02:00";
+      case "27:00": return "03:00";
+      case "28:00": return "04:00";
+      case "29:00": return "05:00";
+      default: return endDate;
+    }
+  }
+
+  Stage? findStageByUpperCasedTitle(String title) {
     Stage? returnStage;
     for (var stage in stages) {
       if (stage.data.attributes?.name == title) {

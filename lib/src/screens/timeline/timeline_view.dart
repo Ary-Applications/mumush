@@ -121,7 +121,7 @@ class TimelineViewState extends State<TimelineView> {
                                   onChanged: (item) {
                                     setState(() {
                                       selectedStage =
-                                          _viewModel.findStageByUppercasedTitle(
+                                          _viewModel.findStageByUpperCasedTitle(
                                                   item!) ??
                                               placeholderStage;
                                       activePerformances =

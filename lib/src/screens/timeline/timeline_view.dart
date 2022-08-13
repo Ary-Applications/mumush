@@ -47,9 +47,7 @@ class TimelineViewState extends State<TimelineView> {
 
           _viewModel.getAllIncluded();
           _viewModel.getAllStagesAndArtists();
-
           _viewModel.getAllStageNames();
-
           stages = _viewModel.stages;
           _viewModel.getAllPerformances();
           _viewModel.getAllDays();
@@ -92,7 +90,7 @@ class TimelineViewState extends State<TimelineView> {
                                   value: selectedStage.data.attributes?.name
                                       ?.toUpperCase(),
                                   isExpanded: true,
-                                  iconSize: 40,
+                                  iconSize: 30,
                                   icon: const Icon(
                                     Icons.arrow_drop_down,
                                     color: Colors.white,
@@ -110,7 +108,7 @@ class TimelineViewState extends State<TimelineView> {
                                                             ?.toUpperCase() ??
                                                         "NAME",
                                                     style: const TextStyle(
-                                                        fontSize: 30.0,
+                                                        fontSize: 24.0,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         color: Colors.white),
@@ -131,7 +129,7 @@ class TimelineViewState extends State<TimelineView> {
                                               selectedStage
                                                       .data.attributes?.id ??
                                                   1,
-                                              1);
+                                              activeDay);
                                       squareList = _viewModel
                                           .makeSquareListsFromPerformances(
                                               activePerformances);
@@ -218,14 +216,18 @@ class TimelineViewState extends State<TimelineView> {
                                   width:
                                       (MediaQuery.of(context).size.width) / 2,
                                   height: 500,
-                                  child: Stack(children: [
-                                    SizedBox(
-                                      width:
-                                          (MediaQuery.of(context).size.width) /
-                                              2,
-                                      height: 500,
-                                      child: CustomPaint(
-                                        foregroundPainter: LinePainter(),
+                                  child: Stack(
+                                      children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
+                                      child: SizedBox(
+                                        width:
+                                            (MediaQuery.of(context).size.width) /
+                                                2,
+                                        height: 500,
+                                        child: CustomPaint(
+                                          foregroundPainter: LinePainter(),
+                                        ),
                                       ),
                                     ),
                                     squareList[index]
@@ -252,7 +254,7 @@ class TimelineViewState extends State<TimelineView> {
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
-          primary:Color(0xFFF67F59),
+          primary: Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -305,8 +307,8 @@ class TimelineViewState extends State<TimelineView> {
               fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
-              color:Color(0xFFF67F59)),
-          primary:Color(0xFFF67F59),
+              color: Color(0xFFF67F59)),
+          primary: Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -414,7 +416,7 @@ class TimelineViewState extends State<TimelineView> {
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
-          primary:Color(0xFFF67F59),
+          primary: Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -467,7 +469,7 @@ class TimelineViewState extends State<TimelineView> {
               fontSize: 25,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
-              color:Color(0xFFF67F59)),
+              color: Color(0xFFF67F59)),
           primary: Color(0xFFF67F59),
         ),
         autofocus: true,
@@ -517,7 +519,7 @@ class LinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..strokeWidth = 5
+      ..strokeWidth = 3
       ..color = Color(0xFFF67F59);
     canvas.drawLine(Offset(size.width * 0, size.height * 0.59),
         Offset(size.width * 1, size.height * 0.59), paint);

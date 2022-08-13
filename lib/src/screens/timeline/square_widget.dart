@@ -45,18 +45,20 @@ class SquareWidget extends StatelessWidget {
                               alignment: Alignment.topLeft,
                               child: Text(
                                 event.date,
-                                style: const TextStyle(fontSize: 10.0,color: Colors.white,fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 12.0,color: Colors.white,fontWeight: FontWeight.bold),
                               )),
                         ],
                       ),
-                      const SizedBox(height: 1),
-                      Align(
-                          alignment: Alignment.bottomRight,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(event.location,
-                                style: const TextStyle(fontSize: 15.0)),
-                          ))
+                      // TODO: Make redirection if possible
+                      // const SizedBox(height: 1),
+                      // Align(
+                      //     alignment: Alignment.bottomRight,
+                      //     child: TextButton(
+                      //       onPressed: () {},
+                      //       child: Text(event.location,
+                      //           style: const TextStyle(fontSize: 8.0),
+                      //       ),
+                      //     ))
                     ],
                   ),
                 ),

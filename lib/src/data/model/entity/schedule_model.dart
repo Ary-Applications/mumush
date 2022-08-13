@@ -26,12 +26,14 @@ class ScheduleMetaPage {
     this.number,
     this.size,
   });
+
   ScheduleMetaPage.fromJson(Map<String, dynamic> json) {
     total = int.tryParse(json['total']?.toString() ?? '');
     last = int.tryParse(json['last']?.toString() ?? '');
     number = int.tryParse(json['number']?.toString() ?? '');
     size = int.tryParse(json['size']?.toString() ?? '');
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['total'] = total;
@@ -59,9 +61,13 @@ class ScheduleMeta {
   ScheduleMeta({
     this.page,
   });
+
   ScheduleMeta.fromJson(Map<String, dynamic> json) {
-    page = (json['page'] != null && (json['page'] is Map)) ? ScheduleMetaPage.fromJson(json['page']) : null;
+    page = (json['page'] != null && (json['page'] is Map))
+        ? ScheduleMetaPage.fromJson(json['page'])
+        : null;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (page != null) {
@@ -76,7 +82,7 @@ class ScheduleIncludedRelationshipsPerformancesData {
 {
   "type": "performances",
   "id": 1
-} 
+}
 */
 
   String? type;
@@ -86,10 +92,13 @@ class ScheduleIncludedRelationshipsPerformancesData {
     this.type,
     this.id,
   });
-  ScheduleIncludedRelationshipsPerformancesData.fromJson(Map<String, dynamic> json) {
+
+  ScheduleIncludedRelationshipsPerformancesData.fromJson(
+      Map<String, dynamic> json) {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -105,7 +114,7 @@ class ScheduleIncludedRelationshipsPerformances {
     "type": "performances",
     "id": 1
   }
-} 
+}
 */
 
   ScheduleIncludedRelationshipsPerformancesData? data;
@@ -113,9 +122,14 @@ class ScheduleIncludedRelationshipsPerformances {
   ScheduleIncludedRelationshipsPerformances({
     this.data,
   });
-  ScheduleIncludedRelationshipsPerformances.fromJson(Map<String, dynamic> json) {
-    data = (json['data'] != null && (json['data'] is Map)) ? ScheduleIncludedRelationshipsPerformancesData.fromJson(json['data']) : null;
+
+  ScheduleIncludedRelationshipsPerformances.fromJson(
+      Map<String, dynamic> json) {
+    data = (json['data'] != null && (json['data'] is Map))
+        ? ScheduleIncludedRelationshipsPerformancesData.fromJson(json['data'])
+        : null;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (data != null) {
@@ -136,7 +150,7 @@ class ScheduleIncludedRelationships {
       }
     }
   ]
-} 
+}
 */
 
   dynamic performances;
@@ -144,6 +158,7 @@ class ScheduleIncludedRelationships {
   ScheduleIncludedRelationships({
     this.performances,
   });
+
   ScheduleIncludedRelationships.fromJson(Map<String, dynamic> json) {
     if (json['performances'] != null && (json['performances'] is List)) {
       final v = json['performances'];
@@ -153,17 +168,16 @@ class ScheduleIncludedRelationships {
       });
       print("DEBUG YES: deserialize json performances array $arr0");
       performances = arr0;
-    }
-    else if (json['performances'] != null) {
+    } else if (json['performances'] != null) {
       final v = json['performances'];
       final ret = ScheduleIncludedRelationshipsPerformances.fromJson(v);
       print("DEBUG YES: deserialize json performances $ret");
       performances = ret;
-    }
-    else {
+    } else {
       print("DEBUG ERROR: Could not deserialize json performances");
     }
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (performances != null) {
@@ -184,13 +198,16 @@ class ScheduleIncludedAttributes {
   "id": 1,
   "name": "Gargantua",
   "year": "2022"
-} 
+}
 */
 
   int? id;
   String? longName;
   String? shortName;
   String? origin;
+  String? day;
+  String? start;
+  String? end;
   String? link;
   String? name;
   String? year;
@@ -199,20 +216,28 @@ class ScheduleIncludedAttributes {
     this.id,
     this.longName,
     this.shortName,
+    this.day,
+    this.start,
+    this.end,
     this.origin,
     this.link,
     this.name,
     this.year,
   });
+
   ScheduleIncludedAttributes.fromJson(Map<String, dynamic> json) {
     id = int.tryParse(json['id']?.toString() ?? '');
     longName = json['longName']?.toString();
     shortName = json['shortName']?.toString();
+    day = json['day']?.toString();
+    start = json['start']?.toString();
+    end = json['end']?.toString();
     origin = json['origin']?.toString();
     link = json['link']?.toString();
     name = json['name']?.toString();
     year = json['year']?.toString();
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
@@ -242,7 +267,7 @@ class ScheduleIncluded {
       }
     ]
   }
-} 
+}
 */
 
   String? type;
@@ -256,12 +281,19 @@ class ScheduleIncluded {
     this.attributes,
     this.relationships,
   });
+
   ScheduleIncluded.fromJson(Map<String, dynamic> json) {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
-    attributes = (json['attributes'] != null && (json['attributes'] is Map)) ? ScheduleIncludedAttributes.fromJson(json['attributes']) : null;
-    relationships = (json['relationships'] != null && (json['relationships'] is Map)) ? ScheduleIncludedRelationships.fromJson(json['relationships']) : null;
+    attributes = (json['attributes'] != null && (json['attributes'] is Map))
+        ? ScheduleIncludedAttributes.fromJson(json['attributes'])
+        : null;
+    relationships =
+        (json['relationships'] != null && (json['relationships'] is Map))
+            ? ScheduleIncludedRelationships.fromJson(json['relationships'])
+            : null;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -291,10 +323,12 @@ class ScheduleDataRelationshipsArtistsData {
     this.type,
     this.id,
   });
+
   ScheduleDataRelationshipsArtistsData.fromJson(Map<String, dynamic> json) {
     type = json['type']?.toString();
     id = json['id']?.toString();
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -318,9 +352,13 @@ class ScheduleDataRelationshipsArtists {
   ScheduleDataRelationshipsArtists({
     this.data,
   });
+
   ScheduleDataRelationshipsArtists.fromJson(Map<String, dynamic> json) {
-    data = (json['data'] != null && (json['data'] is Map)) ? ScheduleDataRelationshipsArtistsData.fromJson(json['data']) : null;
+    data = (json['data'] != null && (json['data'] is Map))
+        ? ScheduleDataRelationshipsArtistsData.fromJson(json['data'])
+        : null;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (data != null) {
@@ -335,7 +373,7 @@ class ScheduleDataRelationshipsPerformanceDescriptionsData {
 {
   "type": "performanceDescriptions",
   "id": 4
-} 
+}
 */
 
   String? type;
@@ -345,10 +383,13 @@ class ScheduleDataRelationshipsPerformanceDescriptionsData {
     this.type,
     this.id,
   });
-  ScheduleDataRelationshipsPerformanceDescriptionsData.fromJson(Map<String, dynamic> json) {
+
+  ScheduleDataRelationshipsPerformanceDescriptionsData.fromJson(
+      Map<String, dynamic> json) {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -364,7 +405,7 @@ class ScheduleDataRelationshipsPerformanceDescriptions {
     "type": "performanceDescriptions",
     "id": 4
   }
-} 
+}
 */
 
   ScheduleDataRelationshipsPerformanceDescriptionsData? data;
@@ -372,9 +413,15 @@ class ScheduleDataRelationshipsPerformanceDescriptions {
   ScheduleDataRelationshipsPerformanceDescriptions({
     this.data,
   });
-  ScheduleDataRelationshipsPerformanceDescriptions.fromJson(Map<String, dynamic> json) {
-    data = (json['data'] != null && (json['data'] is Map)) ? ScheduleDataRelationshipsPerformanceDescriptionsData.fromJson(json['data']) : null;
+
+  ScheduleDataRelationshipsPerformanceDescriptions.fromJson(
+      Map<String, dynamic> json) {
+    data = (json['data'] != null && (json['data'] is Map))
+        ? ScheduleDataRelationshipsPerformanceDescriptionsData.fromJson(
+            json['data'])
+        : null;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (data != null) {
@@ -389,7 +436,7 @@ class ScheduleDataRelationshipsDaysData {
 {
   "type": "days",
   "id": 1
-} 
+}
 */
 
   String? type;
@@ -399,10 +446,12 @@ class ScheduleDataRelationshipsDaysData {
     this.type,
     this.id,
   });
+
   ScheduleDataRelationshipsDaysData.fromJson(Map<String, dynamic> json) {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -418,7 +467,7 @@ class ScheduleDataRelationshipsDays {
     "type": "days",
     "id": 1
   }
-} 
+}
 */
 
   ScheduleDataRelationshipsDaysData? data;
@@ -426,9 +475,13 @@ class ScheduleDataRelationshipsDays {
   ScheduleDataRelationshipsDays({
     this.data,
   });
+
   ScheduleDataRelationshipsDays.fromJson(Map<String, dynamic> json) {
-    data = (json['data'] != null && (json['data'] is Map)) ? ScheduleDataRelationshipsDaysData.fromJson(json['data']) : null;
+    data = (json['data'] != null && (json['data'] is Map))
+        ? ScheduleDataRelationshipsDaysData.fromJson(json['data'])
+        : null;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (data != null) {
@@ -443,7 +496,7 @@ class ScheduleDataRelationshipsStagesData {
 {
   "type": "stages",
   "id": 2
-} 
+}
 */
 
   String? type;
@@ -453,10 +506,12 @@ class ScheduleDataRelationshipsStagesData {
     this.type,
     this.id,
   });
+
   ScheduleDataRelationshipsStagesData.fromJson(Map<String, dynamic> json) {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -472,7 +527,7 @@ class ScheduleDataRelationshipsStages {
     "type": "stages",
     "id": 2
   }
-} 
+}
 */
 
   ScheduleDataRelationshipsStagesData? data;
@@ -480,9 +535,13 @@ class ScheduleDataRelationshipsStages {
   ScheduleDataRelationshipsStages({
     this.data,
   });
+
   ScheduleDataRelationshipsStages.fromJson(Map<String, dynamic> json) {
-    data = (json['data'] != null && (json['data'] is Map)) ? ScheduleDataRelationshipsStagesData.fromJson(json['data']) : null;
+    data = (json['data'] != null && (json['data'] is Map))
+        ? ScheduleDataRelationshipsStagesData.fromJson(json['data'])
+        : null;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (data != null) {
@@ -519,7 +578,7 @@ class ScheduleDataRelationships {
       "id": "mankind"
     }
   }
-} 
+}
 */
 
   ScheduleDataRelationshipsStages? stages;
@@ -527,18 +586,26 @@ class ScheduleDataRelationships {
   ScheduleDataRelationshipsArtists? artists;
   ScheduleDataRelationshipsPerformanceDescriptions? performanceDescriptions;
 
-  ScheduleDataRelationships({
-    this.stages,
-    this.days,
-    this.performanceDescriptions,
-    this.artists
-  });
+  ScheduleDataRelationships(
+      {this.stages, this.days, this.performanceDescriptions, this.artists});
+
   ScheduleDataRelationships.fromJson(Map<String, dynamic> json) {
-    stages = (json['stages'] != null && (json['stages'] is Map)) ? ScheduleDataRelationshipsStages.fromJson(json['stages']) : null;
-    days = (json['days'] != null && (json['days'] is Map)) ? ScheduleDataRelationshipsDays.fromJson(json['days']) : null;
-    performanceDescriptions = (json['performanceDescriptions'] != null && (json['performanceDescriptions'] is Map)) ? ScheduleDataRelationshipsPerformanceDescriptions.fromJson(json['performanceDescriptions']) : null;
-    artists = (json['artists'] != null && (json['artists'] is Map)) ? ScheduleDataRelationshipsArtists.fromJson(json['artists']) : null;
+    stages = (json['stages'] != null && (json['stages'] is Map))
+        ? ScheduleDataRelationshipsStages.fromJson(json['stages'])
+        : null;
+    days = (json['days'] != null && (json['days'] is Map))
+        ? ScheduleDataRelationshipsDays.fromJson(json['days'])
+        : null;
+    performanceDescriptions = (json['performanceDescriptions'] != null &&
+            (json['performanceDescriptions'] is Map))
+        ? ScheduleDataRelationshipsPerformanceDescriptions.fromJson(
+            json['performanceDescriptions'])
+        : null;
+    artists = (json['artists'] != null && (json['artists'] is Map))
+        ? ScheduleDataRelationshipsArtists.fromJson(json['artists'])
+        : null;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (stages != null) {
@@ -566,7 +633,7 @@ class ScheduleDataAttributes {
   "activity": null,
   "year": "2022",
   "parallel": null
-} 
+}
 */
 
   int? id;
@@ -584,6 +651,7 @@ class ScheduleDataAttributes {
     this.year,
     this.parallel,
   });
+
   ScheduleDataAttributes.fromJson(Map<String, dynamic> json) {
     id = int.tryParse(json['id']?.toString() ?? '');
     start = json['start']?.toString();
@@ -592,6 +660,7 @@ class ScheduleDataAttributes {
     year = json['year']?.toString();
     parallel = json['parallel']?.toString();
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
@@ -637,7 +706,7 @@ class ScheduleData {
       }
     }
   }
-} 
+}
 */
 
   String? type;
@@ -651,12 +720,19 @@ class ScheduleData {
     this.attributes,
     this.relationships,
   });
+
   ScheduleData.fromJson(Map<String, dynamic> json) {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
-    attributes = (json['attributes'] != null && (json['attributes'] is Map)) ? ScheduleDataAttributes.fromJson(json['attributes']) : null;
-    relationships = (json['relationships'] != null && (json['relationships'] is Map)) ? ScheduleDataRelationships.fromJson(json['relationships']) : null;
+    attributes = (json['attributes'] != null && (json['attributes'] is Map))
+        ? ScheduleDataAttributes.fromJson(json['attributes'])
+        : null;
+    relationships =
+        (json['relationships'] != null && (json['relationships'] is Map))
+            ? ScheduleDataRelationships.fromJson(json['relationships'])
+            : null;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -671,7 +747,7 @@ class ScheduleData {
   }
 }
 
-class Schedule implements Decodable{
+class Schedule implements Decodable {
 /*
 {
   "data": [
@@ -737,7 +813,7 @@ class Schedule implements Decodable{
       "size": 168
     }
   }
-} 
+}
 */
 
   List<ScheduleData?>? data;
@@ -749,6 +825,7 @@ class Schedule implements Decodable{
     this.included,
     this.meta,
   });
+
   Schedule.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null && (json['data'] is List)) {
       final v = json['data'];
@@ -766,8 +843,11 @@ class Schedule implements Decodable{
       });
       included = arr0;
     }
-    meta = (json['meta'] != null && (json['meta'] is Map)) ? ScheduleMeta.fromJson(json['meta']) : null;
+    meta = (json['meta'] != null && (json['meta'] is Map))
+        ? ScheduleMeta.fromJson(json['meta'])
+        : null;
   }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (this.data != null) {

@@ -73,7 +73,7 @@ class _MapViewState extends State<MapView> {
 
   setMarkers() async {
     Uint8List pinByteData = await AssetHelper.getInstance()
-        .getBytesFromAsset("assets/map/orangePin.png", 30);
+        .getBytesFromAsset("assets/map/orangePin.png", 50);
     Uint8List gargantuaByteData = await AssetHelper.getInstance()
         .getBytesFromAsset("assets/map/gargantua_stage.png", 160);
     Uint8List arboretumByteData = await AssetHelper.getInstance()
@@ -83,11 +83,11 @@ class _MapViewState extends State<MapView> {
     Uint8List barByteData = await AssetHelper.getInstance()
         .getBytesFromAsset("assets/map/bar.png", 100);
     Uint8List fireSpaceByteData = await AssetHelper.getInstance()
-        .getBytesFromAsset("assets/map/fire_space.png", 70);
+        .getBytesFromAsset("assets/map/fire_space.png", 50);
     Uint8List fireByteData = await AssetHelper.getInstance()
         .getBytesFromAsset("assets/map/fire.png", 40);
     Uint8List toiletByteData = await AssetHelper.getInstance()
-        .getBytesFromAsset("assets/map/toilet.png", 40);
+        .getBytesFromAsset("assets/map/toilet.png", 30);
     Uint8List nestByteData = await AssetHelper.getInstance()
         .getBytesFromAsset("assets/map/nest.png", 100);
     Uint8List entranceByteData = await AssetHelper.getInstance()
@@ -96,6 +96,8 @@ class _MapViewState extends State<MapView> {
         .getBytesFromAsset("assets/map/toilets&showers.png", 50);
     Uint8List medByteData = await AssetHelper.getInstance()
         .getBytesFromAsset("assets/map/medical_symbol.png", 100);
+    Uint8List foodByteData = await AssetHelper.getInstance()
+        .getBytesFromAsset("assets/map/food_court.png", 150);
 
     BitmapDescriptor pinMarker = BitmapDescriptor.fromBytes(pinByteData);
     BitmapDescriptor gargantuaMarker =
@@ -114,6 +116,7 @@ class _MapViewState extends State<MapView> {
     BitmapDescriptor toiShowMarker =
         BitmapDescriptor.fromBytes(toiShowByteData);
     BitmapDescriptor medMarker = BitmapDescriptor.fromBytes(medByteData);
+    BitmapDescriptor foodMarker = BitmapDescriptor.fromBytes(foodByteData);
 
     var localMarkers = <Marker>{};
 
@@ -141,6 +144,8 @@ class _MapViewState extends State<MapView> {
         addMarker(localMarkers, location, description, toiShowMarker);
       } else if (description == "Medical Zone") {
         addMarker(localMarkers, location, description, medMarker);
+      } else if (description == "Food court") {
+        addMarker(localMarkers, location, description, foodMarker);
       } else {
         addMarker(localMarkers, location, description, pinMarker);
       }

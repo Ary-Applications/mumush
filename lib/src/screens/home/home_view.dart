@@ -68,13 +68,16 @@ class _HomeViewState extends State<HomeView> {
                             child:Column(
                               children: [
                                 SizedBox(height: 60),
-                                Text('NEED MEDICAL ASSISTANCE?',style: TextStyle(
+                                const Text('NEED MEDICAL ASSISTANCE?',style: TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold,color: Colors.white),),
-                                SizedBox(height: 10,),
-                                Text('CALL:000000000000000',style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,color: Colors.white),),
+                                const SizedBox(height: 10,),
+                                TextButton(
+                                  onPressed: () => _viewModel.makePhoneCall("+40365425 074"),
+                                  child: const Text('CALL:(0365) 425 074',style: TextStyle(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,color: Colors.white),),
+                                ),
 
                               ],
                             ),

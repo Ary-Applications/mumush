@@ -27,7 +27,7 @@ class TimelineViewModel extends BaseViewModel {
   List<ScheduleIncluded?>? included;
   List<ScheduleIncluded> performanceDescriptions = [];
   Stage placeholderStage = Stage(ScheduleIncluded(
-      attributes: ScheduleIncludedAttributes(name: "GARGANTUA")));
+      attributes: ScheduleIncludedAttributes(name: "GARGANTUA")), true);
   List<Stage> stages = [];
   List<ScheduleIncluded> artists = [];
   List<Performance> allPerformances = [];
@@ -133,6 +133,7 @@ class TimelineViewModel extends BaseViewModel {
   Stage? findStageByUpperCasedTitle(String title) {
     Stage? returnStage;
     for (var stage in stages) {
+      stage.isActive = false;
       if (stage.data.attributes?.name == title) {
         returnStage = stage;
       } else if (stage.data.attributes?.name?.toUpperCase() == title) {
@@ -367,7 +368,7 @@ class TimelineViewModel extends BaseViewModel {
       for (var element in included!) {
         if (element?.type == "stages") {
           if (element?.attributes != null) {
-            var stage = Stage(element!);
+            var stage = Stage(element!, false);
             stages.add(stage);
           }
         }

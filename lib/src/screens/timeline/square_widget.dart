@@ -24,28 +24,36 @@ class SquareWidget extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(7))
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: [
                       Container(
-                        height: 60,
+                        // height: 60,
                         child: Align(
-                            alignment: Alignment.topCenter,
+                            alignment: Alignment.topLeft,
                             child: Text(
                               event.eventTitle.toUpperCase(),
                               style: const TextStyle(
-                                  fontSize: 14.0, fontWeight: FontWeight.bold,color: Colors.white),
+                                  fontSize: 16,
+                                  fontFamily: 'SpaceMono',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
                             )),
                       ),
-                      const SizedBox(height: 10),
+                      // const SizedBox(height: 10),
+                      Spacer(),
                       Row(
                         children: [
-                          const SizedBox(width: 2),
+                          // const SizedBox(width: 2),
                           Align(
-                              alignment: Alignment.topLeft,
+                              alignment: Alignment.bottomLeft,
                               child: Text(
                                 event.date,
-                                style: const TextStyle(fontSize: 12.0,color: Colors.white,fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'SpaceMono',
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
                               )),
                         ],
                       ),

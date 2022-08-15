@@ -203,7 +203,7 @@ class TimelineViewState extends State<TimelineView> {
                                 crossAxisSpacing: 0,
                                 mainAxisSpacing: 0),
                         itemBuilder: (BuildContext context, int index) {
-                          return !squareList.isEmpty
+                          return squareList.isNotEmpty
                               ? SizedBox(
                                   width:
                                       (MediaQuery.of(context).size.width) / 2,
@@ -286,6 +286,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 1);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -311,6 +312,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 1);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -340,6 +342,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 2);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -365,6 +368,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 2);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -394,6 +398,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 3);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -419,6 +424,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 3);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -448,6 +454,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 4);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -473,6 +480,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 4);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -502,6 +510,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 5);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -527,6 +536,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 5);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(

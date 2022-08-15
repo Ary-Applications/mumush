@@ -13,9 +13,13 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late HomeViewModel _viewModel;
+  static const linkHeight = 24.0;
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return BaseStatefulView<HomeViewModel>(
         viewModel: getIt<HomeViewModel>(),
         onInit: (viewModel) {
@@ -28,10 +32,10 @@ class _HomeViewState extends State<HomeView> {
               children: [
                 Column(
                   children: [
-                    SizedBox(height: 130),
+                    // SizedBox(height: 130),
                     Container(
-                        height: 250,
-                        width: MediaQuery.of(context).size.width,
+                        height: screenHeight * 0.5,
+                        width: screenWidth,
                         child: const FittedBox(
                           fit: BoxFit.cover,
                           child: Image(image: AssetImage('assets/art/sky.png')),
@@ -40,9 +44,9 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 Column(
                   children: [
-                    SizedBox(height: 100),
+                    SizedBox(height: screenHeight * 0.20),
                     Container(
-                        height: 500,
+                        height: screenHeight * 0.5,
                         width: MediaQuery.of(context).size.width,
                         child: const FittedBox(
                           fit: BoxFit.cover,
@@ -51,48 +55,54 @@ class _HomeViewState extends State<HomeView> {
                         )),
                   ],
                 ),
-                FittedBox(
-                  child: Container(
-                    color: Colors.transparent,
-                    child: Column(children: [
-                      Container(
-                        alignment: AlignmentDirectional.topStart,
-                        height: 150,
-                        width: MediaQuery.of(context).size.width,
-                        color: Color(0xFFEC6842),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 60),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                showInfoPopUp();
-                              },
-                              child: const Icon(
-                                Icons.info_outline,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 124),
-                      Container(
-                          height: 150,
-                          width: 150,
-                          color: Colors.transparent,
-                          child: SvgPicture.asset('assets/art/mumush.svg')),
-                      SizedBox(
-                        height: 80,
-                      ),
-                      Link(
-                          uri: Uri.parse(
-                              "https://www.google.com/maps/place/46°29'46.3%22N+24°47'29.2%22E/@46.4961944,24.7914444,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x1a29a39c83107b27!8m2!3d46.496199!4d24.791438"),
-                          target: LinkTarget.blank,
-                          builder: (context, followLink) {
-                            return TextButton(
+                Column(
+                  children: [
+                    // SizedBox(height: screenHeight * 0.01),
+                    Container(
+                        height: screenHeight * 0.88,
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: const FittedBox(
+                          fit: BoxFit.cover,
+                          child: Image(
+                              image: AssetImage('assets/art/landing_left.png')),
+                        )),
+                  ],
+                ),
+                Column(
+                  children: [
+                    // SizedBox(height: screenHeight * 0.01),
+                    Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Container(
+                          height: screenHeight * 0.888,
+                          width: MediaQuery.of(context).size.width / 2,
+                          child: const FittedBox(
+                            fit: BoxFit.cover,
+                            child: Image(
+                                image:
+                                    AssetImage('assets/art/landing_right.png')),
+                          )),
+                    ),
+                  ],
+                ),
+                Container(
+                  color: Colors.transparent,
+                  child: Column(children: [
+                    SizedBox(height: screenHeight * 0.34),
+                    Container(
+                        height: 155,
+                        width: 155,
+                        color: Colors.transparent,
+                        child: SvgPicture.asset('assets/art/mumush.svg')),
+                    SizedBox(
+                      height: screenHeight * 0.11,
+                    ),
+                    Link(
+                        uri: Uri.parse(
+                            "https://www.google.com/maps/place/46°29'46.3%22N+24°47'29.2%22E/@46.4961944,24.7914444,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x1a29a39c83107b27!8m2!3d46.496199!4d24.791438"),
+                        target: LinkTarget.blank,
+                        builder: (context, followLink) {
+                          return TextButton(
                               onPressed: followLink,
                               child: const Text(
                                 'HOW TO GET TO THE FESTIVAL',
@@ -100,108 +110,130 @@ class _HomeViewState extends State<HomeView> {
                                     fontSize: 20,
                                     fontFamily: 'SpaceMono',
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                                    color: Colors.white,
+                                    shadows: <Shadow>[
+                                      Shadow(
+                                        offset: Offset(0.5, 0.5),
+                                        blurRadius: 4.0,
+                                        color: Colors.black,
+                                      ),
+                                    ]),
+                              ));
+                        }),
+                    SizedBox(
+                      height: screenHeight * 0.06,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                child: Link(
+                                    uri: Uri.parse(
+                                        'https://www.facebook.com/mumush.world/'),
+                                    target: LinkTarget.blank,
+                                    builder: (context, followLink) {
+                                      return TextButton.icon(
+                                        onPressed: followLink,
+                                        icon: const Icon(
+                                          FontAwesomeIcons.facebook,
+                                          color: Colors.white,
+                                          size: linkHeight,
+                                        ),
+                                        label: const Text(''),
+                                      );
+                                    }),
                               ),
-                            );
-                          }),
-                      SizedBox(
-                        height: 100,
+                              Expanded(
+                                child: Link(
+                                    uri: Uri.parse(
+                                        'https://www.instagram.com/mumush_world/'),
+                                    target: LinkTarget.blank,
+                                    builder: (context, followLink) {
+                                      return TextButton.icon(
+                                        onPressed: followLink,
+                                        icon: const Icon(
+                                          FontAwesomeIcons.instagram,
+                                          color: Colors.white,
+                                          size: linkHeight,
+                                        ),
+                                        label: const Text(''),
+                                      );
+                                    }),
+                              ),
+                              Expanded(
+                                child: Link(
+                                    uri: Uri.parse(
+                                        'https://open.spotify.com/user/qnfogyg7kvywbyvl4kdtlmp35'),
+                                    target: LinkTarget.blank,
+                                    builder: (context, followLink) {
+                                      return TextButton.icon(
+                                        onPressed: followLink,
+                                        icon: const Icon(
+                                          FontAwesomeIcons.spotify,
+                                          color: Colors.white,
+                                          size: linkHeight,
+                                        ),
+                                        label: Text(''),
+                                      );
+                                    }),
+                              ),
+                              Expanded(
+                                child: Link(
+                                    uri: Uri.parse(
+                                        'https://www.youtube.com/channel/UCipH85UPv3sr2GkpWZJIWTQ'),
+                                    target: LinkTarget.blank,
+                                    builder: (context, followLink) {
+                                      return TextButton.icon(
+                                        onPressed: followLink,
+                                        icon: const Icon(
+                                          FontAwesomeIcons.youtube,
+                                          color: Colors.white,
+                                          size: linkHeight,
+                                        ),
+                                        label: Text(''),
+                                      );
+                                    }),
+                              ),
+                              Expanded(
+                                child: Link(
+                                    uri: Uri.parse(
+                                        'https://soundcloud.com/soundsofmumush'),
+                                    target: LinkTarget.blank,
+                                    builder: (context, followLink) {
+                                      return TextButton.icon(
+                                        onPressed: followLink,
+                                        icon: const Icon(
+                                          FontAwesomeIcons.soundcloud,
+                                          color: Colors.white,
+                                          size: linkHeight,
+                                        ),
+                                        label: Text(''),
+                                      );
+                                    }),
+                              ),
+                              Expanded(
+                                child: Link(
+                                    uri: Uri.parse('https://www.mumush.world/'),
+                                    target: LinkTarget.blank,
+                                    builder: (context, followLink) {
+                                      return TextButton.icon(
+                                        onPressed: followLink,
+                                        icon: const Icon(
+                                          FontAwesomeIcons.globe,
+                                          color: Colors.white,
+                                          size: linkHeight,
+                                        ),
+                                        label: const Text(''),
+                                      );
+                                    }),
+                              ),
+                            ]),
                       ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Link(
-                                uri: Uri.parse(
-                                    'https://www.facebook.com/mumush.world/'),
-                                target: LinkTarget.blank,
-                                builder: (context, followLink) {
-                                  return TextButton.icon(
-                                    onPressed: followLink,
-                                    icon: Icon(
-                                      FontAwesomeIcons.facebook,
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    label: const Text(''),
-                                  );
-                                }),
-                            Link(
-                                uri: Uri.parse(
-                                    'https://www.instagram.com/mumush_world/'),
-                                target: LinkTarget.blank,
-                                builder: (context, followLink) {
-                                  return TextButton.icon(
-                                    onPressed: followLink,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.instagram,
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    label: Text(''),
-                                  );
-                                }),
-                            Link(
-                                uri: Uri.parse(
-                                    'https://open.spotify.com/user/qnfogyg7kvywbyvl4kdtlmp35'),
-                                target: LinkTarget.blank,
-                                builder: (context, followLink) {
-                                  return TextButton.icon(
-                                    onPressed: followLink,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.spotify,
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    label: Text(''),
-                                  );
-                                }),
-                            Link(
-                                uri: Uri.parse(
-                                    'https://www.youtube.com/channel/UCipH85UPv3sr2GkpWZJIWTQ'),
-                                target: LinkTarget.blank,
-                                builder: (context, followLink) {
-                                  return TextButton.icon(
-                                    onPressed: followLink,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.youtube,
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    label: Text(''),
-                                  );
-                                }),
-                            Link(
-                                uri: Uri.parse(
-                                    'https://soundcloud.com/soundsofmumush'),
-                                target: LinkTarget.blank,
-                                builder: (context, followLink) {
-                                  return TextButton.icon(
-                                    onPressed: followLink,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.soundcloud,
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    label: Text(''),
-                                  );
-                                }),
-                            Link(
-                                uri: Uri.parse('https://www.mumush.world/'),
-                                target: LinkTarget.blank,
-                                builder: (context, followLink) {
-                                  return TextButton.icon(
-                                    onPressed: followLink,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.globe,
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    label: const Text(''),
-                                  );
-                                }),
-                          ])
-                    ]),
-                  ),
+                    )
+                  ]),
                 ),
               ],
             ),

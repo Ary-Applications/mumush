@@ -19,10 +19,9 @@ class SquareWidget extends StatelessWidget {
               width: 150.0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border:Border.all(color: Colors.white,width: 3),
-                  borderRadius: const BorderRadius.all(Radius.circular(7))
-                ),
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.white, width: 3),
+                    borderRadius: const BorderRadius.all(Radius.circular(7))),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
@@ -37,7 +36,9 @@ class SquareWidget extends StatelessWidget {
                                   fontSize: 16,
                                   fontFamily: 'SpaceMono',
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  color: Colors.white,
+                              overflow: TextOverflow.ellipsis),
+                              maxLines: 4,
                             )),
                       ),
                       // const SizedBox(height: 10),

@@ -4,7 +4,7 @@ description: A new Flutter project.
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
@@ -63,6 +63,8 @@ flutter:
     - assets/art/graund.png
     - assets/art/sky.png
     - assets/art/backgraund.png
+    - assets/art/landing_right.png
+    - assets/art/landing_left.png
     - assets/map/
     - assets/map/arboretum_stage.png
     - assets/map/artechno_tent.png
@@ -96,7 +98,6 @@ flutter:
     - assets/map/uv_zone.png
     - assets/
     - assets/rawData.json
-
 
   fonts:
     - family: SpaceMono

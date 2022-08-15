@@ -47,7 +47,7 @@ class _MapViewState extends State<MapView> {
       mapToolbarEnabled: true,
       onMapCreated: onMapCreated,
       markers: Set<Marker>.of(_markers),
-      mapType: MapType.normal,
+      mapType: MapType.satellite,
       initialCameraPosition: _initialCameraPosition,
     );
 

@@ -50,11 +50,12 @@ class TimelineViewModel extends BaseViewModel {
       var eventShortName = performance.included?.attributes?.shortName;
       var eventLongName = performance.included?.attributes?.longName;
 
-      if (eventName != null) {
-        var event = Event(eventName, "", (startToEnd));
-        squaresToReturn.add(SquareWidget(event: event));
-      } else if (eventShortName != null) {
+      if (eventShortName != null) {
         var event = Event(eventShortName, "", (startToEnd));
+        squaresToReturn.add(SquareWidget(event: event));
+
+      } else if (eventName != null) {
+        var event = Event(eventName, "", (startToEnd));
         squaresToReturn.add(SquareWidget(event: event));
       } else if (eventLongName != null) {
         var event = Event(eventLongName, "", (startToEnd));

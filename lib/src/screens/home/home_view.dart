@@ -90,7 +90,7 @@ class _HomeViewState extends State<HomeView> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: Platform.isIOS ? screenHeight * 0.612 : screenHeight * 0.64,
+                        height: Platform.isIOS ? screenHeight * 0.602 : screenHeight * 0.64,
                       ),
                       Container(
                         child: Align(

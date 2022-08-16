@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mumush/src/screens/map/map_view.dart';
 
+import '../data/model/entity/schedule_model.dart';
+import '../di/injection.dart';
+import '../screens/base/base.dart';
 import '../screens/home/home_view.dart';
-import '../screens/timeline/event.dart';
-import '../screens/timeline/square_widget.dart';
 import '../screens/timeline/timeline_view.dart';
+import 'appViewModel.dart';
 
 class Mumush extends StatefulWidget {
   const Mumush({Key? key}) : super(key: key);
@@ -16,6 +18,8 @@ class Mumush extends StatefulWidget {
 
 class _MumushState extends State<Mumush> {
   int _selectedIndex = 0;
+  late Schedule? schedule;
+
   PageController pageController = PageController();
 
   void onTapped(int index) {
@@ -27,77 +31,57 @@ class _MumushState extends State<Mumush> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      restorationScopeId: Mumush._appRestorationScopeId,
-      theme: ThemeData(fontFamily: 'SpaceMono'),
-      darkTheme: ThemeData.dark(),
-      home: Scaffold(
-        backgroundColor: Colors.grey,
-        bottomNavigationBar: BottomNavigationBar(
-          selectedLabelStyle: const TextStyle(color: Colors.pinkAccent),
-          selectedItemColor: Colors.pinkAccent,
-          onTap: onTapped,
-          backgroundColor: Colors.white38,
-          currentIndex: _selectedIndex,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.white,
+    return BaseStatefulView<AppViewModel>(
+        viewModel: getIt<AppViewModel>(),
+        onInit: (viewModel) async {},
+        builder: (context, viewModel, child) {
+          return MaterialApp(
+            restorationScopeId: Mumush._appRestorationScopeId,
+            theme: ThemeData(fontFamily: 'SpaceMono'),
+            darkTheme: ThemeData.dark(),
+            home: Scaffold(
+              backgroundColor: Colors.grey,
+              bottomNavigationBar: BottomNavigationBar(
+                selectedLabelStyle: const TextStyle(color: Colors.pinkAccent),
+                selectedItemColor: Colors.white,
+                unselectedItemColor: Colors.white38,
+                onTap: onTapped,
+                backgroundColor: Colors.black,
+                currentIndex: _selectedIndex,
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: 'Home',
+                    backgroundColor: Colors.white,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.calendar_month),
+                    label: 'Schedule',
+                    backgroundColor: Colors.white,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.location_on),
+                    label: 'Map',
+                    backgroundColor: Colors.white,
+                  )
+                ],
+              ),
+              body: PageView(
+                  controller: pageController,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    HomeView(),
+                    TimelineView(
+                      day1: 'THU',
+                      day2: 'FRI',
+                      day3: 'SAT',
+                      day4: 'SUN',
+                      day5: 'MON',
+                    ),
+                    MapView(),
+                  ]),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month),
-              label: 'Schedule',
-              backgroundColor: Colors.white,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.location_on),
-              label: 'Map',
-              backgroundColor: Colors.white,
-            )
-          ],
-        ),
-        body: PageView(controller: pageController, children: [
-          HomeView(),
-          TimelineView(
-            squareList: [
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-              SquareWidget(event: Event("Event", "Okay", "Time")),
-            ],
-            items: const [
-              'GARGANTUA',
-              'Arboretum',
-              'Arts & Crafts',
-              'Circus',
-              'Kid s Area',
-              'Healing'
-            ],
-            selectedItem: 'GARGANTUA',
-            day1: 'DAY1',
-            day2: 'DAY2',
-            day3: 'DAY3',
-            day4: 'DAY4',
-            day5: 'DAY5',
-          ),
-          MapView(),
-        ]),
-      ),
-    );
+          );
+        });
   }
 }

@@ -1,6 +1,6 @@
 class Event {
   String eventTitle = "";
-  String location;
+  String location = "LOCATION";
   String date = "";
 
   Event(this.eventTitle, this.location, this.date) {

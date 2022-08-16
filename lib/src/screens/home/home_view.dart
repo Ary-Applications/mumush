@@ -89,8 +89,10 @@ class _HomeViewState extends State<HomeView> {
                 Container(
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: Platform.isIOS ? screenHeight * 0.612 : screenHeight * 0.64,
+                      Expanded(
+                        child: SizedBox(
+                          height: Platform.isIOS ? screenHeight * 0.612 : screenHeight * 0.63,
+                        ),
                       ),
                       Container(
                         child: Align(
@@ -105,6 +107,7 @@ class _HomeViewState extends State<HomeView> {
                                     tileMode: TileMode.clamp
                                 ),
                               ),
+                              // color: Colors.red,
                               height: screenHeight * 0.29,
                               width: MediaQuery.of(context).size.width,
                           ),

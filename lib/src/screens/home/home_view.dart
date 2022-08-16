@@ -5,6 +5,7 @@ import 'package:mumush/src/di/injection.dart';
 import 'package:mumush/src/screens/base/base.dart';
 import 'package:mumush/src/screens/home/home_view_model.dart';
 import 'package:url_launcher/link.dart';
+import 'dart:io' show Platform;
 
 class HomeView extends StatefulWidget {
   @override
@@ -86,6 +87,33 @@ class _HomeViewState extends State<HomeView> {
                   ],
                 ),
                 Container(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: Platform.isIOS ? screenHeight * 0.612 : screenHeight * 0.64,
+                      ),
+                      Container(
+                        child: Align(
+                          alignment: AlignmentDirectional.bottomEnd,
+                          child: Container(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [Colors.black, Colors.transparent],
+                                    begin: Alignment.bottomCenter,
+                                    end: Alignment.topCenter,
+                                    stops: [0.0, 1.0],
+                                    tileMode: TileMode.clamp
+                                ),
+                              ),
+                              height: screenHeight * 0.29,
+                              width: MediaQuery.of(context).size.width,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
                   color: Colors.transparent,
                   child: Column(children: [
                     SizedBox(height: screenHeight * 0.34),
@@ -107,7 +135,7 @@ class _HomeViewState extends State<HomeView> {
                               child: const Text(
                                 'HOW TO GET TO THE FESTIVAL',
                                 style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 22,
                                     fontFamily: 'SpaceMono',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
@@ -235,6 +263,29 @@ class _HomeViewState extends State<HomeView> {
                     )
                   ]),
                 ),
+                Column(children: [
+                  Container(
+                    alignment: AlignmentDirectional.topStart,
+                    // height: 150,
+                    width: MediaQuery.of(context).size.width,
+
+                    // color: Colors.black.withOpacity(0.4),
+                    child: Column(children: [
+                      const SizedBox(height: 50),
+                      TextButton(
+                        onPressed: () {
+                          showInfoPopUp();
+                        },
+
+                        child: const Icon(
+                          Icons.info_outline,
+                          color: Colors.white,
+                          size: 35,
+                        ),
+                      ),
+                    ]),
+                  )
+                ]),
               ],
             ),
           );

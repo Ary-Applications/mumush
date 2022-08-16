@@ -28,12 +28,17 @@ class TimelineViewState extends State<TimelineView> {
   late List<SquareWidget> squareList = [];
   late List<Performance> activePerformances = [];
   late List<Stage> stages = [];
-  Stage selectedStage = Stage(ScheduleIncluded(
-      attributes: ScheduleIncludedAttributes(name: "GARGANTUA")));
-  Stage placeholderStage = Stage(ScheduleIncluded(
-      attributes: ScheduleIncludedAttributes(name: "GARGANTUA")));
+  Stage selectedStage = Stage(
+      ScheduleIncluded(
+          attributes: ScheduleIncludedAttributes(name: "GARGANTUA")),
+      true);
+  Stage placeholderStage = Stage(
+      ScheduleIncluded(
+          attributes: ScheduleIncludedAttributes(name: "GARGANTUA")),
+      true);
   late TimelineViewModel _viewModel;
   var activeDay = 1;
+  var isFirstDropdown = true;
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +46,13 @@ class TimelineViewState extends State<TimelineView> {
         viewModel: getIt<TimelineViewModel>(),
         onInit: (viewModel) async {
           _viewModel = viewModel;
-          // TODO: Add a loading
-          // TODO: If there's connection, get schedule online, if not, schedule from local db/json.
-          await _viewModel.getAllSchedule();
 
+          await _viewModel.getAllSchedule();
           _viewModel.getAllIncluded();
           _viewModel.getAllStagesAndArtists();
           _viewModel.getAllStageNames();
           stages = _viewModel.stages;
+
           _viewModel.getAllPerformances();
           _viewModel.getAllDays();
           _viewModel.getAllPerformanceDescriptions();
@@ -81,7 +85,8 @@ class TimelineViewState extends State<TimelineView> {
                           height: 80,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 20),
-                          child: Center(
+                          child: Align(
+                            alignment: Alignment.centerLeft,
                             child: DropdownButtonHideUnderline(
                               child: Theme(
                                 data: Theme.of(context)
@@ -90,33 +95,19 @@ class TimelineViewState extends State<TimelineView> {
                                   value: selectedStage.data.attributes?.name
                                       ?.toUpperCase(),
                                   isExpanded: true,
-                                  iconSize: 30,
-                                  icon: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Colors.white,
+                                  iconSize: 25,
+                                  icon: const Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Icon(
+                                      Icons.arrow_drop_down,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                   items: stages
-                                      .map((item) => DropdownMenuItem<String>(
-                                            value: item.data.attributes?.name
-                                                ?.toUpperCase(),
-                                            child: SizedBox(
-                                                height: 80,
-                                                child: Center(
-                                                    child: FittedBox(
-                                                  child: Text(
-                                                    item.data.attributes?.name
-                                                            ?.toUpperCase() ??
-                                                        "NAME",
-                                                    style: const TextStyle(
-                                                        fontSize: 24.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.white),
-                                                    overflow:
-                                                        TextOverflow.visible,
-                                                  ),
-                                                ))),
-                                          ))
+                                      .map((item) => (item.isActive ||
+                                              isFirstDropdown)
+                                          ? buildDropdownMenuActiveItem(item)
+                                          : buildDropdownMenuItem(item))
                                       .toList(),
                                   onChanged: (item) {
                                     setState(() {
@@ -124,6 +115,7 @@ class TimelineViewState extends State<TimelineView> {
                                           _viewModel.findStageByUpperCasedTitle(
                                                   item!) ??
                                               placeholderStage;
+                                      selectedStage.isActive = true;
                                       activePerformances =
                                           _viewModel.getEventsByStageAndDay(
                                               selectedStage
@@ -211,27 +203,12 @@ class TimelineViewState extends State<TimelineView> {
                                 crossAxisSpacing: 0,
                                 mainAxisSpacing: 0),
                         itemBuilder: (BuildContext context, int index) {
-                          return !squareList.isEmpty
+                          return squareList.isNotEmpty
                               ? SizedBox(
                                   width:
                                       (MediaQuery.of(context).size.width) / 2,
                                   height: 500,
-                                  child: Stack(
-                                      children: [
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
-                                      child: SizedBox(
-                                        width:
-                                            (MediaQuery.of(context).size.width) /
-                                                2,
-                                        height: 500,
-                                        child: CustomPaint(
-                                          foregroundPainter: LinePainter(),
-                                        ),
-                                      ),
-                                    ),
-                                    squareList[index]
-                                  ]))
+                                  child: Stack(children: [squareList[index]]))
                               : const Text("Error: No Data");
                         },
                       ),
@@ -242,6 +219,51 @@ class TimelineViewState extends State<TimelineView> {
             ),
           );
         });
+  }
+
+  DropdownMenuItem<String> buildDropdownMenuItem(Stage item) {
+    return DropdownMenuItem<String>(
+      value: item.data.attributes?.name?.toUpperCase(),
+      child: SizedBox(
+          height: 80,
+          child: Align(
+            alignment: AlignmentDirectional.topStart,
+            child: FittedBox(
+              child: Text(
+                item.data.attributes?.name?.toUpperCase() ?? "NAME",
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'SpaceMono',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+                overflow: TextOverflow.visible,
+              ),
+            ),
+          )),
+    );
+  }
+
+  DropdownMenuItem<String> buildDropdownMenuActiveItem(Stage item) {
+    isFirstDropdown = false;
+    return DropdownMenuItem<String>(
+      value: item.data.attributes?.name?.toUpperCase(),
+      child: SizedBox(
+          height: 80,
+          child: Align(
+            alignment: AlignmentDirectional.topStart,
+            child: FittedBox(
+              child: Text(
+                item.data.attributes?.name?.toUpperCase() ?? "NAME",
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'SpaceMono',
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFF67F59)),
+                overflow: TextOverflow.visible,
+              ),
+            ),
+          )),
+    );
   }
 
   TextButton buildDayOneTextButton(bool active) {
@@ -264,6 +286,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 1);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -289,6 +312,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 1);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -318,6 +342,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 2);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -343,6 +368,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 2);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -372,6 +398,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 3);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -397,6 +424,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 3);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -426,6 +454,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 4);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -451,6 +480,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 4);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -480,6 +510,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 5);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -505,6 +536,7 @@ class TimelineViewState extends State<TimelineView> {
                 selectedStage.data.attributes?.id ?? 1, 5);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
+            selectedStage.isActive = true;
           });
         },
         child: Text(
@@ -515,16 +547,16 @@ class TimelineViewState extends State<TimelineView> {
   }
 }
 
-class LinePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..strokeWidth = 3
-      ..color = Color(0xFFF67F59);
-    canvas.drawLine(Offset(size.width * 0, size.height * 0.59),
-        Offset(size.width * 1, size.height * 0.59), paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
+// class LinePainter extends CustomPainter {
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     final paint = Paint()
+//       ..strokeWidth = 3
+//       ..color = Color(0xFFF67F59);
+//     canvas.drawLine(Offset(size.width * 0, size.height * 0.59),
+//         Offset(size.width * 1, size.height * 0.59), paint);
+//   }
+//
+//   @override
+//   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+// }

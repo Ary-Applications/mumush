@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:mumush/src/data/base_request.dart';
 import 'package:mumush/src/data/network/api_constants.dart';
 import 'package:mumush/src/data/network/decodable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'base_response.dart';
 import 'network_client.dart';
@@ -19,12 +20,15 @@ class HttpClient implements NetworkClient {
   static const int requestTimeout = 15;
   static const Duration requestTimeoutDuration =
       Duration(seconds: requestTimeout);
+  SharedPreferences? prefs;
+  String? bodyStr;
 
   @override
   Future<T?> run<T extends Decodable>(
       IBaseRequest baseRequest, BaseResponseType baseResponseType) async {
     T? response;
     http.Response? httpResponse;
+    prefs = await SharedPreferences.getInstance();
 
     try {
       final requestUrl = ApiConstants.baseUrl + baseRequest.path;
@@ -61,6 +65,9 @@ class HttpClient implements NetworkClient {
     } on Exception catch (e) {
       debugPrint('General network exception caught: ${e.toString()}');
     }
+    if (bodyStr != null) {
+      saveResponse();
+    }
     return response;
   }
 
@@ -72,7 +79,7 @@ class HttpClient implements NetworkClient {
         "<-- $statusCode ${response.request!.url} (${end.difference(start).inMilliseconds}ms)");
     switch (statusCode) {
       case NetworkRequestException.successStatusCode:
-        final bodyStr = response.body.toString();
+        bodyStr = response.body.toString();
         debugPrint("Response Body: " + response.body.toString());
         return _getDecodedObj(response.body, baseResponseType);
       case NetworkRequestException.noContentBodyStatusCode:
@@ -91,6 +98,10 @@ class HttpClient implements NetworkClient {
         throw FetchDataException(
             'Error occurred while Communication with Server with StatusCode : ${response.statusCode}');
     }
+  }
+
+  saveResponse() async {
+    await prefs?.setString('json', bodyStr!);
   }
 
   T? _getDecodedObj<T>(String responseBody, BaseResponseType baseResponseType) {

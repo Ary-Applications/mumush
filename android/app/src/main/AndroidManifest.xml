@@ -4,7 +4,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="mumush">
+        android:label="Mumush">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAyL_uKjFeP8IdFemgLykeGCrmr3YRdtbw" />
@@ -45,4 +45,10 @@
             <data android:scheme="tel" />
         </intent>
     </queries>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 </manifest>

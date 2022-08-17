@@ -370,6 +370,9 @@ class TimelineViewModel extends BaseViewModel {
         if (element?.type == "stages") {
           if (element?.attributes != null) {
             var stage = Stage(element!, false);
+            if (stage.data.attributes?.name == "Sound of Light Installation") {
+              stage.data.attributes?.name = "Sound of light";
+            }
             stages.add(stage);
           }
         }

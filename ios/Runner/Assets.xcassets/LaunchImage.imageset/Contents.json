@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "1024-1.png",
-      "idiom" : "universal"
+      "filename" : "Background.png",
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Background@2x.png",
+      "idiom" : "iphone",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Background@3x.png",
+      "idiom" : "iphone",
+      "scale" : "3x"
     }
   ],
   "info" : {

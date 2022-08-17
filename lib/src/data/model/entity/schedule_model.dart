@@ -166,12 +166,10 @@ class ScheduleIncludedRelationships {
       v.forEach((v) {
         arr0.add(ScheduleIncludedRelationshipsPerformances.fromJson(v));
       });
-      print("DEBUG YES: deserialize json performances array $arr0");
       performances = arr0;
     } else if (json['performances'] != null) {
       final v = json['performances'];
       final ret = ScheduleIncludedRelationshipsPerformances.fromJson(v);
-      print("DEBUG YES: deserialize json performances $ret");
       performances = ret;
     } else {
       print("DEBUG ERROR: Could not deserialize json performances");

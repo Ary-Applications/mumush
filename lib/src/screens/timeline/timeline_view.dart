@@ -14,11 +14,10 @@ class TimelineView extends StatefulWidget {
       required this.day1,
       required this.day2,
       required this.day3,
-      required this.day4,
-      required this.day5})
+      required this.day4})
       : super(key: key);
 
-  String day1, day2, day3, day4, day5;
+  String day1, day2, day3, day4;
 
   @override
   State<TimelineView> createState() => TimelineViewState();
@@ -44,6 +43,7 @@ class TimelineViewState extends State<TimelineView> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final daysWidth = screenWidth * 0.25;
     return BaseStatefulView<TimelineViewModel>(
         viewModel: getIt<TimelineViewModel>(),
         onInit: (viewModel) async {
@@ -137,15 +137,15 @@ class TimelineViewState extends State<TimelineView> {
                     ),
                     FittedBox(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(
-                              width: screenWidth * 0.2,
+                              width: daysWidth,
                               child: activeDay == 1
                                   ? buildDayOneTextButton(true)
                                   : buildDayOneTextButton(false)),
                           Container(
-                            width: screenWidth * 0.2,
+                            width: daysWidth,
                             // height: 30,
                             decoration: const BoxDecoration(
                                 border: Border(
@@ -156,7 +156,7 @@ class TimelineViewState extends State<TimelineView> {
                                 : buildDayTwoTextButton(false),
                           ),
                           Container(
-                            width: screenWidth * 0.2,
+                            width: daysWidth,
                             // height: 30,
                             decoration: const BoxDecoration(
                                 border: Border(
@@ -167,7 +167,7 @@ class TimelineViewState extends State<TimelineView> {
                                 : buildDayThreeTextButton(false),
                           ),
                           Container(
-                            width: screenWidth * 0.2,
+                            width: daysWidth,
                             // height: 30,
                             decoration: const BoxDecoration(
                                 border: Border(
@@ -176,17 +176,6 @@ class TimelineViewState extends State<TimelineView> {
                             child: activeDay == 4
                                 ? buildDayFourTextButton(true)
                                 : buildDayFourTextButton(false),
-                          ),
-                          Container(
-                            width: screenWidth * 0.2,
-                            // height: 30,
-                            decoration: const BoxDecoration(
-                                border: Border(
-                              left: BorderSide(width: 3.0, color: Colors.white),
-                            )),
-                            child: activeDay == 5
-                                ? buildDayFiveTextButton(true)
-                                : buildDayFiveTextButton(false),
                           ),
                         ],
                       ),
@@ -485,72 +474,4 @@ class TimelineViewState extends State<TimelineView> {
       );
     }
   }
-
-  TextButton buildDayFiveTextButton(bool active) {
-    if (active) {
-      return TextButton(
-        style: TextButton.styleFrom(
-          textStyle: const TextStyle(
-              fontSize: 20,
-              fontFamily: 'SpaceMono',
-              fontWeight: FontWeight.bold,
-              color: Color(0xFFF67F59)),
-          primary: Color(0xFFF67F59),
-        ),
-        autofocus: true,
-        onPressed: () {
-          activeDay = 5;
-          setState(() {
-            activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 5);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
-            selectedStage.isActive = true;
-          });
-        },
-        child: Text(
-          widget.day5,
-        ),
-      );
-    } else {
-      return TextButton(
-        style: TextButton.styleFrom(
-          textStyle: const TextStyle(
-              fontSize: 20,
-              fontFamily: 'SpaceMono',
-              fontWeight: FontWeight.bold,
-              color: Colors.white),
-          primary: Colors.white,
-        ),
-        autofocus: true,
-        onPressed: () {
-          activeDay = 5;
-          setState(() {
-            activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 5);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
-            selectedStage.isActive = true;
-          });
-        },
-        child: Text(
-          widget.day5,
-        ),
-      );
-    }
-  }
 }
-
-// class LinePainter extends CustomPainter {
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final paint = Paint()
-//       ..strokeWidth = 3
-//       ..color = Color(0xFFF67F59);
-//     canvas.drawLine(Offset(size.width * 0, size.height * 0.59),
-//         Offset(size.width * 1, size.height * 0.59), paint);
-//   }
-//
-//   @override
-//   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-// }

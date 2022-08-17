@@ -76,7 +76,6 @@ class _MumushState extends State<Mumush> {
                       day2: 'FRI',
                       day3: 'SAT',
                       day4: 'SUN',
-                      day5: 'MON',
                     ),
                     MapView(),
                   ]),

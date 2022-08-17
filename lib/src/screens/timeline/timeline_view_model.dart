@@ -26,8 +26,10 @@ class TimelineViewModel extends BaseViewModel {
   Schedule? schedule;
   List<ScheduleIncluded?>? included;
   List<ScheduleIncluded> performanceDescriptions = [];
-  Stage placeholderStage = Stage(ScheduleIncluded(
-      attributes: ScheduleIncludedAttributes(name: "GARGANTUA")), true);
+  Stage placeholderStage = Stage(
+      ScheduleIncluded(
+          attributes: ScheduleIncludedAttributes(name: "GARGANTUA")),
+      true);
   List<Stage> stages = [];
   List<ScheduleIncluded> artists = [];
   List<Performance> allPerformances = [];
@@ -53,7 +55,6 @@ class TimelineViewModel extends BaseViewModel {
       if (eventShortName != null) {
         var event = Event(eventShortName, "", (startToEnd));
         squaresToReturn.add(SquareWidget(event: event));
-
       } else if (eventName != null) {
         var event = Event(eventName, "", (startToEnd));
         squaresToReturn.add(SquareWidget(event: event));
@@ -157,7 +158,6 @@ class TimelineViewModel extends BaseViewModel {
   }
 
   getAllSchedule() async {
-
     prefs = await SharedPreferences.getInstance();
     final scheduleFromSharedPrefs = prefs?.getString('json');
     if (scheduleFromSharedPrefs != null) {
@@ -175,9 +175,9 @@ class TimelineViewModel extends BaseViewModel {
               .then((value) => schedule = value);
         } catch (e) {
           debugPrint(e.toString());
-          if(schedule == null) {
+          if (schedule == null) {
             final String response =
-            await rootBundle.loadString('assets/rawData.json');
+                await rootBundle.loadString('assets/rawData.json');
             schedule = _getDecodedObj<Schedule>(
                 response, BaseResponseType.performancesResponse);
           }
@@ -233,11 +233,25 @@ class TimelineViewModel extends BaseViewModel {
                 nextDay.data.relationships!;
             nextDayPerfList = nextDayRelList.performances;
           }
+
           if (dayPerfList != null) {
-            for (var stagePerfElement in stagePerfList) {
-              for (var dayPerfElement in dayPerfList) {
-                if (dayPerfElement?.data?.id == stagePerfElement?.data?.id) {
-                  eventIds.add(dayPerfElement!.data!.id!);
+            for (var performance in allPerformances) {
+              for (var stagePerfElement in stagePerfList) {
+                if (stagePerfElement?.data?.id == performance.data.id) {
+                  for (var dayPerfElement in dayPerfList) {
+                    if (dayPerfElement?.data?.id ==
+                        stagePerfElement?.data?.id) {
+                      var dayStartDateFirstTwoCharacters =
+                          performance.data.attributes?.start?.substring(0, 2);
+                      if (dayStartDateFirstTwoCharacters != null) {
+                        var perfStartDateInt =
+                            int.parse(dayStartDateFirstTwoCharacters);
+                        if (perfStartDateInt >= 8) {
+                          eventIds.add(dayPerfElement!.data!.id!);
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -249,7 +263,6 @@ class TimelineViewModel extends BaseViewModel {
               for (var nextDayPerf in nextDayPerfList) {
                 if (nextDayPerf?.data?.id == stagePerfElement?.data?.id) {
                   nextDayIds.add(nextDayPerf!.data!.id!);
-                  // eventIds.add(nextDayPerf!.data!.id!);
                 }
               }
             }
@@ -319,31 +332,31 @@ class TimelineViewModel extends BaseViewModel {
       });
     });
 
-    debugPrint("DEBUG: Events to return by stage Data IDs: ");
-    for (var element in eventsToReturn) {
-      debugPrint(element.data.relationships?.artists?.data?.id);
-    }
-
-    debugPrint("DEBUG: Events to return by INCLUDED: ");
-    for (var element in eventsToReturn) {
-      var attributesName = element.included?.attributes?.name;
-      if ((attributesName != null) && (attributesName != "")) {
-        debugPrint("DEBUG: attributesName: $attributesName");
-      } else {
-        var attributesShortName = element.included?.attributes?.shortName;
-        if (attributesShortName != null) {
-          debugPrint("DEBUG: attributesShortName: $attributesShortName");
-        } else {
-          var attributesLongName = element.included?.attributes?.longName;
-          if (attributesLongName != null) {
-            debugPrint("DEBUG: attributesLongName: $attributesLongName");
-          } else {
-            debugPrint(
-                "DEBUG: GOT Neither name, or short or long name for: $element");
-          }
-        }
-      }
-    }
+    // debugPrint("DEBUG: Events to return by stage Data IDs: ");
+    // for (var element in eventsToReturn) {
+    //   debugPrint(element.data.relationships?.artists?.data?.id);
+    // }
+    //
+    // debugPrint("DEBUG: Events to return by INCLUDED: ");
+    // for (var element in eventsToReturn) {
+    //   var attributesName = element.included?.attributes?.name;
+    //   if ((attributesName != null) && (attributesName != "")) {
+    //     debugPrint("DEBUG: attributesName: $attributesName");
+    //   } else {
+    //     var attributesShortName = element.included?.attributes?.shortName;
+    //     if (attributesShortName != null) {
+    //       debugPrint("DEBUG: attributesShortName: $attributesShortName");
+    //     } else {
+    //       var attributesLongName = element.included?.attributes?.longName;
+    //       if (attributesLongName != null) {
+    //         debugPrint("DEBUG: attributesLongName: $attributesLongName");
+    //       } else {
+    //         debugPrint(
+    //             "DEBUG: GOT Neither name, or short or long name for: $element");
+    //       }
+    //     }
+    //   }
+    // }
     return eventsToReturn;
   }
 
@@ -410,9 +423,6 @@ class TimelineViewModel extends BaseViewModel {
           allPerformances.add(performance);
         }
       }
-      allPerformances.forEach((element) {
-        print(element.data.attributes?.activity);
-      });
     }
   }
 }

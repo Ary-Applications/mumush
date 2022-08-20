@@ -48,8 +48,8 @@ class TimelineViewState extends State<TimelineView> {
         viewModel: getIt<TimelineViewModel>(),
         onInit: (viewModel) async {
           _viewModel = viewModel;
+          await _viewModel.getAllScheduleOnlyFromRawData();
 
-          await _viewModel.getAllSchedule();
           _viewModel.getAllIncluded();
           _viewModel.getAllStagesAndArtists();
           _viewModel.getAllStageNames();
@@ -64,6 +64,7 @@ class TimelineViewState extends State<TimelineView> {
           squareList =
               _viewModel.makeSquareListsFromPerformances(activePerformances);
           setState(() {});
+          await _viewModel.getAllScheduleByAllMeans();
         },
         builder: (context, viewModel, child) {
           return Container(

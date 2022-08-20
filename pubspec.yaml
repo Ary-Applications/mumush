@@ -97,7 +97,7 @@ flutter:
     - assets/map/toilets&showers.png
     - assets/map/uv_zone.png
     - assets/
-    - assets/rawData.json
+    - assets/rawdata.json
 
   fonts:
     - family: SpaceMono

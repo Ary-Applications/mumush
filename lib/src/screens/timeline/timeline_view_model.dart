@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mumush/src/screens/timeline/event.dart';
@@ -151,19 +152,41 @@ class TimelineViewModel extends BaseViewModel {
       var baseResponse = BaseResponseFactory.getBaseResponse(baseResponseType)!;
       decodedObj = baseResponse.decode(responseBody) as T;
     } catch (error) {
-      debugPrint("Decoding exception:" + error.toString());
+      debugPrint("Decoding exception:$error");
       throw DecodableException(error.toString());
     }
     return decodedObj;
   }
 
-  getAllSchedule() async {
+  getAllScheduleOnlyFromRawData() async {
+    final String rawResponse =
+    await rootBundle.loadString('assets/rawdata.json');
+    schedule ??= _getDecodedObj<Schedule>(
+        rawResponse, BaseResponseType.performancesResponse);
+  }
+
+  getAllScheduleByAllMeans() async {
+    final String rawResponse =
+        await rootBundle.loadString('assets/rawdata.json');
+    schedule ??= _getDecodedObj<Schedule>(
+        rawResponse, BaseResponseType.performancesResponse);
     prefs = await SharedPreferences.getInstance();
     final scheduleFromSharedPrefs = prefs?.getString('json');
     if (scheduleFromSharedPrefs != null) {
       schedule = _getDecodedObj<Schedule>(
           scheduleFromSharedPrefs, BaseResponseType.performancesResponse);
+      await getScheduleByHttp(rawResponse);
+    } else {
+      schedule ??= _getDecodedObj<Schedule>(
+          rawResponse, BaseResponseType.performancesResponse);
+      await getScheduleByHttp(rawResponse);
     }
+
+    schedule ??= _getDecodedObj<Schedule>(
+        rawResponse, BaseResponseType.performancesResponse);
+  }
+
+  Future<void> getScheduleByHttp(String rawResponse) async {
     try {
       final result = await InternetAddress.lookup('api.mumush.world');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -175,20 +198,17 @@ class TimelineViewModel extends BaseViewModel {
               .then((value) => schedule = value);
         } catch (e) {
           debugPrint(e.toString());
-          if (schedule == null) {
-            final String response =
-                await rootBundle.loadString('assets/rawData.json');
-            schedule = _getDecodedObj<Schedule>(
-                response, BaseResponseType.performancesResponse);
-          }
+          schedule ??= _getDecodedObj<Schedule>(
+              rawResponse, BaseResponseType.performancesResponse);
         }
       }
     } on SocketException catch (_) {
-      print('not connected');
-      final String response =
-          await rootBundle.loadString('assets/rawData.json');
+      if (kDebugMode) {
+        print('not connected');
+      }
+
       schedule = _getDecodedObj<Schedule>(
-          response, BaseResponseType.performancesResponse);
+          rawResponse, BaseResponseType.performancesResponse);
     }
   }
 
@@ -273,14 +293,14 @@ class TimelineViewModel extends BaseViewModel {
           for (var performance in allPerformances) {
             for (var id in nextDayIds) {
               if (performance.data.id == id) {
-                var nextDayEndDateFirstTwoCharacters =
-                    performance.data.attributes?.end?.substring(0, 2);
-                if (nextDayEndDateFirstTwoCharacters != null) {
-                  var nextDayEndDateInt =
-                      int.parse(nextDayEndDateFirstTwoCharacters);
-                  if (nextDayEndDateInt < 12) {
+                var nextDayStartDateFirstTwoCharacters =
+                    performance.data.attributes?.start?.substring(0, 2);
+                if (nextDayStartDateFirstTwoCharacters != null) {
+                  var nextDayStartDateInt =
+                      int.parse(nextDayStartDateFirstTwoCharacters);
+                  if (nextDayStartDateInt <= 8) {
                     print('DEBUG: FOUND NEXT DAY End dates');
-                    print(nextDayEndDateInt);
+                    print(nextDayStartDateInt);
                     eventIds.add(id);
                   }
                 }

@@ -2,38 +2,6 @@
   "data": [
     {
       "type": "performances",
-      "id": 5,
-      "attributes": {
-        "id": 5,
-        "start": "09:30",
-        "end": "19:00",
-        "activity": null,
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 2
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 1
-          }
-        },
-        "performanceDescriptions": {
-          "data": {
-            "type": "performanceDescriptions",
-            "id": 4
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 131,
       "attributes": {
         "id": 131,
@@ -55,31 +23,11 @@
             "type": "days",
             "id": 1
           }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 156,
-      "attributes": {
-        "id": 156,
-        "start": "11:00",
-        "end": "18:00",
-        "activity": "Plastic recycling workshop; Discussions about waste collection systems, circular economy and other related topics",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 9
-          }
         },
-        "days": {
+        "performanceDescriptions": {
           "data": {
-            "type": "days",
-            "id": 1
+            "type": "performanceDescriptions",
+            "id": 33
           }
         }
       }
@@ -138,6 +86,32 @@
     },
     {
       "type": "performances",
+      "id": 132,
+      "attributes": {
+        "id": 132,
+        "start": "14:00",
+        "end": "15:00",
+        "activity": "Lunch break",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 5
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
       "id": 1,
       "attributes": {
         "id": 1,
@@ -170,12 +144,12 @@
     },
     {
       "type": "performances",
-      "id": 132,
+      "id": 156,
       "attributes": {
-        "id": 132,
+        "id": 156,
         "start": "14:00",
-        "end": "15:00",
-        "activity": "Lunch break",
+        "end": "18:00",
+        "activity": "Plastic recycling workshop",
         "year": "2022",
         "parallel": null
       },
@@ -183,13 +157,19 @@
         "stages": {
           "data": {
             "type": "stages",
-            "id": 5
+            "id": 9
           }
         },
         "days": {
           "data": {
             "type": "days",
             "id": 1
+          }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 28
           }
         }
       }
@@ -243,6 +223,44 @@
             "type": "days",
             "id": 1
           }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 35
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 5,
+      "attributes": {
+        "id": 5,
+        "start": "16:00",
+        "end": "19:00",
+        "activity": null,
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 2
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 1
+          }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 4
+          }
         }
       }
     },
@@ -273,7 +291,7 @@
         "artists": {
           "data": {
             "type": "artists",
-            "id": "oiee"
+            "id": "vekt"
           }
         }
       }
@@ -294,32 +312,6 @@
           "data": {
             "type": "stages",
             "id": 6
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 1
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 89,
-      "attributes": {
-        "id": 89,
-        "start": "17:00",
-        "end": "19:00",
-        "activity": "Body Painting/ Altar making",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 3
           }
         },
         "days": {
@@ -357,7 +349,7 @@
         "artists": {
           "data": {
             "type": "artists",
-            "id": "cyborg-templar"
+            "id": "oiee"
           }
         }
       }
@@ -448,6 +440,32 @@
     },
     {
       "type": "performances",
+      "id": 94,
+      "attributes": {
+        "id": 94,
+        "start": "21:00",
+        "end": "21:30",
+        "activity": "Fire Crew Show",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 4
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
       "id": 7,
       "attributes": {
         "id": 7,
@@ -474,32 +492,6 @@
           "data": {
             "type": "artists",
             "id": "mankind"
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 94,
-      "attributes": {
-        "id": 94,
-        "start": "21:00",
-        "end": "21:30",
-        "activity": "Fire Crew Show",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 4
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 1
           }
         }
       }
@@ -622,6 +614,38 @@
     },
     {
       "type": "performances",
+      "id": 17,
+      "attributes": {
+        "id": 17,
+        "start": "00:00",
+        "end": "03:00",
+        "activity": null,
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 2
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 2
+          }
+        },
+        "artists": {
+          "data": {
+            "type": "artists",
+            "id": "katamii"
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
       "id": 8,
       "attributes": {
         "id": 8,
@@ -654,38 +678,6 @@
     },
     {
       "type": "performances",
-      "id": 17,
-      "attributes": {
-        "id": 17,
-        "start": "00:00",
-        "end": "02:00",
-        "activity": null,
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 2
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        },
-        "artists": {
-          "data": {
-            "type": "artists",
-            "id": "katamii"
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 9,
       "attributes": {
         "id": 9,
@@ -711,18 +703,18 @@
         "artists": {
           "data": {
             "type": "artists",
-            "id": "vekt"
+            "id": "cyborg-templar"
           }
         }
       }
     },
     {
       "type": "performances",
-      "id": 42,
+      "id": 19,
       "attributes": {
-        "id": 42,
-        "start": "02:00",
-        "end": "03:30",
+        "id": 19,
+        "start": "03:00",
+        "end": "06:00",
         "activity": null,
         "year": "2022",
         "parallel": null
@@ -743,13 +735,7 @@
         "artists": {
           "data": {
             "type": "artists",
-            "id": "gagarin-project"
-          }
-        },
-        "performanceDescriptions": {
-          "data": {
-            "type": "performanceDescriptions",
-            "id": 5
+            "id": "klaada"
           }
         }
       }
@@ -782,38 +768,6 @@
           "data": {
             "type": "artists",
             "id": "quidbop"
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 19,
-      "attributes": {
-        "id": 19,
-        "start": "03:30",
-        "end": "06:00",
-        "activity": null,
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 2
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        },
-        "artists": {
-          "data": {
-            "type": "artists",
-            "id": "klaada"
           }
         }
       }
@@ -974,38 +928,12 @@
     },
     {
       "type": "performances",
-      "id": 157,
-      "attributes": {
-        "id": 157,
-        "start": "11:00",
-        "end": "18:00",
-        "activity": "Plastic recycling workshop; Discussions about waste collection systems, circular economy and other related topics",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 9
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 111,
       "attributes": {
         "id": 111,
         "start": "11:00",
         "end": "13:00",
-        "activity": "Experience Painting",
+        "activity": "Postcard making",
         "year": "2022",
         "parallel": null
       },
@@ -1052,32 +980,6 @@
     },
     {
       "type": "performances",
-      "id": 97,
-      "attributes": {
-        "id": 97,
-        "start": "11:30",
-        "end": "13:00",
-        "activity": "Flowerstick workshop",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 4
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 160,
       "attributes": {
         "id": 160,
@@ -1092,6 +994,32 @@
           "data": {
             "type": "stages",
             "id": 10
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 2
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 97,
+      "attributes": {
+        "id": 97,
+        "start": "11:30",
+        "end": "13:00",
+        "activity": "Flowerstick workshop",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 4
           }
         },
         "days": {
@@ -1125,17 +1053,23 @@
             "type": "days",
             "id": 2
           }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 25
+          }
         }
       }
     },
     {
       "type": "performances",
-      "id": 150,
+      "id": 73,
       "attributes": {
-        "id": 150,
+        "id": 73,
         "start": "13:00",
         "end": "14:00",
-        "activity": "Village with white flowers - Butoh dance",
+        "activity": "Visionary Experience",
         "year": "2022",
         "parallel": null
       },
@@ -1143,7 +1077,59 @@
         "stages": {
           "data": {
             "type": "stages",
-            "id": 8
+            "id": 6
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 2
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 192,
+      "attributes": {
+        "id": 192,
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "Albee & Thamo",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 2
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 2
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 161,
+      "attributes": {
+        "id": 161,
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "Inspirational theatre workshop",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 10
           }
         },
         "days": {
@@ -1182,70 +1168,12 @@
     },
     {
       "type": "performances",
-      "id": 22,
+      "id": 150,
       "attributes": {
-        "id": 22,
-        "start": "13:00",
-        "end": "15:00",
-        "activity": null,
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 2
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        },
-        "artists": {
-          "data": {
-            "type": "artists",
-            "id": "zsuja"
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 161,
-      "attributes": {
-        "id": 161,
-        "start": "13:00",
-        "end": "15:00",
-        "activity": "Inspirational theatre workshop",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 10
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 73,
-      "attributes": {
-        "id": 73,
+        "id": 150,
         "start": "13:00",
         "end": "14:00",
-        "activity": "Visionary Experience",
+        "activity": "Village with white flowers - Butoh dance",
         "year": "2022",
         "parallel": null
       },
@@ -1253,7 +1181,7 @@
         "stages": {
           "data": {
             "type": "stages",
-            "id": 6
+            "id": 8
           }
         },
         "days": {
@@ -1298,12 +1226,12 @@
     },
     {
       "type": "performances",
-      "id": 144,
+      "id": 135,
       "attributes": {
-        "id": 144,
+        "id": 135,
         "start": "14:00",
-        "end": "15:30",
-        "activity": null,
+        "end": "15:00",
+        "activity": "Lunch break",
         "year": "2022",
         "parallel": null
       },
@@ -1311,7 +1239,59 @@
         "stages": {
           "data": {
             "type": "stages",
-            "id": 7
+            "id": 5
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 2
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 121,
+      "attributes": {
+        "id": 121,
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "Self Massage Workshop",
+        "year": "2022",
+        "parallel": 1
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 6
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 2
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 157,
+      "attributes": {
+        "id": 157,
+        "start": "14:00",
+        "end": "18:00",
+        "activity": "Plastic recycling workshop",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 9
           }
         },
         "days": {
@@ -1323,7 +1303,7 @@
         "performanceDescriptions": {
           "data": {
             "type": "performanceDescriptions",
-            "id": 21
+            "id": 29
           }
         }
       }
@@ -1362,26 +1342,32 @@
     },
     {
       "type": "performances",
-      "id": 121,
+      "id": 144,
       "attributes": {
-        "id": 121,
+        "id": 144,
         "start": "14:00",
-        "end": "16:00",
-        "activity": "Self Massage Workshop",
+        "end": "15:30",
+        "activity": null,
         "year": "2022",
-        "parallel": 1
+        "parallel": null
       },
       "relationships": {
         "stages": {
           "data": {
             "type": "stages",
-            "id": 6
+            "id": 7
           }
         },
         "days": {
           "data": {
             "type": "days",
             "id": 2
+          }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 21
           }
         }
       }
@@ -1402,32 +1388,6 @@
           "data": {
             "type": "stages",
             "id": 8
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 135,
-      "attributes": {
-        "id": 135,
-        "start": "14:00",
-        "end": "15:00",
-        "activity": "Lunch break",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 5
           }
         },
         "days": {
@@ -1498,32 +1458,6 @@
     },
     {
       "type": "performances",
-      "id": 162,
-      "attributes": {
-        "id": 162,
-        "start": "15:00",
-        "end": "17:00",
-        "activity": "Stencil art workshop",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 10
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 13,
       "attributes": {
         "id": 13,
@@ -1550,6 +1484,58 @@
           "data": {
             "type": "artists",
             "id": "fluidian"
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 92,
+      "attributes": {
+        "id": 92,
+        "start": "15:00",
+        "end": "19:00",
+        "activity": "Upcycling Workshop",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 3
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 2
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 162,
+      "attributes": {
+        "id": 162,
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "Stencil art workshop",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 10
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 2
           }
         }
       }
@@ -1588,12 +1574,12 @@
     },
     {
       "type": "performances",
-      "id": 92,
+      "id": 191,
       "attributes": {
-        "id": 92,
-        "start": "15:00",
-        "end": "19:00",
-        "activity": "Upcycling Workshop",
+        "id": 191,
+        "start": "16:00",
+        "end": "17:00",
+        "activity": "NIAL MCGUIGAN (UK) live",
         "year": "2022",
         "parallel": null
       },
@@ -1601,7 +1587,7 @@
         "stages": {
           "data": {
             "type": "stages",
-            "id": 3
+            "id": 8
           }
         },
         "days": {
@@ -1678,32 +1664,6 @@
     },
     {
       "type": "performances",
-      "id": 163,
-      "attributes": {
-        "id": 163,
-        "start": "17:00",
-        "end": "18:00",
-        "activity": "Jaw harp workshop",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 10
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 24,
       "attributes": {
         "id": 24,
@@ -1768,38 +1728,6 @@
     },
     {
       "type": "performances",
-      "id": 14,
-      "attributes": {
-        "id": 14,
-        "start": "19:00",
-        "end": "20:00",
-        "activity": null,
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 1
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        },
-        "artists": {
-          "data": {
-            "type": "artists",
-            "id": "zimbru"
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 25,
       "attributes": {
         "id": 25,
@@ -1826,6 +1754,32 @@
           "data": {
             "type": "artists",
             "id": "botond"
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 14,
+      "attributes": {
+        "id": 14,
+        "start": "19:00",
+        "end": "20:00",
+        "activity": "Nial MC Guigan",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 1
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 2
           }
         }
       }
@@ -1974,6 +1928,38 @@
     },
     {
       "type": "performances",
+      "id": 27,
+      "attributes": {
+        "id": 27,
+        "start": "23:00",
+        "end": "25:00",
+        "activity": null,
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 2
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 2
+          }
+        },
+        "artists": {
+          "data": {
+            "type": "artists",
+            "id": "eltawave"
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
       "id": 101,
       "attributes": {
         "id": 101,
@@ -2026,38 +2012,6 @@
           "data": {
             "type": "artists",
             "id": "torzs"
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 27,
-      "attributes": {
-        "id": 27,
-        "start": "23:00",
-        "end": "25:00",
-        "activity": null,
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 2
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 2
-          }
-        },
-        "artists": {
-          "data": {
-            "type": "artists",
-            "id": "eltawave"
           }
         }
       }
@@ -2378,84 +2332,6 @@
     },
     {
       "type": "performances",
-      "id": 77,
-      "attributes": {
-        "id": 77,
-        "start": "11:00",
-        "end": "14:00",
-        "activity": "Souldance",
-        "year": "2022",
-        "parallel": 1
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 6
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 3
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 158,
-      "attributes": {
-        "id": 158,
-        "start": "11:00",
-        "end": "18:00",
-        "activity": "Plastic recycling workshop; Discussions about waste collection systems, circular economy and other related topics",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 9
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 3
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 113,
-      "attributes": {
-        "id": 113,
-        "start": "11:00",
-        "end": "12:30",
-        "activity": "Kombucha Brewing",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 3
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 3
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 102,
       "attributes": {
         "id": 102,
@@ -2503,31 +2379,11 @@
             "type": "days",
             "id": 3
           }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 164,
-      "attributes": {
-        "id": 164,
-        "start": "12:00",
-        "end": "13:00",
-        "activity": "Jaw harp workshop",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 10
-          }
         },
-        "days": {
+        "performanceDescriptions": {
           "data": {
-            "type": "days",
-            "id": 3
+            "type": "performanceDescriptions",
+            "id": 26
           }
         }
       }
@@ -2566,32 +2422,26 @@
     },
     {
       "type": "performances",
-      "id": 178,
+      "id": 164,
       "attributes": {
-        "id": 178,
-        "start": "12:30",
-        "end": "14:00",
-        "activity": "Medicinal herbs of Mumush tour (gathering at the Teahouse 13:00-13:15)",
+        "id": 164,
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "Jaw harp workshop",
         "year": "2022",
-        "parallel": 2
+        "parallel": null
       },
       "relationships": {
         "stages": {
           "data": {
             "type": "stages",
-            "id": 6
+            "id": 10
           }
         },
         "days": {
           "data": {
             "type": "days",
             "id": 3
-          }
-        },
-        "performanceDescriptions": {
-          "data": {
-            "type": "performanceDescriptions",
-            "id": 17
           }
         }
       }
@@ -2624,20 +2474,20 @@
     },
     {
       "type": "performances",
-      "id": 152,
+      "id": 178,
       "attributes": {
-        "id": 152,
-        "start": "13:00",
+        "id": 178,
+        "start": "12:30",
         "end": "14:00",
-        "activity": null,
+        "activity": "Medicinal herbs of Mumush tour (gathering at the Teahouse 13:00-13:15)",
         "year": "2022",
-        "parallel": null
+        "parallel": 2
       },
       "relationships": {
         "stages": {
           "data": {
             "type": "stages",
-            "id": 8
+            "id": 6
           }
         },
         "days": {
@@ -2649,7 +2499,7 @@
         "performanceDescriptions": {
           "data": {
             "type": "performanceDescriptions",
-            "id": 24
+            "id": 17
           }
         }
       }
@@ -2708,6 +2558,122 @@
     },
     {
       "type": "performances",
+      "id": 146,
+      "attributes": {
+        "id": 146,
+        "start": "14:00",
+        "end": "15:00",
+        "activity": null,
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 7
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 3
+          }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 22
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 138,
+      "attributes": {
+        "id": 138,
+        "start": "14:00",
+        "end": "15:00",
+        "activity": "Lunch break",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 5
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 3
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 153,
+      "attributes": {
+        "id": 153,
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "Jam",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 8
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 3
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 158,
+      "attributes": {
+        "id": 158,
+        "start": "14:00",
+        "end": "15:00",
+        "activity": "Plastic recycling workshop",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 9
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 3
+          }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 30
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
       "id": 174,
       "attributes": {
         "id": 174,
@@ -2746,32 +2712,6 @@
     },
     {
       "type": "performances",
-      "id": 153,
-      "attributes": {
-        "id": 153,
-        "start": "14:00",
-        "end": "16:00",
-        "activity": "Jam",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 8
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 3
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 179,
       "attributes": {
         "id": 179,
@@ -2798,64 +2738,6 @@
           "data": {
             "type": "performanceDescriptions",
             "id": 18
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 138,
-      "attributes": {
-        "id": 138,
-        "start": "14:00",
-        "end": "15:00",
-        "activity": "Lunch break",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 5
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 3
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 146,
-      "attributes": {
-        "id": 146,
-        "start": "14:00",
-        "end": "15:00",
-        "activity": null,
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 7
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 3
-          }
-        },
-        "performanceDescriptions": {
-          "data": {
-            "type": "performanceDescriptions",
-            "id": 22
           }
         }
       }
@@ -2914,12 +2796,12 @@
     },
     {
       "type": "performances",
-      "id": 139,
+      "id": 190,
       "attributes": {
-        "id": 139,
+        "id": 190,
         "start": "15:00",
-        "end": "18:00",
-        "activity": null,
+        "end": "16:00",
+        "activity": "Fashion Dilemma with Nona",
         "year": "2022",
         "parallel": null
       },
@@ -2927,19 +2809,13 @@
         "stages": {
           "data": {
             "type": "stages",
-            "id": 5
+            "id": 9
           }
         },
         "days": {
           "data": {
             "type": "days",
             "id": 3
-          }
-        },
-        "performanceDescriptions": {
-          "data": {
-            "type": "performanceDescriptions",
-            "id": 15
           }
         }
       }
@@ -2978,6 +2854,38 @@
     },
     {
       "type": "performances",
+      "id": 139,
+      "attributes": {
+        "id": 139,
+        "start": "15:00",
+        "end": "18:00",
+        "activity": null,
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 5
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 3
+          }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 15
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
       "id": 166,
       "attributes": {
         "id": 166,
@@ -3009,7 +2917,7 @@
         "id": 116,
         "start": "15:30",
         "end": "17:30",
-        "activity": "Experience Painting",
+        "activity": "Postcard making",
         "year": "2022",
         "parallel": null
       },
@@ -3024,6 +2932,38 @@
           "data": {
             "type": "days",
             "id": 3
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 189,
+      "attributes": {
+        "id": 189,
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "Plastic recycling workshop",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 9
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 3
+          }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 31
           }
         }
       }
@@ -3114,32 +3054,6 @@
           "data": {
             "type": "artists",
             "id": "okuma"
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 167,
-      "attributes": {
-        "id": 167,
-        "start": "17:00",
-        "end": "18:00",
-        "activity": "Making music with drums workshop",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 10
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 3
           }
         }
       }
@@ -3320,32 +3234,6 @@
     },
     {
       "type": "performances",
-      "id": 123,
-      "attributes": {
-        "id": 123,
-        "start": "21:00",
-        "end": "21:30",
-        "activity": "Fire Crew Show",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 4
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 3
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 33,
       "attributes": {
         "id": 33,
@@ -3372,6 +3260,32 @@
           "data": {
             "type": "artists",
             "id": "romano-drom"
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 123,
+      "attributes": {
+        "id": 123,
+        "start": "21:00",
+        "end": "21:30",
+        "activity": "Fire Crew Show",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 4
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 3
           }
         }
       }
@@ -3494,38 +3408,6 @@
     },
     {
       "type": "performances",
-      "id": 56,
-      "attributes": {
-        "id": 56,
-        "start": "00:00",
-        "end": "02:00",
-        "activity": null,
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 2
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 4
-          }
-        },
-        "artists": {
-          "data": {
-            "type": "artists",
-            "id": "dekel"
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 45,
       "attributes": {
         "id": 45,
@@ -3558,11 +3440,11 @@
     },
     {
       "type": "performances",
-      "id": 46,
+      "id": 56,
       "attributes": {
-        "id": 46,
-        "start": "02:00",
-        "end": "04:00",
+        "id": 56,
+        "start": "00:00",
+        "end": "02:00",
         "activity": null,
         "year": "2022",
         "parallel": null
@@ -3571,7 +3453,7 @@
         "stages": {
           "data": {
             "type": "stages",
-            "id": 1
+            "id": 2
           }
         },
         "days": {
@@ -3583,7 +3465,7 @@
         "artists": {
           "data": {
             "type": "artists",
-            "id": "kristof-kelemen"
+            "id": "dekel"
           }
         }
       }
@@ -3616,6 +3498,38 @@
           "data": {
             "type": "artists",
             "id": "shtuby"
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 46,
+      "attributes": {
+        "id": 46,
+        "start": "02:00",
+        "end": "04:00",
+        "activity": null,
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 1
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 4
+          }
+        },
+        "artists": {
+          "data": {
+            "type": "artists",
+            "id": "kristof-kelemen"
           }
         }
       }
@@ -3797,17 +3711,23 @@
             "type": "days",
             "id": 4
           }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 34
+          }
         }
       }
     },
     {
       "type": "performances",
-      "id": 159,
+      "id": 118,
       "attributes": {
-        "id": 159,
+        "id": 118,
         "start": "11:00",
-        "end": "18:00",
-        "activity": "Plastic recycling workshop; Discussions about waste collection systems, circular economy and other related topics",
+        "end": "13:00",
+        "activity": "natural Cosmetics",
         "year": "2022",
         "parallel": null
       },
@@ -3815,7 +3735,7 @@
         "stages": {
           "data": {
             "type": "stages",
-            "id": 9
+            "id": 3
           }
         },
         "days": {
@@ -3854,32 +3774,6 @@
     },
     {
       "type": "performances",
-      "id": 118,
-      "attributes": {
-        "id": 118,
-        "start": "11:00",
-        "end": "13:00",
-        "activity": "natural Cosmetics",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 3
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 4
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 126,
       "attributes": {
         "id": 126,
@@ -3900,96 +3794,6 @@
           "data": {
             "type": "days",
             "id": 4
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 148,
-      "attributes": {
-        "id": 148,
-        "start": "13:00",
-        "end": "14:00",
-        "activity": null,
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 7
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 4
-          }
-        },
-        "performanceDescriptions": {
-          "data": {
-            "type": "performanceDescriptions",
-            "id": 20
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 154,
-      "attributes": {
-        "id": 154,
-        "start": "13:00",
-        "end": "14:00",
-        "activity": "Village with white flowers - Butoh dance",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 8
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 4
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 180,
-      "attributes": {
-        "id": 180,
-        "start": "13:00",
-        "end": "14:30",
-        "activity": null,
-        "year": "2022",
-        "parallel": 2
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 6
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 4
-          }
-        },
-        "performanceDescriptions": {
-          "data": {
-            "type": "performanceDescriptions",
-            "id": 19
           }
         }
       }
@@ -4074,20 +3878,20 @@
     },
     {
       "type": "performances",
-      "id": 176,
+      "id": 180,
       "attributes": {
-        "id": 176,
-        "start": "14:00",
-        "end": "16:00",
+        "id": 180,
+        "start": "13:00",
+        "end": "14:30",
         "activity": null,
         "year": "2022",
-        "parallel": null
+        "parallel": 2
       },
       "relationships": {
         "stages": {
           "data": {
             "type": "stages",
-            "id": 2
+            "id": 6
           }
         },
         "days": {
@@ -4096,16 +3900,68 @@
             "id": 4
           }
         },
-        "artists": {
+        "performanceDescriptions": {
           "data": {
-            "type": "artists",
-            "id": "gagarin-project"
+            "type": "performanceDescriptions",
+            "id": 19
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 148,
+      "attributes": {
+        "id": 148,
+        "start": "13:00",
+        "end": "14:00",
+        "activity": null,
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 7
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 4
           }
         },
         "performanceDescriptions": {
           "data": {
             "type": "performanceDescriptions",
-            "id": 10
+            "id": 20
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 154,
+      "attributes": {
+        "id": 154,
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "Village with white flowers - Butoh dance",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 8
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 4
           }
         }
       }
@@ -4132,6 +3988,70 @@
           "data": {
             "type": "days",
             "id": 4
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 159,
+      "attributes": {
+        "id": 159,
+        "start": "14:00",
+        "end": "18:00",
+        "activity": "Plastic recycling workshop",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 9
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 4
+          }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 32
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 193,
+      "attributes": {
+        "id": 193,
+        "start": "14:00",
+        "end": "16:00",
+        "activity": null,
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 2
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 4
+          }
+        },
+        "artists": {
+          "data": {
+            "type": "artists",
+            "id": "spirit-soundz"
           }
         }
       }
@@ -4222,32 +4142,6 @@
     },
     {
       "type": "performances",
-      "id": 84,
-      "attributes": {
-        "id": 84,
-        "start": "15:00",
-        "end": "16:30",
-        "activity": "Yoga Nidra",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 6
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 4
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 120,
       "attributes": {
         "id": 120,
@@ -4321,6 +4215,38 @@
             "type": "days",
             "id": 4
           }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 36
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 84,
+      "attributes": {
+        "id": 84,
+        "start": "15:00",
+        "end": "16:30",
+        "activity": "Yoga Nidra",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 6
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 4
+          }
         }
       }
     },
@@ -4347,17 +4273,23 @@
             "type": "days",
             "id": 4
           }
+        },
+        "performanceDescriptions": {
+          "data": {
+            "type": "performanceDescriptions",
+            "id": 27
+          }
         }
       }
     },
     {
       "type": "performances",
-      "id": 61,
+      "id": 171,
       "attributes": {
-        "id": 61,
+        "id": 171,
         "start": "16:00",
-        "end": "18:00",
-        "activity": null,
+        "end": "17:00",
+        "activity": "Making music with drums workshop",
         "year": "2022",
         "parallel": null
       },
@@ -4365,19 +4297,13 @@
         "stages": {
           "data": {
             "type": "stages",
-            "id": 2
+            "id": 10
           }
         },
         "days": {
           "data": {
             "type": "days",
             "id": 4
-          }
-        },
-        "artists": {
-          "data": {
-            "type": "artists",
-            "id": "logical-elements"
           }
         }
       }
@@ -4416,12 +4342,12 @@
     },
     {
       "type": "performances",
-      "id": 171,
+      "id": 61,
       "attributes": {
-        "id": 171,
+        "id": 61,
         "start": "16:00",
-        "end": "17:00",
-        "activity": "Making music with drums workshop",
+        "end": "18:00",
+        "activity": null,
         "year": "2022",
         "parallel": null
       },
@@ -4429,13 +4355,19 @@
         "stages": {
           "data": {
             "type": "stages",
-            "id": 10
+            "id": 2
           }
         },
         "days": {
           "data": {
             "type": "days",
             "id": 4
+          }
+        },
+        "artists": {
+          "data": {
+            "type": "artists",
+            "id": "logical-elements"
           }
         }
       }
@@ -4596,6 +4528,32 @@
     },
     {
       "type": "performances",
+      "id": 128,
+      "attributes": {
+        "id": 128,
+        "start": "21:00",
+        "end": "21:30",
+        "activity": "Fire Crew Show",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 4
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 4
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
       "id": 50,
       "attributes": {
         "id": 50,
@@ -4622,32 +4580,6 @@
           "data": {
             "type": "artists",
             "id": "perija"
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
-      "id": 128,
-      "attributes": {
-        "id": 128,
-        "start": "21:00",
-        "end": "21:30",
-        "activity": "Fire Crew Show",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 4
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 4
           }
         }
       }
@@ -4712,32 +4644,6 @@
     },
     {
       "type": "performances",
-      "id": 130,
-      "attributes": {
-        "id": 130,
-        "start": "23:00",
-        "end": "23:30",
-        "activity": "Fire Crew Show",
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 4
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 4
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 51,
       "attributes": {
         "id": 51,
@@ -4764,6 +4670,32 @@
           "data": {
             "type": "artists",
             "id": "operentzia"
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 130,
+      "attributes": {
+        "id": 130,
+        "start": "23:00",
+        "end": "23:30",
+        "activity": "Fire Crew Show",
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 4
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 4
           }
         }
       }
@@ -4834,38 +4766,6 @@
     },
     {
       "type": "performances",
-      "id": 53,
-      "attributes": {
-        "id": 53,
-        "start": "02:00",
-        "end": "04:00",
-        "activity": null,
-        "year": "2022",
-        "parallel": null
-      },
-      "relationships": {
-        "stages": {
-          "data": {
-            "type": "stages",
-            "id": 1
-          }
-        },
-        "days": {
-          "data": {
-            "type": "days",
-            "id": 5
-          }
-        },
-        "artists": {
-          "data": {
-            "type": "artists",
-            "id": "vedat-akdag"
-          }
-        }
-      }
-    },
-    {
-      "type": "performances",
       "id": 66,
       "attributes": {
         "id": 66,
@@ -4892,6 +4792,38 @@
           "data": {
             "type": "artists",
             "id": "latam"
+          }
+        }
+      }
+    },
+    {
+      "type": "performances",
+      "id": 53,
+      "attributes": {
+        "id": 53,
+        "start": "02:00",
+        "end": "04:00",
+        "activity": null,
+        "year": "2022",
+        "parallel": null
+      },
+      "relationships": {
+        "stages": {
+          "data": {
+            "type": "stages",
+            "id": 1
+          }
+        },
+        "days": {
+          "data": {
+            "type": "days",
+            "id": 5
+          }
+        },
+        "artists": {
+          "data": {
+            "type": "artists",
+            "id": "vedat-akdag"
           }
         }
       }
@@ -5266,12 +5198,6 @@
           {
             "data": {
               "type": "performances",
-              "id": 42
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 19
             }
           },
@@ -5290,7 +5216,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 22
+              "id": 192
             }
           },
           {
@@ -5410,7 +5336,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 176
+              "id": 193
             }
           },
           {
@@ -5477,12 +5403,6 @@
           {
             "data": {
               "type": "performances",
-              "id": 89
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 111
             }
           },
@@ -5496,12 +5416,6 @@
             "data": {
               "type": "performances",
               "id": 92
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 113
             }
           },
           {
@@ -5810,13 +5724,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 177
+              "id": 121
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 121
+              "id": 177
             }
           },
           {
@@ -5835,12 +5749,6 @@
             "data": {
               "type": "performances",
               "id": 76
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 77
             }
           },
           {
@@ -5888,13 +5796,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 180
+              "id": 83
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 83
+              "id": 180
             }
           },
           {
@@ -6016,7 +5924,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 152
+              "id": 191
             }
           },
           {
@@ -6071,6 +5979,18 @@
           {
             "data": {
               "type": "performances",
+              "id": 190
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 189
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
               "id": 159
             }
           }
@@ -6108,12 +6028,6 @@
           {
             "data": {
               "type": "performances",
-              "id": 163
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 164
             }
           },
@@ -6127,12 +6041,6 @@
             "data": {
               "type": "performances",
               "id": 166
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 167
             }
           },
           {
@@ -6172,19 +6080,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 5
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 131
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 156
             }
           },
           {
@@ -6202,13 +6098,19 @@
           {
             "data": {
               "type": "performances",
+              "id": 132
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
               "id": 1
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 132
+              "id": 156
             }
           },
           {
@@ -6226,6 +6128,12 @@
           {
             "data": {
               "type": "performances",
+              "id": 5
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
               "id": 2
             }
           },
@@ -6233,12 +6141,6 @@
             "data": {
               "type": "performances",
               "id": 69
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 89
             }
           },
           {
@@ -6268,13 +6170,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 7
+              "id": 94
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 94
+              "id": 7
             }
           },
           {
@@ -6320,13 +6222,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 8
+              "id": 17
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 17
+              "id": 8
             }
           },
           {
@@ -6338,19 +6240,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 42
+              "id": 19
             }
           },
           {
             "data": {
               "type": "performances",
               "id": 10
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 19
             }
           },
           {
@@ -6386,12 +6282,6 @@
           {
             "data": {
               "type": "performances",
-              "id": 157
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 111
             }
           },
@@ -6404,13 +6294,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 97
+              "id": 160
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 160
+              "id": 97
             }
           },
           {
@@ -6422,19 +6312,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 150
+              "id": 73
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 112
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 22
+              "id": 192
             }
           },
           {
@@ -6446,7 +6330,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 73
+              "id": 112
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 150
             }
           },
           {
@@ -6458,13 +6348,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 144
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 177
+              "id": 135
             }
           },
           {
@@ -6476,13 +6360,25 @@
           {
             "data": {
               "type": "performances",
-              "id": 151
+              "id": 157
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 135
+              "id": 177
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 144
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 151
             }
           },
           {
@@ -6500,13 +6396,19 @@
           {
             "data": {
               "type": "performances",
-              "id": 162
+              "id": 13
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 13
+              "id": 92
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 162
             }
           },
           {
@@ -6518,7 +6420,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 92
+              "id": 191
             }
           },
           {
@@ -6536,12 +6438,6 @@
           {
             "data": {
               "type": "performances",
-              "id": 163
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 24
             }
           },
@@ -6554,13 +6450,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 14
+              "id": 25
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 25
+              "id": 14
             }
           },
           {
@@ -6596,6 +6492,12 @@
           {
             "data": {
               "type": "performances",
+              "id": 27
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
               "id": 101
             }
           },
@@ -6603,12 +6505,6 @@
             "data": {
               "type": "performances",
               "id": 16
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 27
             }
           }
         ]
@@ -6690,24 +6586,6 @@
           {
             "data": {
               "type": "performances",
-              "id": 77
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 158
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 113
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 102
             }
           },
@@ -6720,19 +6598,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 164
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 39
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 178
+              "id": 164
             }
           },
           {
@@ -6744,7 +6616,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 152
+              "id": 178
             }
           },
           {
@@ -6762,19 +6634,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 174
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 153
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 179
+              "id": 146
             }
           },
           {
@@ -6786,7 +6646,25 @@
           {
             "data": {
               "type": "performances",
-              "id": 146
+              "id": 153
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 158
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 174
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 179
             }
           },
           {
@@ -6804,13 +6682,19 @@
           {
             "data": {
               "type": "performances",
-              "id": 139
+              "id": 190
             }
           },
           {
             "data": {
               "type": "performances",
               "id": 40
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 139
             }
           },
           {
@@ -6823,6 +6707,12 @@
             "data": {
               "type": "performances",
               "id": 116
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 189
             }
           },
           {
@@ -6841,12 +6731,6 @@
             "data": {
               "type": "performances",
               "id": 31
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 167
             }
           },
           {
@@ -6888,13 +6772,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 123
+              "id": 33
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 33
+              "id": 123
             }
           },
           {
@@ -6940,25 +6824,25 @@
           {
             "data": {
               "type": "performances",
-              "id": 56
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 45
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 46
+              "id": 56
             }
           },
           {
             "data": {
               "type": "performances",
               "id": 57
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 46
             }
           },
           {
@@ -7000,7 +6884,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 159
+              "id": 118
             }
           },
           {
@@ -7012,31 +6896,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 118
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 126
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 148
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 154
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
-              "id": 180
             }
           },
           {
@@ -7060,13 +6920,37 @@
           {
             "data": {
               "type": "performances",
-              "id": 176
+              "id": 180
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 148
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 154
             }
           },
           {
             "data": {
               "type": "performances",
               "id": 141
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 159
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 193
             }
           },
           {
@@ -7090,12 +6974,6 @@
           {
             "data": {
               "type": "performances",
-              "id": 84
-            }
-          },
-          {
-            "data": {
-              "type": "performances",
               "id": 120
             }
           },
@@ -7114,13 +6992,19 @@
           {
             "data": {
               "type": "performances",
+              "id": 84
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
               "id": 149
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 61
+              "id": 171
             }
           },
           {
@@ -7132,7 +7016,7 @@
           {
             "data": {
               "type": "performances",
-              "id": 171
+              "id": 61
             }
           },
           {
@@ -7168,13 +7052,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 50
+              "id": 128
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 128
+              "id": 50
             }
           },
           {
@@ -7192,13 +7076,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 130
+              "id": 51
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 51
+              "id": 130
             }
           }
         ]
@@ -7232,13 +7116,13 @@
           {
             "data": {
               "type": "performances",
-              "id": 53
+              "id": 66
             }
           },
           {
             "data": {
               "type": "performances",
-              "id": 66
+              "id": 53
             }
           },
           {
@@ -7267,10 +7151,11 @@
       "id": 1,
       "attributes": {
         "id": 1,
-        "longName": "Tzuc",
+        "longName": null,
         "shortName": null,
         "origin": "RO",
-        "link": null
+        "link": null,
+        "hint": null
       },
       "relationships": {
         "performances": {
@@ -7289,7 +7174,8 @@
         "longName": "Árcsi",
         "shortName": null,
         "origin": "RO",
-        "link": null
+        "link": null,
+        "hint": null
       },
       "relationships": {
         "performances": {
@@ -7308,7 +7194,8 @@
         "longName": "Novan Live",
         "shortName": null,
         "origin": "HU",
-        "link": null
+        "link": null,
+        "hint": null
       },
       "relationships": {
         "performances": {
@@ -7326,8 +7213,9 @@
         "id": 4,
         "longName": "Sounds Of Mumush",
         "shortName": null,
-        "origin": "RO",
-        "link": "https://soundcloud.com/soundsofmumush"
+        "origin": null,
+        "link": "https://soundcloud.com/soundsofmumush",
+        "hint": "Sounds of Mumush"
       },
       "relationships": {
         "performances": {
@@ -7340,32 +7228,14 @@
     },
     {
       "type": "performanceDescriptions",
-      "id": 5,
-      "attributes": {
-        "id": 5,
-        "longName": "Gagarin Beats",
-        "shortName": null,
-        "origin": null,
-        "link": null
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 42
-          }
-        }
-      }
-    },
-    {
-      "type": "performanceDescriptions",
       "id": 6,
       "attributes": {
         "id": 6,
         "longName": "Sounds Of Mumush",
         "shortName": null,
         "origin": "RO",
-        "link": null
+        "link": "https://soundcloud.com/soundsofmumush",
+        "hint": "Sounds Of Mumush"
       },
       "relationships": {
         "performances": {
@@ -7381,10 +7251,11 @@
       "id": 7,
       "attributes": {
         "id": 7,
-        "longName": "Gagarin Project",
+        "longName": "Ceteract",
         "shortName": null,
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": null
       },
       "relationships": {
         "performances": {
@@ -7402,8 +7273,9 @@
         "id": 8,
         "longName": "Sounds Of Mumush",
         "shortName": null,
-        "origin": "RO",
-        "link": null
+        "origin": null,
+        "link": "https://soundcloud.com/soundsofmumush",
+        "hint": "Sounds Of Mumush"
       },
       "relationships": {
         "performances": {
@@ -7421,8 +7293,9 @@
         "id": 9,
         "longName": "Sounds Of Mumush",
         "shortName": null,
-        "origin": "RO",
-        "link": null
+        "origin": null,
+        "link": "https://soundcloud.com/soundsofmumush",
+        "hint": "Sounds Of Mumush"
       },
       "relationships": {
         "performances": {
@@ -7435,32 +7308,14 @@
     },
     {
       "type": "performanceDescriptions",
-      "id": 10,
-      "attributes": {
-        "id": 10,
-        "longName": "Acoustic Substance - Gagarin Chill",
-        "shortName": null,
-        "origin": null,
-        "link": null
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 176
-          }
-        }
-      }
-    },
-    {
-      "type": "performanceDescriptions",
       "id": 11,
       "attributes": {
         "id": 11,
         "longName": "Aranyani",
         "shortName": null,
         "origin": "MK",
-        "link": null
+        "link": null,
+        "hint": null
       },
       "relationships": {
         "performances": {
@@ -7476,10 +7331,11 @@
       "id": 12,
       "attributes": {
         "id": 12,
-        "longName": "Mumush toy sewing, Clay modeling, Leather pouches and everyday activities",
+        "longName": "Clay modeling and Everyday Activities",
         "shortName": "Sewing, Clay Modeling & Felt Pouches",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "Imaginary Zoological Atlas: create your own protecting Mumush, Nature’s Signs: observe the world around you (plants and animals), Paint this wall!, Write a comic book!, Easy Mandalas, Interactive Games, Leather Pouches and Leather Birds"
       },
       "relationships": {
         "performances": {
@@ -7495,10 +7351,11 @@
       "id": 13,
       "attributes": {
         "id": 13,
-        "longName": "Mumush toy sewing, Clay modeling, Leather pouches and everyday activities",
+        "longName": "Mumush toy sewing",
         "shortName": "Sewing, Clay Modeling & Felt Pouches",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": null
       },
       "relationships": {
         "performances": {
@@ -7514,10 +7371,11 @@
       "id": 14,
       "attributes": {
         "id": 14,
-        "longName": "Mumush toy sewing, Clay modeling, Leather pouches and everyday activities",
+        "longName": "Clay modeling and Everyday Activities",
         "shortName": "Sewing, Clay Modeling & Felt Pouches",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "Imaginary Zoological Atlas: create your own protecting Mumush, Nature’s Signs: observe the world around you (plants and animals), Paint this wall!, Write a comic book!, Easy Mandalas, Interactive Games, Leather Pouches and Leather Birds"
       },
       "relationships": {
         "performances": {
@@ -7533,10 +7391,11 @@
       "id": 15,
       "attributes": {
         "id": 15,
-        "longName": "Mumush toy sewing, Clay modeling, Leather pouches and everyday activities",
+        "longName": "Clay modeling and Everyday Activities",
         "shortName": "Sewing, Clay Modeling & Felt Pouches",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "Imaginary Zoological Atlas: create your own protecting Mumush, Nature’s Signs: observe the world around you (plants and animals), Paint this wall!, Write a comic book!, Easy Mandalas, Interactive Games, Leather Pouches and Leather Birds"
       },
       "relationships": {
         "performances": {
@@ -7552,10 +7411,11 @@
       "id": 16,
       "attributes": {
         "id": 16,
-        "longName": "Guided forest tour (gathering at info point 14:00-14:15)",
+        "longName": "Guided forest tour",
         "shortName": "Guided forest tour",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "(gathering at info point 14:00-14:15)"
       },
       "relationships": {
         "performances": {
@@ -7571,10 +7431,11 @@
       "id": 17,
       "attributes": {
         "id": 17,
-        "longName": "Medicinal herbs of Mumush tour (gathering at the Teahouse 13:00-13:15)",
+        "longName": "Medicinal herbs of Mumush tour",
         "shortName": "Medicinal herbs of Mumush tour",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "(gathering at the Teahouse 13:00-13:15)"
       },
       "relationships": {
         "performances": {
@@ -7590,10 +7451,11 @@
       "id": 18,
       "attributes": {
         "id": 18,
-        "longName": "Guided forest tour (gathering at info point 14:00-14:15)",
+        "longName": "Guided forest tour",
         "shortName": "Guided forest tour",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "(gathering at info point 14:00-14:15)"
       },
       "relationships": {
         "performances": {
@@ -7609,10 +7471,11 @@
       "id": 19,
       "attributes": {
         "id": 19,
-        "longName": "Medicinal herbs of Mumush tour (gathering at the Teahouse 13:00-13:15)",
+        "longName": "Medicinal herbs of Mumush tour",
         "shortName": "Medicinal herbs of Mumush tour",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "(gathering at the Teahouse 13:00-13:15)"
       },
       "relationships": {
         "performances": {
@@ -7631,7 +7494,8 @@
         "longName": "Meeting & Q&A with Дeva, moderator: Dobai Csaba",
         "shortName": "Meeting & Q&A with Дeva",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "Meeting & Q&A with Дeva, moderator: Dobai Csaba"
       },
       "relationships": {
         "performances": {
@@ -7647,10 +7511,11 @@
       "id": 21,
       "attributes": {
         "id": 21,
-        "longName": "Panel discussion with festival organisers: Mata Csaba, Titus Carole, Görög Miklós, Nagy Hunor-Györk",
+        "longName": "Panel discussion with festival organisers: Fülöp Tímea, Titus Carole, Görög Miklós, Nagy Hunor-Györk",
         "shortName": "Discussion with festival organisers",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "Panel members: Mata Csaba, Titus Carole, Görög Miklós, Nagy Hunor-Györk"
       },
       "relationships": {
         "performances": {
@@ -7669,7 +7534,8 @@
         "longName": "Preserving and restoring biodiversity in the Carpathian basin",
         "shortName": "Biodiversity in the Carpathian basin",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "Preserving and restoring biodiversity in the Carpathian basin. Presented by Hajdu László Hunor"
       },
       "relationships": {
         "performances": {
@@ -7688,7 +7554,8 @@
         "longName": "How to understand and navigate visionary experiences",
         "shortName": "Understanding visionary experiences",
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "How to understand and navigate visionary experiences (with or without entheogens). Presented by Ovidiu Brazdău."
       },
       "relationships": {
         "performances": {
@@ -7701,19 +7568,240 @@
     },
     {
       "type": "performanceDescriptions",
-      "id": 24,
+      "id": 25,
       "attributes": {
-        "id": 24,
-        "longName": "Whatcha listenin' to? Listening session with 2 music producers",
-        "shortName": "Whatcha listenin' to?",
+        "id": 25,
+        "longName": null,
+        "shortName": null,
         "origin": null,
-        "link": null
+        "link": null,
+        "hint": "Planetary boundaries: how many red lines did we cross? Presented by dr. Hajdu László Hunor"
       },
       "relationships": {
         "performances": {
           "data": {
             "type": "performances",
-            "id": 152
+            "id": 143
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 26,
+      "attributes": {
+        "id": 26,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Brief history about hemp's history, uses, potential and its impact on the human culture. Presented by Fábián Balázs Dániel."
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 145
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 27,
+      "attributes": {
+        "id": 27,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Permaculture ethics we should use as basic principles. Techniques we can use for sustainable community based food production and low carbon footprint lifestyle. Presented by Bálint Krisztián."
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 149
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 28,
+      "attributes": {
+        "id": 28,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Plastic recycling workshop; Discussions about waste collection systems, circular economy and other related topics"
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 156
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 29,
+      "attributes": {
+        "id": 29,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Plastic recycling workshop; Discussions about waste collection systems, circular economy and other related topics"
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 157
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 30,
+      "attributes": {
+        "id": 30,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Plastic recycling workshop; Discussions about waste collection systems, circular economy and other related topics"
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 158
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 31,
+      "attributes": {
+        "id": 31,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Plastic recycling workshop; Discussions about waste collection systems, circular economy and other related topics"
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 189
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 32,
+      "attributes": {
+        "id": 32,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Plastic recycling workshop; Discussions about waste collection systems, circular economy and other related topics"
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 159
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 33,
+      "attributes": {
+        "id": 33,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Imaginary Zoological Atlas: create your own protecting Mumush, Nature’s Signs: observe the world around you, Paint this wall!, Write a comic book!, Easy Mandalas, Interactive Games, Leather Pouches and Leather Birds"
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 131
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 34,
+      "attributes": {
+        "id": 34,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Imaginary Zoological Atlas: create your own protecting Mumush, Nature’s Signs: observe the world around you (plants and animals), Paint this wall!, Write a comic book!, Easy Mandalas, Interactive Games, Leather Pouches and Leather Birds"
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 140
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 35,
+      "attributes": {
+        "id": 35,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Imaginary Zoological Atlas: create your own protecting Mumush, Nature’s Signs: observe the world around you (plants and animals), Paint this wall!, Write a comic book!, Easy Mandalas, Interactive Games, Leather Pouches and Leather Birds"
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 133
+          }
+        }
+      }
+    },
+    {
+      "type": "performanceDescriptions",
+      "id": 36,
+      "attributes": {
+        "id": 36,
+        "longName": null,
+        "shortName": null,
+        "origin": null,
+        "link": null,
+        "hint": "Imaginary Zoological Atlas: create your own protecting Mumush, Nature’s Signs: observe the world around you (plants and animals), Paint this wall!, Write a comic book!, Easy Mandalas, Interactive Games, Leather Pouches and Leather Birds"
+      },
+      "relationships": {
+        "performances": {
+          "data": {
+            "type": "performances",
+            "id": 142
           }
         }
       }
@@ -7733,196 +7821,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 1
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 1
+            }
           }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "oiee",
-      "attributes": {
-        "id": "oiee",
-        "name": "Oiee",
-        "description": null,
-        "origin": "HU",
-        "link": "https://www.youtube.com/watch?v=NiZjE8goZcY&ab_channel=OieeMusic",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/1a46bbbe-bbfd-4ced-9875-4cfa6560e250.jpg",
-        "years": [
-          "2022"
         ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 2
-          }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "cyborg-templar",
-      "attributes": {
-        "id": "cyborg-templar",
-        "name": "Cyborg Templar",
-        "description": null,
-        "origin": "HU",
-        "link": "https://www.mixcloud.com/feherlofaya",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/29542973-ee4f-4a78-95d9-66e89e1bd34c.jpg",
-        "years": [
-          "2022"
-        ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 3
-          }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "nova-gravity",
-      "attributes": {
-        "id": "nova-gravity",
-        "name": "Nova Gravity",
-        "description": null,
-        "origin": "HU",
-        "link": "https://soundcloud.com/nova_gravity",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/43c88bf1-8b46-4ff5-a58e-ae6a8039a5d1.jpg",
-        "years": [
-          "2022"
-        ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 6
-          }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "mankind",
-      "attributes": {
-        "id": "mankind",
-        "name": "Mankind",
-        "description": null,
-        "origin": "HU",
-        "link": "https://soundcloud.com/mankindddd",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/64bee71f-fbe4-4051-bd2f-7b5593ff8bae.png",
-        "years": [
-          "2022"
-        ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 7
-          }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "dokkerman-turkeying-fellaz",
-      "attributes": {
-        "id": "dokkerman-turkeying-fellaz",
-        "name": "Dokkerman & the Turkeying Fellaz",
-        "description": null,
-        "origin": "HU",
-        "link": "https://www.youtube.com/watch?v=LjQCOYMMAiM&ab_channel=DokkermanandtheTurkeyingFellaz",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/96ceaf56-0a6d-454b-b85e-e30a0752dbda.jpg",
-        "years": [
-          "2022"
-        ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 172
-          }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "korai-electric",
-      "attributes": {
-        "id": "korai-electric",
-        "name": "Korai Electric",
-        "description": null,
-        "origin": "HU",
-        "link": "https://www.youtube.com/watch?v=dSybWk3BzGc",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/8875b77c-2c4d-4cb0-a752-534663876caa.png",
-        "years": [
-          "2022"
-        ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 4
-          }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "dobri",
-      "attributes": {
-        "id": "dobri",
-        "name": "Dobri",
-        "description": null,
-        "origin": "RO",
-        "link": "https://soundcloud.com/soundsofmumush/sounds-of-the-ether-dobri",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/d51633b5-d993-492e-8724-c1c1f49d43ae.jpg",
-        "years": [
-          "2022"
-        ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 8
-          }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "katamii",
-      "attributes": {
-        "id": "katamii",
-        "name": "Katamii",
-        "description": null,
-        "origin": "HU",
-        "link": "https://soundcloud.com/djanekatamii",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/45bb2cee-bbf6-4cfa-a9fd-3dd3587ad1b3.png",
-        "years": [
-          "2022"
-        ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 17
-          }
-        }
       }
     },
     {
@@ -7940,58 +7846,214 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 9
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 2
+            }
           }
-        }
+        ]
       }
     },
     {
       "type": "artists",
-      "id": "gagarin-project",
+      "id": "oiee",
       "attributes": {
-        "id": "gagarin-project",
-        "name": "Gagarin Project",
+        "id": "oiee",
+        "name": "Oiee",
         "description": null,
-        "origin": "UA",
-        "link": "https://soundcloud.com/gagarinproject",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/bc004fc2-9a2c-4bee-9c95-957fc3c1f352.jpg",
+        "origin": "HU",
+        "link": "https://www.youtube.com/watch?v=NiZjE8goZcY&ab_channel=OieeMusic",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/1a46bbbe-bbfd-4ced-9875-4cfa6560e250.jpg",
         "years": [
           "2022"
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 176
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 3
+            }
           }
-        }
+        ]
       }
     },
     {
       "type": "artists",
-      "id": "quidbop",
+      "id": "nova-gravity",
       "attributes": {
-        "id": "quidbop",
-        "name": "Quidbop",
+        "id": "nova-gravity",
+        "name": "Nova Gravity",
+        "description": null,
+        "origin": "HU",
+        "link": "https://soundcloud.com/nova_gravity",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/43c88bf1-8b46-4ff5-a58e-ae6a8039a5d1.jpg",
+        "years": [
+          "2022"
+        ]
+      },
+      "relationships": {
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 6
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "artists",
+      "id": "mankind",
+      "attributes": {
+        "id": "mankind",
+        "name": "Mankind",
+        "description": null,
+        "origin": "HU",
+        "link": "https://soundcloud.com/mankindddd",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/64bee71f-fbe4-4051-bd2f-7b5593ff8bae.png",
+        "years": [
+          "2022"
+        ]
+      },
+      "relationships": {
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "artists",
+      "id": "dokkerman-turkeying-fellaz",
+      "attributes": {
+        "id": "dokkerman-turkeying-fellaz",
+        "name": "Dokkerman & the Turkeying Fellaz",
+        "description": null,
+        "origin": "HU",
+        "link": "https://www.youtube.com/watch?v=LjQCOYMMAiM&ab_channel=DokkermanandtheTurkeyingFellaz",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/96ceaf56-0a6d-454b-b85e-e30a0752dbda.jpg",
+        "years": [
+          "2022"
+        ]
+      },
+      "relationships": {
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 172
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "artists",
+      "id": "korai-electric",
+      "attributes": {
+        "id": "korai-electric",
+        "name": "Korai Electric",
+        "description": null,
+        "origin": "HU",
+        "link": "https://www.youtube.com/watch?v=dSybWk3BzGc",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/8875b77c-2c4d-4cb0-a752-534663876caa.png",
+        "years": [
+          "2022"
+        ]
+      },
+      "relationships": {
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "artists",
+      "id": "katamii",
+      "attributes": {
+        "id": "katamii",
+        "name": "Katamii",
+        "description": null,
+        "origin": "HU",
+        "link": "https://soundcloud.com/djanekatamii",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/45bb2cee-bbf6-4cfa-a9fd-3dd3587ad1b3.png",
+        "years": [
+          "2022"
+        ]
+      },
+      "relationships": {
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 17
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "artists",
+      "id": "dobri",
+      "attributes": {
+        "id": "dobri",
+        "name": "Dobri",
         "description": null,
         "origin": "RO",
-        "link": "https://soundcloud.com/quidbop",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/b2c1dd0c-eee3-4af0-b533-c97dc720bce3.png",
+        "link": "https://soundcloud.com/soundsofmumush/sounds-of-the-ether-dobri",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/d51633b5-d993-492e-8724-c1c1f49d43ae.jpg",
         "years": [
           "2022"
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 10
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 8
+            }
           }
-        }
+        ]
+      }
+    },
+    {
+      "type": "artists",
+      "id": "cyborg-templar",
+      "attributes": {
+        "id": "cyborg-templar",
+        "name": "Cyborg Templar",
+        "description": null,
+        "origin": "HU",
+        "link": "https://www.mixcloud.com/feherlofaya",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/29542973-ee4f-4a78-95d9-66e89e1bd34c.jpg",
+        "years": [
+          "2022"
+        ]
+      },
+      "relationships": {
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 9
+            }
+          }
+        ]
       }
     },
     {
@@ -8009,12 +8071,45 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 41
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 19
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 41
+            }
           }
-        }
+        ]
+      }
+    },
+    {
+      "type": "artists",
+      "id": "quidbop",
+      "attributes": {
+        "id": "quidbop",
+        "name": "Quidbop",
+        "description": null,
+        "origin": "RO",
+        "link": "https://soundcloud.com/quidbop",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/b2c1dd0c-eee3-4af0-b533-c97dc720bce3.png",
+        "years": [
+          "2022"
+        ]
+      },
+      "relationships": {
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 10
+            }
+          }
+        ]
       }
     },
     {
@@ -8032,12 +8127,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 11
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 11
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8055,35 +8152,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 20
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 20
+            }
           }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "zsuja",
-      "attributes": {
-        "id": "zsuja",
-        "name": "Zsüja",
-        "description": null,
-        "origin": "HU",
-        "link": "https://soundcloud.com/user-796212086",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/7f97e412-2370-4623-a10e-38346b1f9080.jpg",
-        "years": [
-          "2022"
         ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 22
-          }
-        }
       }
     },
     {
@@ -8101,12 +8177,20 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 12
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 12
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 193
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8124,12 +8208,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 13
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 13
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8147,12 +8233,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 23
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 23
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8160,7 +8248,7 @@
       "id": "tzuc",
       "attributes": {
         "id": "tzuc",
-        "name": "Tzuc",
+        "name": "IHMAI ISUAV (TZUC)",
         "description": null,
         "origin": "RO",
         "link": "https://soundcloud.com/tzucman",
@@ -8170,35 +8258,39 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 173
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 173
+            }
           }
-        }
+        ]
       }
     },
     {
       "type": "artists",
-      "id": "zimbru",
+      "id": "gagarin-project",
       "attributes": {
-        "id": "zimbru",
-        "name": "Zimbru",
+        "id": "gagarin-project",
+        "name": "Ceteract",
         "description": null,
         "origin": "RO",
-        "link": "https://www.youtube.com/watch?v=nGOufvyuzgk",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/66713566-cade-4083-87a9-e38a8094912a.png",
+        "link": "https://soundcloud.com/ceteract",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/bc004fc2-9a2c-4bee-9c95-957fc3c1f352.jpg",
         "years": [
           "2022"
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 14
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 24
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8216,12 +8308,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 25
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 25
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8239,12 +8333,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 15
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 15
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8262,35 +8358,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 26
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 26
+            }
           }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "torzs",
-      "attributes": {
-        "id": "torzs",
-        "name": "Törzs",
-        "description": null,
-        "origin": "HU",
-        "link": "https://www.youtube.com/watch?v=Et8LmrqMJiQ&ab_channel=WherePostRockDwells",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/2de3bed4-d68a-46ee-830b-6642f3cfa44e.png",
-        "years": [
-          "2022"
         ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 16
-          }
-        }
       }
     },
     {
@@ -8308,12 +8383,39 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 27
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 27
+            }
           }
-        }
+        ]
+      }
+    },
+    {
+      "type": "artists",
+      "id": "torzs",
+      "attributes": {
+        "id": "torzs",
+        "name": "Törzs",
+        "description": null,
+        "origin": "HU",
+        "link": "https://www.youtube.com/watch?v=Et8LmrqMJiQ&ab_channel=WherePostRockDwells",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/2de3bed4-d68a-46ee-830b-6642f3cfa44e.png",
+        "years": [
+          "2022"
+        ]
+      },
+      "relationships": {
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 16
+            }
+          }
+        ]
       }
     },
     {
@@ -8331,12 +8433,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 28
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 28
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8354,12 +8458,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 35
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 35
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8377,12 +8483,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 29
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 29
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8400,12 +8508,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 36
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 36
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8423,12 +8533,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 30
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 30
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8446,12 +8558,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 37
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 37
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8469,12 +8583,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 185
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 185
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8492,12 +8608,20 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 59
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 39
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 59
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8515,12 +8639,20 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 63
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 174
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 63
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8538,12 +8670,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 40
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 40
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8561,12 +8695,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 31
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 31
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8584,12 +8720,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 32
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 32
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8607,12 +8745,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 43
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 43
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8630,12 +8770,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 33
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 33
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8653,12 +8795,20 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 66
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 44
+            }
+          },
+          {
+            "data": {
+              "type": "performances",
+              "id": 66
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8676,35 +8826,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 34
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 34
+            }
           }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "dekel",
-      "attributes": {
-        "id": "dekel",
-        "name": "Dekel",
-        "description": null,
-        "origin": "IL",
-        "link": "https://www.youtube.com/watch?v=O-Wryw1C58c&ab_channel=DEKEL",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/b2bef474-6e68-4475-aaa4-9b8e0888af39.png",
-        "years": [
-          "2022"
         ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 56
-          }
-        }
       }
     },
     {
@@ -8722,35 +8851,39 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 45
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 45
+            }
           }
-        }
+        ]
       }
     },
     {
       "type": "artists",
-      "id": "kristof-kelemen",
+      "id": "dekel",
       "attributes": {
-        "id": "kristof-kelemen",
-        "name": "Kristof Kelemen",
+        "id": "dekel",
+        "name": "Dekel",
         "description": null,
-        "origin": "HU",
-        "link": "https://soundcloud.com/kristofkelemen/santsat-set",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/7590585d-e853-46e3-9e9c-9b8ea637b364.png",
+        "origin": "IL",
+        "link": "https://www.youtube.com/watch?v=O-Wryw1C58c&ab_channel=DEKEL",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/b2bef474-6e68-4475-aaa4-9b8e0888af39.png",
         "years": [
           "2022"
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 46
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 56
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8768,12 +8901,39 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 57
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 57
+            }
           }
-        }
+        ]
+      }
+    },
+    {
+      "type": "artists",
+      "id": "kristof-kelemen",
+      "attributes": {
+        "id": "kristof-kelemen",
+        "name": "Kristof Kelemen",
+        "description": null,
+        "origin": "HU",
+        "link": "https://soundcloud.com/kristofkelemen/santsat-set",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/7590585d-e853-46e3-9e9c-9b8ea637b364.png",
+        "years": [
+          "2022"
+        ]
+      },
+      "relationships": {
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 46
+            }
+          }
+        ]
       }
     },
     {
@@ -8791,12 +8951,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 58
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 58
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8814,12 +8976,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 47
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 47
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8837,35 +9001,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 48
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 48
+            }
           }
-        }
-      }
-    },
-    {
-      "type": "artists",
-      "id": "logical-elements",
-      "attributes": {
-        "id": "logical-elements",
-        "name": "Logical Elements",
-        "description": null,
-        "origin": "RO",
-        "link": "https://logicalelements.bandcamp.com",
-        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/3131f7b5-b8d1-4396-9be6-239d7d826bcb.png",
-        "years": [
-          "2022"
         ]
-      },
-      "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 61
-          }
-        }
       }
     },
     {
@@ -8883,12 +9026,39 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 49
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 49
+            }
           }
-        }
+        ]
+      }
+    },
+    {
+      "type": "artists",
+      "id": "logical-elements",
+      "attributes": {
+        "id": "logical-elements",
+        "name": "Logical Elements",
+        "description": null,
+        "origin": "RO",
+        "link": "https://logicalelements.bandcamp.com",
+        "imageUri": "https://gargantua-images-production.s3.eu-west-1.amazonaws.com/artists/3131f7b5-b8d1-4396-9be6-239d7d826bcb.png",
+        "years": [
+          "2022"
+        ]
+      },
+      "relationships": {
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 61
+            }
+          }
+        ]
       }
     },
     {
@@ -8906,12 +9076,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 62
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 62
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8929,12 +9101,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 175
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 175
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8952,12 +9126,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 50
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 50
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8975,12 +9151,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 184
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 184
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -8998,12 +9176,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 51
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 51
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -9021,12 +9201,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 183
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 183
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -9044,12 +9226,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 52
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 52
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -9067,12 +9251,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 53
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 53
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -9090,12 +9276,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 54
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 54
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -9113,12 +9301,14 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 181
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 181
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -9136,21 +9326,23 @@
         ]
       },
       "relationships": {
-        "performances": {
-          "data": {
-            "type": "performances",
-            "id": 55
+        "performances": [
+          {
+            "data": {
+              "type": "performances",
+              "id": 55
+            }
           }
-        }
+        ]
       }
     }
   ],
   "meta": {
     "page": {
-      "total": 171,
+      "total": 167,
       "last": 0,
       "number": 0,
-      "size": 171
+      "size": 167
     }
   }
 }

@@ -47,7 +47,6 @@ class TimelineViewModel extends BaseViewModel {
       var startDate = performance.data.attributes?.start ?? "";
       var endDate = performance.data.attributes?.end ?? "";
       endDate = formatEndDate(endDate);
-
       var startToEnd = "$startDate-$endDate";
       var eventName = performance.included?.attributes?.name;
       var eventShortName = performance.included?.attributes?.shortName;
@@ -55,13 +54,19 @@ class TimelineViewModel extends BaseViewModel {
 
       if (eventShortName != null) {
         var event = Event(eventShortName, "", (startToEnd));
-        squaresToReturn.add(SquareWidget(event: event));
+        var widgetToAdd = SquareWidget(event: event);
+        widgetToAdd.isActive = performance.isCurrent;
+        squaresToReturn.add(widgetToAdd);
       } else if (eventName != null) {
         var event = Event(eventName, "", (startToEnd));
-        squaresToReturn.add(SquareWidget(event: event));
+        var widgetToAdd = SquareWidget(event: event);
+        widgetToAdd.isActive = performance.isCurrent;
+        squaresToReturn.add(widgetToAdd);
       } else if (eventLongName != null) {
         var event = Event(eventLongName, "", (startToEnd));
-        squaresToReturn.add(SquareWidget(event: event));
+        var widgetToAdd = SquareWidget(event: event);
+        widgetToAdd.isActive = performance.isCurrent;
+        squaresToReturn.add(widgetToAdd);
       } else {
         ScheduleIncluded? foundArtist;
         for (var artist in artists) {
@@ -80,14 +85,18 @@ class TimelineViewModel extends BaseViewModel {
           print("DEBUG: Could find artist from artists attributes: $name");
           if (name != null) {
             var event = Event(name, "", (startToEnd));
-            squaresToReturn.add(SquareWidget(event: event));
+            var widgetToAdd = SquareWidget(event: event);
+            widgetToAdd.isActive = performance.isCurrent;
+            squaresToReturn.add(widgetToAdd);
           } else {
             var maybeName = performance.data.relationships?.artists?.data?.id;
             print(
                 "DEBUG: ERROR ERROR ERROR!!!!!!!!!!! Could not find NAME!!!!!!! Maybe this? : $maybeName");
             if (maybeName != null) {
               var event = Event(maybeName, "", (startToEnd));
-              squaresToReturn.add(SquareWidget(event: event));
+              var widgetToAdd = SquareWidget(event: event);
+              widgetToAdd.isActive = performance.isCurrent;
+              squaresToReturn.add(widgetToAdd);
             }
           }
         } else {
@@ -96,14 +105,18 @@ class TimelineViewModel extends BaseViewModel {
           var maybeName = performance.data.relationships?.artists?.data?.id;
           if (maybeName != null) {
             var event = Event(maybeName, "", (startToEnd));
-            squaresToReturn.add(SquareWidget(event: event));
+            var widgetToAdd = SquareWidget(event: event);
+            widgetToAdd.isActive = performance.isCurrent;
+            squaresToReturn.add(widgetToAdd);
             print('DEBUG: Name found as artist data id');
           } else {
             print('DEBUG: Name found in activities');
             if (performance.data.attributes?.activity != null) {
               var activityName = performance.data.attributes?.activity;
               var event = Event(activityName ?? "", "", (startToEnd));
-              squaresToReturn.add(SquareWidget(event: event));
+              var widgetToAdd = SquareWidget(event: event);
+              widgetToAdd.isActive = performance.isCurrent;
+              squaresToReturn.add(widgetToAdd);
             } else {
               print('DEBUG: Name could not be found');
             }
@@ -160,7 +173,7 @@ class TimelineViewModel extends BaseViewModel {
 
   getAllScheduleOnlyFromRawData() async {
     final String rawResponse =
-    await rootBundle.loadString('assets/rawdata.json');
+        await rootBundle.loadString('assets/rawdata.json');
     schedule ??= _getDecodedObj<Schedule>(
         rawResponse, BaseResponseType.performancesResponse);
   }
@@ -212,6 +225,21 @@ class TimelineViewModel extends BaseViewModel {
     }
   }
 
+  int? getCurrentDayNumberFromDate(int dayNr) {
+    switch (dayNr) {
+      case 18:
+        return 1;
+      case 19:
+        return 2;
+      case 20:
+        return 3;
+      case 21:
+        return 4;
+      default:
+        return null;
+    }
+  }
+
   // MARK: - Events by stage and day ids
   List<Performance> getEventsByStageAndDay(int stageId, int dayId) {
     Stage? stage;
@@ -220,6 +248,11 @@ class TimelineViewModel extends BaseViewModel {
 
     List<int> eventIds = [];
     List<Performance> eventsToReturn = [];
+    print("DateTime");
+    print(DateTime.now());
+    final currentDate = DateTime.now();
+    final currentDateDay = currentDate.day;
+    final currentDateHour = currentDate.hour;
 
     /// Get one stage by stageName
     for (var element in stages) {
@@ -263,10 +296,22 @@ class TimelineViewModel extends BaseViewModel {
                         stagePerfElement?.data?.id) {
                       var dayStartDateFirstTwoCharacters =
                           performance.data.attributes?.start?.substring(0, 2);
-                      if (dayStartDateFirstTwoCharacters != null) {
+                      var dayEndDateFirstTwoCharacters =
+                          performance.data.attributes?.end?.substring(0, 2);
+                      if ((dayStartDateFirstTwoCharacters != null &&
+                          dayEndDateFirstTwoCharacters != null)) {
                         var perfStartDateInt =
                             int.parse(dayStartDateFirstTwoCharacters);
+                        var perfEndDateInt =
+                            int.parse(dayEndDateFirstTwoCharacters);
                         if (perfStartDateInt >= 8) {
+                          if (getCurrentDayNumberFromDate(currentDateDay) ==
+                              dayId) {
+                            if ((currentDateHour >= perfStartDateInt) &&
+                                (currentDateHour < perfEndDateInt)) {
+                              performance.isCurrent = true;
+                            }
+                          }
                           eventIds.add(dayPerfElement!.data!.id!);
                         }
                       }

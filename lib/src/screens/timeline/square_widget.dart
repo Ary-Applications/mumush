@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'event.dart';
 
 class SquareWidget extends StatelessWidget {
-  const SquareWidget({Key? key, required this.event}) : super(key: key);
-
+  SquareWidget({Key? key, required this.event}) : super(key: key);
+  bool isActive = false;
   final Event event;
 
   @override
@@ -20,7 +20,9 @@ class SquareWidget extends StatelessWidget {
                 width: 150.0,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.transparent,
+                      color: isActive
+                          ? Colors.white.withOpacity(0.5)
+                          : Colors.transparent,
                       border: Border.all(color: Colors.white, width: 3),
                       borderRadius: const BorderRadius.all(Radius.circular(7))),
                   child: Padding(

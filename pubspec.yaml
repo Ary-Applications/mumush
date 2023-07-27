@@ -14,14 +14,14 @@ dependencies:
     sdk: flutter
 
   # DI packages
-  injectable: ^1.5.3
+  injectable: ^2.1.2
   get_it: ^7.2.0
 
   # Provider
   provider: ^6.0.3
 
   cupertino_icons: ^1.0.3
-  flutter_svg: ^1.1.1+1
+  flutter_svg: ^2.0.7
   flutter_signin_button: ^2.0.0
   url_launcher: ^6.1.5
   font_awesome_flutter: ^9.2.0
@@ -30,7 +30,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.10.0"
+  flutter_launcher_icons: ^0.13.1
 
   flutter_lints: ^2.0.0
   # DI generators
@@ -38,12 +38,12 @@ dev_dependencies:
   build_runner:
 
   # Networking
-  http: ^0.13.5
+  http: ^1.1.0
 
   # Maps & Location
   google_maps_flutter: ^2.1.9
-  location: ^4.3.0
-  permission_handler: ^8.1.4+2
+  location: ^5.0.1
+  permission_handler: ^10.4.3
 
 flutter_icons:
   android: true

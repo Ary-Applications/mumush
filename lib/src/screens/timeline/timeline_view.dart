@@ -14,11 +14,10 @@ class TimelineView extends StatefulWidget {
       required this.day1,
       required this.day2,
       required this.day3,
-      required this.day4,
-      required this.day5})
+      required this.day4})
       : super(key: key);
 
-  String day1, day2, day3, day4, day5;
+  String day1, day2, day3, day4;
 
   @override
   State<TimelineView> createState() => TimelineViewState();
@@ -42,12 +41,15 @@ class TimelineViewState extends State<TimelineView> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final daysWidth = screenWidth * 0.25;
     return BaseStatefulView<TimelineViewModel>(
         viewModel: getIt<TimelineViewModel>(),
         onInit: (viewModel) async {
           _viewModel = viewModel;
+          await _viewModel.getAllScheduleOnlyFromRawData();
 
-          await _viewModel.getAllSchedule();
           _viewModel.getAllIncluded();
           _viewModel.getAllStagesAndArtists();
           _viewModel.getAllStageNames();
@@ -62,6 +64,7 @@ class TimelineViewState extends State<TimelineView> {
           squareList =
               _viewModel.makeSquareListsFromPerformances(activePerformances);
           setState(() {});
+          await _viewModel.getAllScheduleByAllMeans();
         },
         builder: (context, viewModel, child) {
           return Container(
@@ -80,115 +83,102 @@ class TimelineViewState extends State<TimelineView> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(16, 70, 16, 0),
                       child: Container(
-                          height: 80,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: DropdownButtonHideUnderline(
-                              child: Theme(
-                                data: Theme.of(context)
-                                    .copyWith(canvasColor: Color(0xFF17194E)),
-                                child: DropdownButton<String>(
-                                  value: selectedStage.data.attributes?.name
-                                      ?.toUpperCase(),
-                                  isExpanded: true,
-                                  iconSize: 25,
-                                  icon: const Align(
-                                    alignment: Alignment.topCenter,
-                                    child: Icon(
-                                      Icons.arrow_drop_down,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  items: stages
-                                      .map((item) => (item.isActive ||
-                                              isFirstDropdown)
-                                          ? buildDropdownMenuActiveItem(item)
-                                          : buildDropdownMenuItem(item))
-                                      .toList(),
-                                  onChanged: (item) {
-                                    setState(() {
-                                      selectedStage =
-                                          _viewModel.findStageByUpperCasedTitle(
-                                                  item!) ??
-                                              placeholderStage;
-                                      selectedStage.isActive = true;
-                                      activePerformances =
-                                          _viewModel.getEventsByStageAndDay(
-                                              selectedStage
-                                                      .data.attributes?.id ??
-                                                  1,
-                                              activeDay);
-                                      squareList = _viewModel
-                                          .makeSquareListsFromPerformances(
-                                              activePerformances);
-                                    });
-                                  },
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: DropdownButtonHideUnderline(
+                            child: Theme(
+                              data: Theme.of(context).copyWith(
+                                  canvasColor: const Color(0xFF17194E)),
+                              child: DropdownButton<String>(
+                                style: const TextStyle(
+
+                                    // fontSize: 20,
+                                    fontFamily: 'SpaceMono',
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFFF67F59)),
+                                value: selectedStage.data.attributes?.name
+                                    ?.toUpperCase(),
+                                isExpanded: true,
+                                iconSize: 35,
+                                icon: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.white,
                                 ),
+                                items: stages
+                                    .map((item) =>
+                                        (item.isActive || isFirstDropdown)
+                                            ? buildDropdownMenuActiveItem(item)
+                                            : buildDropdownMenuItem(item))
+                                    .toList(),
+                                onChanged: (item) {
+                                  setState(() {
+                                    selectedStage =
+                                        _viewModel.findStageByUpperCasedTitle(
+                                                item!) ??
+                                            placeholderStage;
+                                    selectedStage.isActive = true;
+                                    activePerformances =
+                                        _viewModel.getEventsByStageAndDay(
+                                            selectedStage.data.attributes?.id ??
+                                                1,
+                                            activeDay);
+                                    squareList = _viewModel
+                                        .makeSquareListsFromPerformances(
+                                            activePerformances);
+                                  });
+                                },
                               ),
                             ),
-                          )),
+                          ),
+                        ),
+                      ),
                     ),
                     FittedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(2, 20, 0, 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                                width: 90,
-                                child: activeDay == 1
-                                    ? buildDayOneTextButton(true)
-                                    : buildDayOneTextButton(false)),
-                            Container(
-                              width: 90,
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                left:
-                                    BorderSide(width: 3.0, color: Colors.white),
-                              )),
-                              child: activeDay == 2
-                                  ? buildDayTwoTextButton(true)
-                                  : buildDayTwoTextButton(false),
-                            ),
-                            Container(
-                              width: 90,
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                left:
-                                    BorderSide(width: 3.0, color: Colors.white),
-                              )),
-                              child: activeDay == 3
-                                  ? buildDayThreeTextButton(true)
-                                  : buildDayThreeTextButton(false),
-                            ),
-                            Container(
-                              width: 90,
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                left:
-                                    BorderSide(width: 3.0, color: Colors.white),
-                              )),
-                              child: activeDay == 4
-                                  ? buildDayFourTextButton(true)
-                                  : buildDayFourTextButton(false),
-                            ),
-                            Container(
-                              width: 90,
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                left:
-                                    BorderSide(width: 3.0, color: Colors.white),
-                              )),
-                              child: activeDay == 5
-                                  ? buildDayFiveTextButton(true)
-                                  : buildDayFiveTextButton(false),
-                            ),
-                          ],
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                              width: daysWidth,
+                              child: activeDay == 1
+                                  ? buildDayOneTextButton(true)
+                                  : buildDayOneTextButton(false)),
+                          Container(
+                            width: daysWidth,
+                            // height: 30,
+                            decoration: const BoxDecoration(
+                                border: Border(
+                              left: BorderSide(width: 3.0, color: Colors.white),
+                            )),
+                            child: activeDay == 2
+                                ? buildDayTwoTextButton(true)
+                                : buildDayTwoTextButton(false),
+                          ),
+                          Container(
+                            width: daysWidth,
+                            // height: 30,
+                            decoration: const BoxDecoration(
+                                border: Border(
+                              left: BorderSide(width: 3.0, color: Colors.white),
+                            )),
+                            child: activeDay == 3
+                                ? buildDayThreeTextButton(true)
+                                : buildDayThreeTextButton(false),
+                          ),
+                          Container(
+                            width: daysWidth,
+                            // height: 30,
+                            decoration: const BoxDecoration(
+                                border: Border(
+                              left: BorderSide(width: 3.0, color: Colors.white),
+                            )),
+                            child: activeDay == 4
+                                ? buildDayFourTextButton(true)
+                                : buildDayFourTextButton(false),
+                          ),
+                        ],
                       ),
                     ),
                     Expanded(
@@ -224,22 +214,23 @@ class TimelineViewState extends State<TimelineView> {
   DropdownMenuItem<String> buildDropdownMenuItem(Stage item) {
     return DropdownMenuItem<String>(
       value: item.data.attributes?.name?.toUpperCase(),
-      child: SizedBox(
-          height: 80,
-          child: Align(
-            alignment: AlignmentDirectional.topStart,
-            child: FittedBox(
-              child: Text(
-                item.data.attributes?.name?.toUpperCase() ?? "NAME",
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'SpaceMono',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-                overflow: TextOverflow.visible,
-              ),
-            ),
-          )),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: SizedBox(
+            // height: 80,
+            child: Align(
+          alignment: AlignmentDirectional.bottomStart,
+          child: Text(
+            item.data.attributes?.name?.toUpperCase() ?? "NAME",
+            style: const TextStyle(
+                fontSize: 20,
+                fontFamily: 'SpaceMono',
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
+            overflow: TextOverflow.visible,
+          ),
+        )),
+      ),
     );
   }
 
@@ -247,22 +238,25 @@ class TimelineViewState extends State<TimelineView> {
     isFirstDropdown = false;
     return DropdownMenuItem<String>(
       value: item.data.attributes?.name?.toUpperCase(),
-      child: SizedBox(
-          height: 80,
-          child: Align(
-            alignment: AlignmentDirectional.topStart,
-            child: FittedBox(
-              child: Text(
-                item.data.attributes?.name?.toUpperCase() ?? "NAME",
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'SpaceMono',
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFF67F59)),
-                overflow: TextOverflow.visible,
-              ),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: SizedBox(
+            // height: 80,
+            child: Align(
+          alignment: AlignmentDirectional.bottomStart,
+          child: FittedBox(
+            child: Text(
+              item.data.attributes?.name?.toUpperCase() ?? "NAME",
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'SpaceMono',
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFF67F59)),
+              overflow: TextOverflow.visible,
             ),
-          )),
+          ),
+        )),
+      ),
     );
   }
 
@@ -270,9 +264,8 @@ class TimelineViewState extends State<TimelineView> {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
-          minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 25,
+              fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
@@ -296,9 +289,8 @@ class TimelineViewState extends State<TimelineView> {
     } else {
       return TextButton(
         style: TextButton.styleFrom(
-          minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 25,
+              fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
@@ -326,9 +318,8 @@ class TimelineViewState extends State<TimelineView> {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
-          minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 25,
+              fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
@@ -352,9 +343,8 @@ class TimelineViewState extends State<TimelineView> {
     } else {
       return TextButton(
         style: TextButton.styleFrom(
-          minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 25,
+              fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
@@ -382,9 +372,8 @@ class TimelineViewState extends State<TimelineView> {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
-          minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 25,
+              fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
@@ -408,9 +397,8 @@ class TimelineViewState extends State<TimelineView> {
     } else {
       return TextButton(
         style: TextButton.styleFrom(
-          minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 25,
+              fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
@@ -438,9 +426,8 @@ class TimelineViewState extends State<TimelineView> {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
-          minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 25,
+              fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
@@ -464,9 +451,8 @@ class TimelineViewState extends State<TimelineView> {
     } else {
       return TextButton(
         style: TextButton.styleFrom(
-          minimumSize: const Size(10, 40),
           textStyle: const TextStyle(
-              fontSize: 25,
+              fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
@@ -485,78 +471,8 @@ class TimelineViewState extends State<TimelineView> {
         },
         child: Text(
           widget.day4,
-        ),
-      );
-    }
-  }
-
-  TextButton buildDayFiveTextButton(bool active) {
-    if (active) {
-      return TextButton(
-        style: TextButton.styleFrom(
-          minimumSize: const Size(10, 40),
-          textStyle: const TextStyle(
-              fontSize: 25,
-              fontFamily: 'SpaceMono',
-              fontWeight: FontWeight.bold,
-              color: Color(0xFFF67F59)),
-          primary: Color(0xFFF67F59),
-        ),
-        autofocus: true,
-        onPressed: () {
-          activeDay = 5;
-          setState(() {
-            activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 5);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
-            selectedStage.isActive = true;
-          });
-        },
-        child: Text(
-          widget.day5,
-        ),
-      );
-    } else {
-      return TextButton(
-        style: TextButton.styleFrom(
-          minimumSize: const Size(10, 40),
-          textStyle: const TextStyle(
-              fontSize: 25,
-              fontFamily: 'SpaceMono',
-              fontWeight: FontWeight.bold,
-              color: Colors.white),
-          primary: Colors.white,
-        ),
-        autofocus: true,
-        onPressed: () {
-          activeDay = 5;
-          setState(() {
-            activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 5);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
-            selectedStage.isActive = true;
-          });
-        },
-        child: Text(
-          widget.day5,
         ),
       );
     }
   }
 }
-
-// class LinePainter extends CustomPainter {
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final paint = Paint()
-//       ..strokeWidth = 3
-//       ..color = Color(0xFFF67F59);
-//     canvas.drawLine(Offset(size.width * 0, size.height * 0.59),
-//         Offset(size.width * 1, size.height * 0.59), paint);
-//   }
-//
-//   @override
-//   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-// }

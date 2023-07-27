@@ -58,7 +58,6 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 Column(
                   children: [
-                    // SizedBox(height: screenHeight * 0.01),
                     Container(
                         height: screenHeight * 0.88,
                         width: MediaQuery.of(context).size.width / 2,
@@ -71,7 +70,6 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 Column(
                   children: [
-                    // SizedBox(height: screenHeight * 0.01),
                     Align(
                       alignment: AlignmentDirectional.centerEnd,
                       child: Container(
@@ -91,7 +89,7 @@ class _HomeViewState extends State<HomeView> {
                     children: [
                       Expanded(
                         child: SizedBox(
-                          height: Platform.isIOS ? screenHeight * 0.612 : screenHeight * 0.63,
+                          height: Platform.isIOS ? screenHeight * 0.5 : screenHeight * 0.64,
                         ),
                       ),
                       Container(
@@ -170,7 +168,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.facebook,
-                                          color: Colors.white,
+                                          color: Colors.white70,
                                           size: linkHeight,
                                         ),
                                         label: const Text(''),
@@ -187,7 +185,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.instagram,
-                                          color: Colors.white,
+                                          color: Colors.white70,
                                           size: linkHeight,
                                         ),
                                         label: const Text(''),
@@ -204,7 +202,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.spotify,
-                                          color: Colors.white,
+                                          color: Colors.white70,
                                           size: linkHeight,
                                         ),
                                         label: Text(''),
@@ -221,7 +219,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.youtube,
-                                          color: Colors.white,
+                                          color: Colors.white70,
                                           size: linkHeight,
                                         ),
                                         label: Text(''),
@@ -238,7 +236,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.soundcloud,
-                                          color: Colors.white,
+                                          color: Colors.white70,
                                           size: linkHeight,
                                         ),
                                         label: Text(''),
@@ -254,7 +252,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.globe,
-                                          color: Colors.white,
+                                          color: Colors.white70,
                                           size: linkHeight,
                                         ),
                                         label: const Text(''),

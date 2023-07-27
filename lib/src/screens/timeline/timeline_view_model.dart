@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mumush/src/screens/timeline/event.dart';
@@ -26,8 +27,10 @@ class TimelineViewModel extends BaseViewModel {
   Schedule? schedule;
   List<ScheduleIncluded?>? included;
   List<ScheduleIncluded> performanceDescriptions = [];
-  Stage placeholderStage = Stage(ScheduleIncluded(
-      attributes: ScheduleIncludedAttributes(name: "GARGANTUA")), true);
+  Stage placeholderStage = Stage(
+      ScheduleIncluded(
+          attributes: ScheduleIncludedAttributes(name: "GARGANTUA")),
+      true);
   List<Stage> stages = [];
   List<ScheduleIncluded> artists = [];
   List<Performance> allPerformances = [];
@@ -44,7 +47,6 @@ class TimelineViewModel extends BaseViewModel {
       var startDate = performance.data.attributes?.start ?? "";
       var endDate = performance.data.attributes?.end ?? "";
       endDate = formatEndDate(endDate);
-
       var startToEnd = "$startDate-$endDate";
       var eventName = performance.included?.attributes?.name;
       var eventShortName = performance.included?.attributes?.shortName;
@@ -52,14 +54,19 @@ class TimelineViewModel extends BaseViewModel {
 
       if (eventShortName != null) {
         var event = Event(eventShortName, "", (startToEnd));
-        squaresToReturn.add(SquareWidget(event: event));
-
+        var widgetToAdd = SquareWidget(event: event);
+        widgetToAdd.isActive = performance.isCurrent;
+        squaresToReturn.add(widgetToAdd);
       } else if (eventName != null) {
         var event = Event(eventName, "", (startToEnd));
-        squaresToReturn.add(SquareWidget(event: event));
+        var widgetToAdd = SquareWidget(event: event);
+        widgetToAdd.isActive = performance.isCurrent;
+        squaresToReturn.add(widgetToAdd);
       } else if (eventLongName != null) {
         var event = Event(eventLongName, "", (startToEnd));
-        squaresToReturn.add(SquareWidget(event: event));
+        var widgetToAdd = SquareWidget(event: event);
+        widgetToAdd.isActive = performance.isCurrent;
+        squaresToReturn.add(widgetToAdd);
       } else {
         ScheduleIncluded? foundArtist;
         for (var artist in artists) {
@@ -78,14 +85,18 @@ class TimelineViewModel extends BaseViewModel {
           print("DEBUG: Could find artist from artists attributes: $name");
           if (name != null) {
             var event = Event(name, "", (startToEnd));
-            squaresToReturn.add(SquareWidget(event: event));
+            var widgetToAdd = SquareWidget(event: event);
+            widgetToAdd.isActive = performance.isCurrent;
+            squaresToReturn.add(widgetToAdd);
           } else {
             var maybeName = performance.data.relationships?.artists?.data?.id;
             print(
                 "DEBUG: ERROR ERROR ERROR!!!!!!!!!!! Could not find NAME!!!!!!! Maybe this? : $maybeName");
             if (maybeName != null) {
               var event = Event(maybeName, "", (startToEnd));
-              squaresToReturn.add(SquareWidget(event: event));
+              var widgetToAdd = SquareWidget(event: event);
+              widgetToAdd.isActive = performance.isCurrent;
+              squaresToReturn.add(widgetToAdd);
             }
           }
         } else {
@@ -94,14 +105,18 @@ class TimelineViewModel extends BaseViewModel {
           var maybeName = performance.data.relationships?.artists?.data?.id;
           if (maybeName != null) {
             var event = Event(maybeName, "", (startToEnd));
-            squaresToReturn.add(SquareWidget(event: event));
+            var widgetToAdd = SquareWidget(event: event);
+            widgetToAdd.isActive = performance.isCurrent;
+            squaresToReturn.add(widgetToAdd);
             print('DEBUG: Name found as artist data id');
           } else {
             print('DEBUG: Name found in activities');
             if (performance.data.attributes?.activity != null) {
               var activityName = performance.data.attributes?.activity;
               var event = Event(activityName ?? "", "", (startToEnd));
-              squaresToReturn.add(SquareWidget(event: event));
+              var widgetToAdd = SquareWidget(event: event);
+              widgetToAdd.isActive = performance.isCurrent;
+              squaresToReturn.add(widgetToAdd);
             } else {
               print('DEBUG: Name could not be found');
             }
@@ -150,20 +165,41 @@ class TimelineViewModel extends BaseViewModel {
       var baseResponse = BaseResponseFactory.getBaseResponse(baseResponseType)!;
       decodedObj = baseResponse.decode(responseBody) as T;
     } catch (error) {
-      debugPrint("Decoding exception:" + error.toString());
+      debugPrint("Decoding exception:$error");
       throw DecodableException(error.toString());
     }
     return decodedObj;
   }
 
-  getAllSchedule() async {
+  getAllScheduleOnlyFromRawData() async {
+    final String rawResponse =
+        await rootBundle.loadString('assets/rawdata.json');
+    schedule ??= _getDecodedObj<Schedule>(
+        rawResponse, BaseResponseType.performancesResponse);
+  }
 
+  getAllScheduleByAllMeans() async {
+    final String rawResponse =
+        await rootBundle.loadString('assets/rawdata.json');
+    schedule ??= _getDecodedObj<Schedule>(
+        rawResponse, BaseResponseType.performancesResponse);
     prefs = await SharedPreferences.getInstance();
     final scheduleFromSharedPrefs = prefs?.getString('json');
     if (scheduleFromSharedPrefs != null) {
       schedule = _getDecodedObj<Schedule>(
           scheduleFromSharedPrefs, BaseResponseType.performancesResponse);
+      await getScheduleByHttp(rawResponse);
+    } else {
+      schedule ??= _getDecodedObj<Schedule>(
+          rawResponse, BaseResponseType.performancesResponse);
+      await getScheduleByHttp(rawResponse);
     }
+
+    schedule ??= _getDecodedObj<Schedule>(
+        rawResponse, BaseResponseType.performancesResponse);
+  }
+
+  Future<void> getScheduleByHttp(String rawResponse) async {
     try {
       final result = await InternetAddress.lookup('api.mumush.world');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -175,20 +211,32 @@ class TimelineViewModel extends BaseViewModel {
               .then((value) => schedule = value);
         } catch (e) {
           debugPrint(e.toString());
-          if(schedule == null) {
-            final String response =
-            await rootBundle.loadString('assets/rawData.json');
-            schedule = _getDecodedObj<Schedule>(
-                response, BaseResponseType.performancesResponse);
-          }
+          schedule ??= _getDecodedObj<Schedule>(
+              rawResponse, BaseResponseType.performancesResponse);
         }
       }
     } on SocketException catch (_) {
-      print('not connected');
-      final String response =
-          await rootBundle.loadString('assets/rawData.json');
+      if (kDebugMode) {
+        print('not connected');
+      }
+
       schedule = _getDecodedObj<Schedule>(
-          response, BaseResponseType.performancesResponse);
+          rawResponse, BaseResponseType.performancesResponse);
+    }
+  }
+
+  int? getCurrentDayNumberFromDate(int dayNr) {
+    switch (dayNr) {
+      case 18:
+        return 1;
+      case 19:
+        return 2;
+      case 20:
+        return 3;
+      case 21:
+        return 4;
+      default:
+        return null;
     }
   }
 
@@ -200,6 +248,11 @@ class TimelineViewModel extends BaseViewModel {
 
     List<int> eventIds = [];
     List<Performance> eventsToReturn = [];
+    print("DateTime");
+    print(DateTime.now());
+    final currentDate = DateTime.now();
+    final currentDateDay = currentDate.day;
+    final currentDateHour = currentDate.hour;
 
     /// Get one stage by stageName
     for (var element in stages) {
@@ -233,11 +286,37 @@ class TimelineViewModel extends BaseViewModel {
                 nextDay.data.relationships!;
             nextDayPerfList = nextDayRelList.performances;
           }
+
           if (dayPerfList != null) {
-            for (var stagePerfElement in stagePerfList) {
-              for (var dayPerfElement in dayPerfList) {
-                if (dayPerfElement?.data?.id == stagePerfElement?.data?.id) {
-                  eventIds.add(dayPerfElement!.data!.id!);
+            for (var performance in allPerformances) {
+              for (var stagePerfElement in stagePerfList) {
+                if (stagePerfElement?.data?.id == performance.data.id) {
+                  for (var dayPerfElement in dayPerfList) {
+                    if (dayPerfElement?.data?.id ==
+                        stagePerfElement?.data?.id) {
+                      var dayStartDateFirstTwoCharacters =
+                          performance.data.attributes?.start?.substring(0, 2);
+                      var dayEndDateFirstTwoCharacters =
+                          performance.data.attributes?.end?.substring(0, 2);
+                      if ((dayStartDateFirstTwoCharacters != null &&
+                          dayEndDateFirstTwoCharacters != null)) {
+                        var perfStartDateInt =
+                            int.parse(dayStartDateFirstTwoCharacters);
+                        var perfEndDateInt =
+                            int.parse(dayEndDateFirstTwoCharacters);
+                        if (perfStartDateInt >= 8) {
+                          if (getCurrentDayNumberFromDate(currentDateDay) ==
+                              dayId) {
+                            if ((currentDateHour >= perfStartDateInt) &&
+                                (currentDateHour < perfEndDateInt)) {
+                              performance.isCurrent = true;
+                            }
+                          }
+                          eventIds.add(dayPerfElement!.data!.id!);
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -249,7 +328,6 @@ class TimelineViewModel extends BaseViewModel {
               for (var nextDayPerf in nextDayPerfList) {
                 if (nextDayPerf?.data?.id == stagePerfElement?.data?.id) {
                   nextDayIds.add(nextDayPerf!.data!.id!);
-                  // eventIds.add(nextDayPerf!.data!.id!);
                 }
               }
             }
@@ -260,14 +338,14 @@ class TimelineViewModel extends BaseViewModel {
           for (var performance in allPerformances) {
             for (var id in nextDayIds) {
               if (performance.data.id == id) {
-                var nextDayEndDateFirstTwoCharacters =
-                    performance.data.attributes?.end?.substring(0, 2);
-                if (nextDayEndDateFirstTwoCharacters != null) {
-                  var nextDayEndDateInt =
-                      int.parse(nextDayEndDateFirstTwoCharacters);
-                  if (nextDayEndDateInt < 12) {
+                var nextDayStartDateFirstTwoCharacters =
+                    performance.data.attributes?.start?.substring(0, 2);
+                if (nextDayStartDateFirstTwoCharacters != null) {
+                  var nextDayStartDateInt =
+                      int.parse(nextDayStartDateFirstTwoCharacters);
+                  if (nextDayStartDateInt <= 8) {
                     print('DEBUG: FOUND NEXT DAY End dates');
-                    print(nextDayEndDateInt);
+                    print(nextDayStartDateInt);
                     eventIds.add(id);
                   }
                 }
@@ -319,31 +397,31 @@ class TimelineViewModel extends BaseViewModel {
       });
     });
 
-    debugPrint("DEBUG: Events to return by stage Data IDs: ");
-    for (var element in eventsToReturn) {
-      debugPrint(element.data.relationships?.artists?.data?.id);
-    }
-
-    debugPrint("DEBUG: Events to return by INCLUDED: ");
-    for (var element in eventsToReturn) {
-      var attributesName = element.included?.attributes?.name;
-      if ((attributesName != null) && (attributesName != "")) {
-        debugPrint("DEBUG: attributesName: $attributesName");
-      } else {
-        var attributesShortName = element.included?.attributes?.shortName;
-        if (attributesShortName != null) {
-          debugPrint("DEBUG: attributesShortName: $attributesShortName");
-        } else {
-          var attributesLongName = element.included?.attributes?.longName;
-          if (attributesLongName != null) {
-            debugPrint("DEBUG: attributesLongName: $attributesLongName");
-          } else {
-            debugPrint(
-                "DEBUG: GOT Neither name, or short or long name for: $element");
-          }
-        }
-      }
-    }
+    // debugPrint("DEBUG: Events to return by stage Data IDs: ");
+    // for (var element in eventsToReturn) {
+    //   debugPrint(element.data.relationships?.artists?.data?.id);
+    // }
+    //
+    // debugPrint("DEBUG: Events to return by INCLUDED: ");
+    // for (var element in eventsToReturn) {
+    //   var attributesName = element.included?.attributes?.name;
+    //   if ((attributesName != null) && (attributesName != "")) {
+    //     debugPrint("DEBUG: attributesName: $attributesName");
+    //   } else {
+    //     var attributesShortName = element.included?.attributes?.shortName;
+    //     if (attributesShortName != null) {
+    //       debugPrint("DEBUG: attributesShortName: $attributesShortName");
+    //     } else {
+    //       var attributesLongName = element.included?.attributes?.longName;
+    //       if (attributesLongName != null) {
+    //         debugPrint("DEBUG: attributesLongName: $attributesLongName");
+    //       } else {
+    //         debugPrint(
+    //             "DEBUG: GOT Neither name, or short or long name for: $element");
+    //       }
+    //     }
+    //   }
+    // }
     return eventsToReturn;
   }
 
@@ -370,6 +448,9 @@ class TimelineViewModel extends BaseViewModel {
         if (element?.type == "stages") {
           if (element?.attributes != null) {
             var stage = Stage(element!, false);
+            if (stage.data.attributes?.name == "Sound of Light Installation") {
+              stage.data.attributes?.name = "Sound of light";
+            }
             stages.add(stage);
           }
         }
@@ -407,9 +488,6 @@ class TimelineViewModel extends BaseViewModel {
           allPerformances.add(performance);
         }
       }
-      allPerformances.forEach((element) {
-        print(element.data.attributes?.activity);
-      });
     }
   }
 }

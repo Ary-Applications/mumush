@@ -8,6 +8,8 @@ import 'package:url_launcher/link.dart';
 import 'dart:io' show Platform;
 
 class HomeView extends StatefulWidget {
+  const HomeView({super.key});
+
   @override
   State<HomeView> createState() => _HomeViewState();
 }
@@ -34,7 +36,7 @@ class _HomeViewState extends State<HomeView> {
                 Column(
                   children: [
                     // SizedBox(height: 130),
-                    Container(
+                    SizedBox(
                         height: screenHeight * 0.5,
                         width: screenWidth,
                         child: const FittedBox(
@@ -46,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
                 Column(
                   children: [
                     SizedBox(height: screenHeight * 0.20),
-                    Container(
+                    SizedBox(
                         height: screenHeight * 0.5,
                         width: MediaQuery.of(context).size.width,
                         child: const FittedBox(
@@ -58,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 Column(
                   children: [
-                    Container(
+                    SizedBox(
                         height: screenHeight * 0.88,
                         width: MediaQuery.of(context).size.width / 2,
                         child: const FittedBox(
@@ -72,7 +74,7 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     Align(
                       alignment: AlignmentDirectional.centerEnd,
-                      child: Container(
+                      child: SizedBox(
                           height: screenHeight * 0.888,
                           width: MediaQuery.of(context).size.width / 2,
                           child: const FittedBox(
@@ -84,35 +86,31 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ],
                 ),
-                Container(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: Platform.isIOS ? screenHeight * 0.5 : screenHeight * 0.64,
-                        ),
+                Column(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: Platform.isIOS ? screenHeight * 0.5 : screenHeight * 0.64,
                       ),
-                      Container(
-                        child: Align(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          child: Container(
-                              decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                    colors: [Colors.black, Colors.transparent],
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.topCenter,
-                                    stops: [0.0, 1.0],
-                                    tileMode: TileMode.clamp
-                                ),
-                              ),
-                              // color: Colors.red,
-                              height: screenHeight * 0.29,
-                              width: MediaQuery.of(context).size.width,
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional.bottomEnd,
+                      child: Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                                colors: [Colors.black, Colors.transparent],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                stops: [0.0, 1.0],
+                                tileMode: TileMode.clamp
+                            ),
                           ),
-                        ),
+                          // color: Colors.red,
+                          height: screenHeight * 0.29,
+                          width: MediaQuery.of(context).size.width,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 Container(
                   color: Colors.transparent,
@@ -205,7 +203,7 @@ class _HomeViewState extends State<HomeView> {
                                           color: Colors.white70,
                                           size: linkHeight,
                                         ),
-                                        label: Text(''),
+                                        label: const Text(''),
                                       );
                                     }),
                               ),
@@ -222,7 +220,7 @@ class _HomeViewState extends State<HomeView> {
                                           color: Colors.white70,
                                           size: linkHeight,
                                         ),
-                                        label: Text(''),
+                                        label: const Text(''),
                                       );
                                     }),
                               ),
@@ -239,7 +237,7 @@ class _HomeViewState extends State<HomeView> {
                                           color: Colors.white70,
                                           size: linkHeight,
                                         ),
-                                        label: Text(''),
+                                        label: const Text(''),
                                       );
                                     }),
                               ),
@@ -316,7 +314,7 @@ class _HomeViewState extends State<HomeView> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white)),
             ),
-            content: Container(
+            content: SizedBox(
               height: 100,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(8.0),
@@ -335,7 +333,7 @@ class _HomeViewState extends State<HomeView> {
                           _viewModel.makePhoneCall("+40365425074");
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: const Color(0xFF1B0F27),
+                          backgroundColor: const Color(0xFF1B0F27),
                           // fixedSize: Size(250, 50),
                         ),
                         child: const Text(

@@ -42,7 +42,6 @@ class TimelineViewState extends State<TimelineView> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     final daysWidth = screenWidth * 0.25;
     return BaseStatefulView<TimelineViewModel>(
         viewModel: getIt<TimelineViewModel>(),
@@ -264,12 +263,12 @@ class TimelineViewState extends State<TimelineView> {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
+          foregroundColor: const Color(0xFFF67F59),
           textStyle: const TextStyle(
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
-          primary: Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -289,12 +288,12 @@ class TimelineViewState extends State<TimelineView> {
     } else {
       return TextButton(
         style: TextButton.styleFrom(
+          foregroundColor: Colors.white,
           textStyle: const TextStyle(
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
-          primary: Colors.white,
         ),
         autofocus: true,
         onPressed: () {
@@ -318,12 +317,12 @@ class TimelineViewState extends State<TimelineView> {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
+          foregroundColor: const Color(0xFFF67F59),
           textStyle: const TextStyle(
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
-          primary: Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -343,12 +342,12 @@ class TimelineViewState extends State<TimelineView> {
     } else {
       return TextButton(
         style: TextButton.styleFrom(
+          foregroundColor: Colors.white,
           textStyle: const TextStyle(
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
-          primary: Colors.white,
         ),
         autofocus: true,
         onPressed: () {
@@ -372,12 +371,12 @@ class TimelineViewState extends State<TimelineView> {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
+          foregroundColor: const Color(0xFFF67F59),
           textStyle: const TextStyle(
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
-          primary: Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -397,12 +396,12 @@ class TimelineViewState extends State<TimelineView> {
     } else {
       return TextButton(
         style: TextButton.styleFrom(
+          foregroundColor: Colors.white,
           textStyle: const TextStyle(
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
-          primary: Colors.white,
         ),
         autofocus: true,
         onPressed: () {
@@ -426,12 +425,12 @@ class TimelineViewState extends State<TimelineView> {
     if (active) {
       return TextButton(
         style: TextButton.styleFrom(
+          foregroundColor: const Color(0xFFF67F59),
           textStyle: const TextStyle(
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Color(0xFFF67F59)),
-          primary: Color(0xFFF67F59),
         ),
         autofocus: true,
         onPressed: () {
@@ -451,12 +450,12 @@ class TimelineViewState extends State<TimelineView> {
     } else {
       return TextButton(
         style: TextButton.styleFrom(
+          foregroundColor: Colors.white,
           textStyle: const TextStyle(
               fontSize: 20,
               fontFamily: 'SpaceMono',
               fontWeight: FontWeight.bold,
               color: Colors.white),
-          primary: Colors.white,
         ),
         autofocus: true,
         onPressed: () {

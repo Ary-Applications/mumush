@@ -18,7 +18,7 @@ class MapView extends StatefulWidget {
 
 class _MapViewState extends State<MapView> {
   late String _mapStyle;
-  Completer<GoogleMapController> _mapController = Completer();
+  final Completer<GoogleMapController> _mapController = Completer();
   late MapViewModel _viewModel;
 
   final CameraPosition _initialCameraPosition = const CameraPosition(

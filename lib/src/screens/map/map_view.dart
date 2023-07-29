@@ -160,7 +160,7 @@ class _MapViewState extends State<MapView> {
     localMarkers.add(Marker(
       markerId: MarkerId(location.toString()),
       position: location,
-      infoWindow: InfoWindow(title: description, snippet: null),
+      infoWindow: InfoWindow(title: (description != "Bar2") ? description : ("Bar"), snippet: null),
       icon: marker,
     ));
   }

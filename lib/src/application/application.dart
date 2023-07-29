@@ -68,7 +68,7 @@ class _MumushState extends State<Mumush> {
               ),
               body: PageView(
                   controller: pageController,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     HomeView(),
                     TimelineView(
@@ -77,7 +77,7 @@ class _MumushState extends State<Mumush> {
                       day3: 'SAT',
                       day4: 'SUN',
                     ),
-                    MapView(),
+                    const MapView(),
                   ]),
             ),
           );

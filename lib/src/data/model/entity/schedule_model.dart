@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:mumush/src/data/network/decodable.dart';
 
 ///
@@ -132,9 +133,7 @@ class ScheduleIncludedRelationshipsPerformances {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    if (data != null) {
-      data['data'] = this.data!.toJson();
-    }
+    data['data'] = this.data!.toJson();
     return data;
   }
 }
@@ -172,7 +171,7 @@ class ScheduleIncludedRelationships {
       final ret = ScheduleIncludedRelationshipsPerformances.fromJson(v);
       performances = ret;
     } else {
-      print("DEBUG ERROR: Could not deserialize json performances");
+      debugPrint("DEBUG ERROR: Could not deserialize json performances");
     }
   }
 
@@ -359,9 +358,7 @@ class ScheduleDataRelationshipsArtists {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    if (data != null) {
-      data['data'] = this.data!.toJson();
-    }
+    data['data'] = this.data!.toJson();
     return data;
   }
 }
@@ -422,9 +419,7 @@ class ScheduleDataRelationshipsPerformanceDescriptions {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    if (data != null) {
-      data['data'] = this.data!.toJson();
-    }
+    data['data'] = this.data!.toJson();
     return data;
   }
 }
@@ -482,9 +477,7 @@ class ScheduleDataRelationshipsDays {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    if (data != null) {
-      data['data'] = this.data!.toJson();
-    }
+    data['data'] = this.data!.toJson();
     return data;
   }
 }
@@ -542,9 +535,7 @@ class ScheduleDataRelationshipsStages {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    if (data != null) {
-      data['data'] = this.data!.toJson();
-    }
+    data['data'] = this.data!.toJson();
     return data;
   }
 }
@@ -831,7 +822,7 @@ class Schedule implements Decodable {
       v.forEach((v) {
         arr0.add(ScheduleData.fromJson(v));
       });
-      this.data = arr0;
+      data = arr0;
     }
     if (json['included'] != null && (json['included'] is List)) {
       final v = json['included'];
@@ -851,17 +842,17 @@ class Schedule implements Decodable {
     if (this.data != null) {
       final v = this.data;
       final arr0 = [];
-      v!.forEach((v) {
+      for (var v in v!) {
         arr0.add(v!.toJson());
-      });
+      }
       data['data'] = arr0;
     }
     if (included != null) {
       final v = included;
       final arr0 = [];
-      v!.forEach((v) {
+      for (var v in v!) {
         arr0.add(v!.toJson());
-      });
+      }
       data['included'] = arr0;
     }
     if (meta != null) {

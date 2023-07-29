@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
@@ -82,7 +81,9 @@ class TimelineViewModel extends BaseViewModel {
         }
         if (foundArtist != null) {
           var name = foundArtist.attributes?.name;
-          print("DEBUG: Could find artist from artists attributes: $name");
+          if (kDebugMode) {
+            print("DEBUG: Could find artist from artists attributes: $name");
+          }
           if (name != null) {
             var event = Event(name, "", (startToEnd));
             var widgetToAdd = SquareWidget(event: event);
@@ -90,8 +91,10 @@ class TimelineViewModel extends BaseViewModel {
             squaresToReturn.add(widgetToAdd);
           } else {
             var maybeName = performance.data.relationships?.artists?.data?.id;
-            print(
-                "DEBUG: ERROR ERROR ERROR!!!!!!!!!!! Could not find NAME!!!!!!! Maybe this? : $maybeName");
+            if (kDebugMode) {
+              print(
+                "DEBUG: Could not find NAME! Maybe this? : $maybeName");
+            }
             if (maybeName != null) {
               var event = Event(maybeName, "", (startToEnd));
               var widgetToAdd = SquareWidget(event: event);
@@ -100,17 +103,23 @@ class TimelineViewModel extends BaseViewModel {
             }
           }
         } else {
-          print(
+          if (kDebugMode) {
+            print(
               'DEBUG: Error: Could not find matching ids in artists and performances');
+          }
           var maybeName = performance.data.relationships?.artists?.data?.id;
           if (maybeName != null) {
             var event = Event(maybeName, "", (startToEnd));
             var widgetToAdd = SquareWidget(event: event);
             widgetToAdd.isActive = performance.isCurrent;
             squaresToReturn.add(widgetToAdd);
-            print('DEBUG: Name found as artist data id');
+            if (kDebugMode) {
+              print('DEBUG: Name found as artist data id');
+            }
           } else {
-            print('DEBUG: Name found in activities');
+            if (kDebugMode) {
+              print('DEBUG: Name found in activities');
+            }
             if (performance.data.attributes?.activity != null) {
               var activityName = performance.data.attributes?.activity;
               var event = Event(activityName ?? "", "", (startToEnd));
@@ -118,7 +127,9 @@ class TimelineViewModel extends BaseViewModel {
               widgetToAdd.isActive = performance.isCurrent;
               squaresToReturn.add(widgetToAdd);
             } else {
-              print('DEBUG: Name could not be found');
+              if (kDebugMode) {
+                print('DEBUG: Name could not be found');
+              }
             }
           }
         }
@@ -203,7 +214,9 @@ class TimelineViewModel extends BaseViewModel {
     try {
       final result = await InternetAddress.lookup('api.mumush.world');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        print('connected');
+        if (kDebugMode) {
+          print('connected');
+        }
 
         try {
           await _scheduleRepository
@@ -248,8 +261,11 @@ class TimelineViewModel extends BaseViewModel {
 
     List<int> eventIds = [];
     List<Performance> eventsToReturn = [];
-    print("DateTime");
-    print(DateTime.now());
+    if (kDebugMode) {
+      print("DateTime");
+      print(DateTime.now());
+    }
+
     final currentDate = DateTime.now();
     final currentDateDay = currentDate.day;
     final currentDateHour = currentDate.hour;
@@ -331,8 +347,10 @@ class TimelineViewModel extends BaseViewModel {
                 }
               }
             }
-            print('DEBUG: FOUND NEXT DAY IDs');
-            print(nextDayIds);
+            if (kDebugMode) {
+              print('DEBUG: FOUND NEXT DAY IDs');
+              print(nextDayIds);
+            }
           }
 
           for (var performance in allPerformances) {
@@ -344,8 +362,10 @@ class TimelineViewModel extends BaseViewModel {
                   var nextDayStartDateInt =
                       int.parse(nextDayStartDateFirstTwoCharacters);
                   if (nextDayStartDateInt <= 8) {
-                    print('DEBUG: FOUND NEXT DAY End dates');
-                    print(nextDayStartDateInt);
+                    if (kDebugMode) {
+                      print('DEBUG: FOUND NEXT DAY End dates');
+                      print(nextDayStartDateInt);
+                    }
                     eventIds.add(id);
                   }
                 }
@@ -355,7 +375,9 @@ class TimelineViewModel extends BaseViewModel {
         }
       }
     } else {
-      print("Error: getEventsByStageAndDay: Could not find stage");
+      if (kDebugMode) {
+        print("Error: getEventsByStageAndDay: Could not find stage");
+      }
     }
 
     for (var performance in allPerformances) {
@@ -375,27 +397,29 @@ class TimelineViewModel extends BaseViewModel {
         for (var eventId in eventIds) {
           if (singlePerformanceData?.data?.id == eventId) {
             includedsToAdd.add(include!);
-            String? dtsg = include.attributes?.longName;
-            String? dtsggg = include.attributes?.shortName;
-            String? dtsggga = include.attributes?.name;
-            print("DEBUG: GOT SINGLE PERFORMANCE LONG NAME $dtsg");
-            print("DEBUG: ORRRRR GOT SINGLE PERFORMANCE SHORT NAME $dtsggg");
-            print("DEBUG: ORRRRR ORRRRRR GOT SINGLE PERFORMANCE NAME $dtsggga");
+            if (kDebugMode) {
+              String? dtsg = include.attributes?.longName;
+              String? dtsggg = include.attributes?.shortName;
+              String? dtsggga = include.attributes?.name;
+              print("DEBUG: GOT SINGLE PERFORMANCE LONG NAME $dtsg");
+              print("DEBUG: OR GOT SINGLE PERFORMANCE SHORT NAME $dtsggg");
+              print("DEBUG: OR GOT SINGLE PERFORMANCE NAME $dtsggga");
+            }
           }
         }
       }
     }
 
-    eventsToReturn.forEach((eventTeReturnelement) {
-      includedsToAdd.forEach((includedElement) {
+    for (var eventTeReturnelement in eventsToReturn) {
+      for (var includedElement in includedsToAdd) {
         ScheduleIncludedRelationshipsPerformances? singlePerformanceData =
             cast<ScheduleIncludedRelationshipsPerformances>(
                 includedElement.relationships?.performances);
         if (eventTeReturnelement.data.id == singlePerformanceData?.data?.id) {
           eventTeReturnelement.included = includedElement;
         }
-      });
-    });
+      }
+    }
 
     // debugPrint("DEBUG: Events to return by stage Data IDs: ");
     // for (var element in eventsToReturn) {
@@ -475,9 +499,9 @@ class TimelineViewModel extends BaseViewModel {
   }
 
   getAllStageNames() {
-    stages.forEach((stage) {
-      print(stage.data.attributes?.name?.toUpperCase());
-    });
+    for (var stage in stages) {
+      debugPrint(stage.data.attributes?.name?.toUpperCase());
+    }
   }
 
   getAllPerformances() {

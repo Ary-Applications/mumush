@@ -29,23 +29,20 @@ class SquareWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        Container(
-                          // height: 60,
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                event.eventTitle.toUpperCase(),
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: 'SpaceMono',
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    overflow: TextOverflow.ellipsis),
-                                maxLines: 4,
-                              )),
-                        ),
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              event.eventTitle.toUpperCase(),
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'SpaceMono',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  overflow: TextOverflow.ellipsis),
+                              maxLines: 4,
+                            )),
                         // const SizedBox(height: 10),
-                        Spacer(),
+                        const Spacer(),
                         Row(
                           children: [
                             // const SizedBox(width: 2),

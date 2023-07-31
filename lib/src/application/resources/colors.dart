@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-const primaryMarkerColor = Colors.orange;
+const primaryMarkerColor = Color(0xFFd2603a);

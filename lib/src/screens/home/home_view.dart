@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mumush/src/di/injection.dart';
 import 'package:mumush/src/screens/base/base.dart';
 import 'package:mumush/src/screens/home/home_view_model.dart';
 import 'package:url_launcher/link.dart';
-import 'dart:io' show Platform;
+
+import '../../application/resources/colors.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -14,9 +14,38 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<Color?> _colorAnimation;
   late HomeViewModel _viewModel;
   static const linkHeight = 24.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _animationController.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          _animationController.forward();
+        }
+      });
+
+    _colorAnimation = ColorTween(begin: Colors.white, end: Colors.black)
+        .animate(_animationController);
+
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,100 +59,23 @@ class _HomeViewState extends State<HomeView> {
         },
         builder: (context, viewModel, child) {
           return Container(
-            color: const Color(0xFF1B0F27),
+            color: primaryMarkerColor,
             child: Stack(
               children: [
-                Column(
-                  children: [
-                    // SizedBox(height: 130),
-                    SizedBox(
-                        height: screenHeight * 0.5,
-                        width: screenWidth,
-                        child: const FittedBox(
-                          fit: BoxFit.cover,
-                          child: Image(image: AssetImage('assets/art/sky.png')),
-                        )),
-                  ],
-                ),
-                Column(
-                  children: [
-                    SizedBox(height: screenHeight * 0.20),
-                    SizedBox(
-                        height: screenHeight * 0.5,
-                        width: MediaQuery.of(context).size.width,
-                        child: const FittedBox(
-                          fit: BoxFit.cover,
-                          child:
-                              Image(image: AssetImage('assets/art/graund.png')),
-                        )),
-                  ],
-                ),
-                Column(
-                  children: [
-                    SizedBox(
-                        height: screenHeight * 0.88,
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: const FittedBox(
-                          fit: BoxFit.cover,
-                          child: Image(
-                              image: AssetImage('assets/art/landing_left.png')),
-                        )),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: SizedBox(
-                          height: screenHeight * 0.888,
-                          width: MediaQuery.of(context).size.width / 2,
-                          child: const FittedBox(
-                            fit: BoxFit.cover,
-                            child: Image(
-                                image:
-                                    AssetImage('assets/art/landing_right.png')),
-                          )),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: Platform.isIOS ? screenHeight * 0.5 : screenHeight * 0.64,
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional.bottomEnd,
-                      child: Container(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                                colors: [Colors.black, Colors.transparent],
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                stops: [0.0, 1.0],
-                                tileMode: TileMode.clamp
-                            ),
-                          ),
-                          // color: Colors.red,
-                          height: screenHeight * 0.29,
-                          width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                  ],
-                ),
+                Positioned.fill(
+                    child: Image.asset(
+                        'assets/art/concept_2023_Landing_mobile_base.png',
+                        fit: BoxFit.cover)),
+                Center(
+                    child: Image.asset(
+                  'assets/art/mumush.png',
+                  width: 150,
+                  height: 150,
+                )),
                 Container(
                   color: Colors.transparent,
                   child: Column(children: [
-                    SizedBox(height: screenHeight * 0.34),
-                    Container(
-                        height: 155,
-                        width: 155,
-                        color: Colors.transparent,
-                        child: SvgPicture.asset('assets/art/mumush.svg')),
-                    SizedBox(
-                      height: screenHeight * 0.11,
-                    ),
+                    SizedBox(height: screenHeight * 0.74),
                     Link(
                         uri: Uri.parse(
                             "https://www.google.com/maps/place/46°29'46.3%22N+24°47'29.2%22E/@46.4961944,24.7914444,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x1a29a39c83107b27!8m2!3d46.496199!4d24.791438"),
@@ -131,25 +83,20 @@ class _HomeViewState extends State<HomeView> {
                         builder: (context, followLink) {
                           return TextButton(
                               onPressed: followLink,
-                              child: const Text(
-                                'HOW TO GET TO THE FESTIVAL',
-                                style: TextStyle(
-                                    fontSize: 22,
-                                    fontFamily: 'SpaceMono',
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    shadows: <Shadow>[
-                                      Shadow(
-                                        offset: Offset(0.5, 0.5),
-                                        blurRadius: 4.0,
-                                        color: Colors.black,
-                                      ),
-                                    ]),
+                              child: AnimatedBuilder(
+                                animation: _colorAnimation,
+                                builder: (context, child) {
+                                  return Text(
+                                    'HOW TO GET TO THE FESTIVAL',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      color: _colorAnimation.value,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                },
                               ));
                         }),
-                    SizedBox(
-                      height: screenHeight * 0.06,
-                    ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -166,7 +113,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.facebook,
-                                          color: Colors.white70,
+                                          color: Colors.black,
                                           size: linkHeight,
                                         ),
                                         label: const Text(''),
@@ -183,7 +130,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.instagram,
-                                          color: Colors.white70,
+                                          color: Colors.black,
                                           size: linkHeight,
                                         ),
                                         label: const Text(''),
@@ -200,7 +147,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.spotify,
-                                          color: Colors.white70,
+                                          color: Colors.black,
                                           size: linkHeight,
                                         ),
                                         label: const Text(''),
@@ -217,7 +164,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.youtube,
-                                          color: Colors.white70,
+                                          color: Colors.black,
                                           size: linkHeight,
                                         ),
                                         label: const Text(''),
@@ -234,7 +181,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.soundcloud,
-                                          color: Colors.white70,
+                                          color: Colors.black,
                                           size: linkHeight,
                                         ),
                                         label: const Text(''),
@@ -250,7 +197,7 @@ class _HomeViewState extends State<HomeView> {
                                         onPressed: followLink,
                                         icon: const Icon(
                                           FontAwesomeIcons.globe,
-                                          color: Colors.white70,
+                                          color: Colors.black,
                                           size: linkHeight,
                                         ),
                                         label: const Text(''),
@@ -265,20 +212,16 @@ class _HomeViewState extends State<HomeView> {
                 Column(children: [
                   Container(
                     alignment: AlignmentDirectional.topStart,
-                    // height: 150,
                     width: MediaQuery.of(context).size.width,
-
-                    // color: Colors.black.withOpacity(0.4),
                     child: Column(children: [
                       const SizedBox(height: 50),
                       TextButton(
                         onPressed: () {
                           showInfoPopUp();
                         },
-
                         child: const Icon(
                           Icons.info_outline,
-                          color: Colors.white,
+                          color: Colors.black,
                           size: 35,
                         ),
                       ),
@@ -333,7 +276,7 @@ class _HomeViewState extends State<HomeView> {
                           _viewModel.makePhoneCall("+40365425074");
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF1B0F27),
+                          backgroundColor: primaryMarkerColor,
                           // fixedSize: Size(250, 50),
                         ),
                         child: const Text(

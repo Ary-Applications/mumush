@@ -59,12 +59,8 @@ flutter:
     # Add assets from the images directory to the application.
   assets:
     - assets/art/
-    - assets/art/mumush.svg
-    - assets/art/graund.png
-    - assets/art/sky.png
+    - assets/art/concept_2023_Landing_mobile_base.png
     - assets/art/backgraund.png
-    - assets/art/landing_right.png
-    - assets/art/landing_left.png
     - assets/map/
     - assets/map/arboretum_stage.png
     - assets/map/artechno_tent.png

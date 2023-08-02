@@ -1,6 +1,6 @@
 class ApiConstants {
   static const String baseUrl = "https://api.mumush.world/";
-  static const String performances = "performances?include=stages,days,artists,performanceDescriptions&filter[year]=2022&order[day]=asc&order[start]=asc";
+  static const String performances = "performances?include=stages,days,artists,performanceDescriptions&filter[year]=2023&order[day]=asc&order[start]=asc";
 }
 
 

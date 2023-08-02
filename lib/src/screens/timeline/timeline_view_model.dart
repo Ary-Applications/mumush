@@ -47,26 +47,14 @@ class TimelineViewModel extends BaseViewModel {
       var endDate = performance.data.attributes?.end ?? "";
       endDate = formatEndDate(endDate);
       var startToEnd = "$startDate-$endDate";
-      var eventName = performance.included?.attributes?.name;
-      var eventShortName = performance.included?.attributes?.shortName;
-      var eventLongName = performance.included?.attributes?.longName;
-
-      if (eventShortName != null) {
-        var event = Event(eventShortName, "", (startToEnd));
-        var widgetToAdd = SquareWidget(event: event);
-        widgetToAdd.isActive = performance.isCurrent;
-        squaresToReturn.add(widgetToAdd);
-      } else if (eventName != null) {
+      var eventName = performance.data.attributes?.activity;
+      if (eventName != null) {
         var event = Event(eventName, "", (startToEnd));
         var widgetToAdd = SquareWidget(event: event);
         widgetToAdd.isActive = performance.isCurrent;
         squaresToReturn.add(widgetToAdd);
-      } else if (eventLongName != null) {
-        var event = Event(eventLongName, "", (startToEnd));
-        var widgetToAdd = SquareWidget(event: event);
-        widgetToAdd.isActive = performance.isCurrent;
-        squaresToReturn.add(widgetToAdd);
-      } else {
+      }
+      else {
         ScheduleIncluded? foundArtist;
         for (var artist in artists) {
           ScheduleIncludedRelationshipsPerformances?
@@ -92,8 +80,7 @@ class TimelineViewModel extends BaseViewModel {
           } else {
             var maybeName = performance.data.relationships?.artists?.data?.id;
             if (kDebugMode) {
-              print(
-                "DEBUG: Could not find NAME! Maybe this? : $maybeName");
+              print("DEBUG: Could not find NAME! Maybe this? : $maybeName");
             }
             if (maybeName != null) {
               var event = Event(maybeName, "", (startToEnd));
@@ -105,7 +92,7 @@ class TimelineViewModel extends BaseViewModel {
         } else {
           if (kDebugMode) {
             print(
-              'DEBUG: Error: Could not find matching ids in artists and performances');
+                'DEBUG: Error: Could not find matching ids in artists and performances');
           }
           var maybeName = performance.data.relationships?.artists?.data?.id;
           if (maybeName != null) {
@@ -259,6 +246,8 @@ class TimelineViewModel extends BaseViewModel {
     Day? day;
     Day? nextDay;
 
+    debugPrint(
+        "DEBUG: getEventsByStageAndDay request with: stageId: $stageId, and dayId $dayId");
     List<int> eventIds = [];
     List<Performance> eventsToReturn = [];
     if (kDebugMode) {
@@ -272,7 +261,7 @@ class TimelineViewModel extends BaseViewModel {
 
     /// Get one stage by stageName
     for (var element in stages) {
-      if (element.data.attributes?.id == stageId) {
+      if (element.data.id == stageId) {
         stage = element;
       }
     }
@@ -280,10 +269,11 @@ class TimelineViewModel extends BaseViewModel {
     if (stage != null) {
       /// Get one day by dayID
       for (var element in days) {
-        if (element.data.attributes?.id == dayId) {
+        if (element.data.id == dayId) {
+          debugPrint("DEBUG: Found day element with id: $dayId");
           day = element;
         }
-        if (element.data.attributes?.id == dayId + 1) {
+        if (element.data.id == dayId + 1) {
           nextDay = element;
         }
       }
@@ -398,11 +388,7 @@ class TimelineViewModel extends BaseViewModel {
           if (singlePerformanceData?.data?.id == eventId) {
             includedsToAdd.add(include!);
             if (kDebugMode) {
-              String? dtsg = include.attributes?.longName;
-              String? dtsggg = include.attributes?.shortName;
               String? dtsggga = include.attributes?.name;
-              print("DEBUG: GOT SINGLE PERFORMANCE LONG NAME $dtsg");
-              print("DEBUG: OR GOT SINGLE PERFORMANCE SHORT NAME $dtsggg");
               print("DEBUG: OR GOT SINGLE PERFORMANCE NAME $dtsggga");
             }
           }
@@ -500,6 +486,7 @@ class TimelineViewModel extends BaseViewModel {
 
   getAllStageNames() {
     for (var stage in stages) {
+      debugPrint("DEBUG: Stage with ID: ${stage.data.id}");
       debugPrint(stage.data.attributes?.name?.toUpperCase());
     }
   }

@@ -36,7 +36,7 @@ class TimelineViewState extends State<TimelineView> {
           attributes: ScheduleIncludedAttributes(name: "GARGANTUA")),
       true);
   late TimelineViewModel _viewModel;
-  var activeDay = 1;
+  var activeDay = 6;
   var isFirstDropdown = true;
 
   @override
@@ -59,7 +59,7 @@ class TimelineViewState extends State<TimelineView> {
           _viewModel.getAllPerformanceDescriptions();
           setState(() {});
           activePerformances = _viewModel.getEventsByStageAndDay(
-              stages.first.data.attributes?.id ?? 1, 1);
+              stages.first.data.id ?? 11, 6);
           squareList =
               _viewModel.makeSquareListsFromPerformances(activePerformances);
           setState(() {});
@@ -121,8 +121,8 @@ class TimelineViewState extends State<TimelineView> {
                                     selectedStage.isActive = true;
                                     activePerformances =
                                         _viewModel.getEventsByStageAndDay(
-                                            selectedStage.data.attributes?.id ??
-                                                1,
+                                            selectedStage.data.id ??
+                                                11,
                                             activeDay);
                                     squareList = _viewModel
                                         .makeSquareListsFromPerformances(
@@ -141,7 +141,7 @@ class TimelineViewState extends State<TimelineView> {
                         children: [
                           SizedBox(
                               width: daysWidth,
-                              child: activeDay == 1
+                              child: activeDay == 6
                                   ? buildDayOneTextButton(true)
                                   : buildDayOneTextButton(false)),
                           Container(
@@ -151,7 +151,7 @@ class TimelineViewState extends State<TimelineView> {
                                 border: Border(
                               left: BorderSide(width: 3.0, color: Colors.white),
                             )),
-                            child: activeDay == 2
+                            child: activeDay == 7
                                 ? buildDayTwoTextButton(true)
                                 : buildDayTwoTextButton(false),
                           ),
@@ -162,7 +162,7 @@ class TimelineViewState extends State<TimelineView> {
                                 border: Border(
                               left: BorderSide(width: 3.0, color: Colors.white),
                             )),
-                            child: activeDay == 3
+                            child: activeDay == 8
                                 ? buildDayThreeTextButton(true)
                                 : buildDayThreeTextButton(false),
                           ),
@@ -173,7 +173,7 @@ class TimelineViewState extends State<TimelineView> {
                                 border: Border(
                               left: BorderSide(width: 3.0, color: Colors.white),
                             )),
-                            child: activeDay == 4
+                            child: activeDay == 9
                                 ? buildDayFourTextButton(true)
                                 : buildDayFourTextButton(false),
                           ),
@@ -272,10 +272,10 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 1;
+          activeDay = 6;
           setState(() {
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 1);
+                selectedStage.data.id ?? 11, activeDay);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
             selectedStage.isActive = true;
@@ -297,10 +297,10 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 1;
+          activeDay = 6;
           setState(() {
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 1);
+                selectedStage.data.id ?? 11, activeDay);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
             selectedStage.isActive = true;
@@ -326,10 +326,10 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 2;
+          activeDay = 7;
           setState(() {
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 2);
+                selectedStage.data.id ?? 11, activeDay);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
             selectedStage.isActive = true;
@@ -351,10 +351,10 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 2;
+          activeDay = 7;
           setState(() {
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 2);
+                selectedStage.data.id ?? 11, activeDay);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
             selectedStage.isActive = true;
@@ -380,10 +380,10 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 3;
+          activeDay = 8;
           setState(() {
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 3);
+                selectedStage.data.id ?? 11, activeDay);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
             selectedStage.isActive = true;
@@ -405,10 +405,10 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 3;
+          activeDay = 8;
           setState(() {
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 3);
+                selectedStage.data.id ?? 11, activeDay);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
             selectedStage.isActive = true;
@@ -434,10 +434,10 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 4;
+          activeDay = 9;
           setState(() {
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 4);
+                selectedStage.data.id ?? 11, activeDay);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
             selectedStage.isActive = true;
@@ -459,10 +459,10 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 4;
+          activeDay = 9;
           setState(() {
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 4);
+                selectedStage.data.id ?? 11, activeDay);
             squareList =
                 _viewModel.makeSquareListsFromPerformances(activePerformances);
             selectedStage.isActive = true;

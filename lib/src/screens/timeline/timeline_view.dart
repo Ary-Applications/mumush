@@ -4,6 +4,7 @@ import 'package:mumush/src/screens/base/base.dart';
 import 'package:mumush/src/screens/timeline/square_widget.dart';
 import 'package:mumush/src/screens/timeline/timeline_view_model.dart';
 
+import '../../application/resources/colors.dart';
 import '../../data/model/entity/performance.dart';
 import '../../data/model/entity/schedule_model.dart';
 import '../../data/model/entity/stage.dart';
@@ -67,17 +68,9 @@ class TimelineViewState extends State<TimelineView> {
         },
         builder: (context, viewModel, child) {
           return Container(
-            color: const Color(0xFF17194E),
+            color: primaryTimelineColor,
             child: Stack(
               children: [
-                SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: const FittedBox(
-                      fit: BoxFit.cover,
-                      child:
-                          Image(image: AssetImage('assets/art/backgraund.png')),
-                    )),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

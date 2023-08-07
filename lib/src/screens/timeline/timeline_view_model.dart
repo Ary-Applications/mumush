@@ -48,19 +48,31 @@ class TimelineViewModel extends BaseViewModel {
       endDate = formatEndDate(endDate);
       var startToEnd = "$startDate-$endDate";
       var eventName = performance.data.attributes?.activity;
-      if (eventName != null) {
+      var eventShortName = performance.included?.attributes?.shortName;
+      var eventLongName = performance.included?.attributes?.longName;
+
+      if (eventShortName != null) {
+        var event = Event(eventShortName, "", (startToEnd));
+        var widgetToAdd = SquareWidget(event: event);
+        widgetToAdd.isActive = performance.isCurrent;
+        squaresToReturn.add(widgetToAdd);
+      } else if (eventName != null) {
         var event = Event(eventName, "", (startToEnd));
         var widgetToAdd = SquareWidget(event: event);
         widgetToAdd.isActive = performance.isCurrent;
         squaresToReturn.add(widgetToAdd);
-      }
-      else {
+      } else if (eventLongName != null) {
+        var event = Event(eventLongName, "", (startToEnd));
+        var widgetToAdd = SquareWidget(event: event);
+        widgetToAdd.isActive = performance.isCurrent;
+        squaresToReturn.add(widgetToAdd);
+      } else {
         ScheduleIncluded? foundArtist;
         for (var artist in artists) {
           ScheduleIncludedRelationshipsPerformances?
               singlePerformanceDataForArtist =
               cast<ScheduleIncludedRelationshipsPerformances>(
-                  artist.relationships?.performances);
+                  artist.relationships?.performances[0]);
           var artistId = singlePerformanceDataForArtist?.data?.id;
           var perfDataId = performance.data.attributes?.id;
           if (artistId == perfDataId) {

@@ -4,7 +4,7 @@ description: A new Flutter project.
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-version: 1.0.0+2
+version: 1.0.3+3
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
@@ -44,6 +44,8 @@ dev_dependencies:
   google_maps_flutter: ^2.1.9
   location: ^5.0.1
   permission_handler: ^10.4.3
+  url_launcher: ^6.0.10
+  maps_launcher: ^2.0.0
 
 flutter_icons:
   android: true
@@ -60,7 +62,8 @@ flutter:
   assets:
     - assets/art/
     - assets/art/concept_2023_Landing_mobile_base.png
-    - assets/art/backgraund.png
+    - assets/art/home_right.png
+    - assets/art/home_left.png
     - assets/map/
     - assets/map/arboretum_stage.png
     - assets/map/artechno_tent.png

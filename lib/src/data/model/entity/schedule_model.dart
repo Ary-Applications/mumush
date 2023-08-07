@@ -200,22 +200,70 @@ class ScheduleIncludedAttributes {
   int? id;
   String? name;
   String? year;
+  DateTime? day;
+  String? start;
+  String? end;
+  String? longName;
+  String? shortName;
+  String? origin;
+  String? link;
+  String? hint;
+  dynamic thumbnailUri;
+  dynamic description;
+  String? imageUri;
+  List<String>? years;
 
   ScheduleIncludedAttributes({
     this.id,
     this.name,
     this.year,
+    this.day,
+    this.start,
+    this.end,
+    this.longName,
+    this.shortName,
+    this.origin,
+    this.link,
+    this.hint,
+    this.thumbnailUri,
+    this.description,
+    this.imageUri,
+    this.years,
   });
   ScheduleIncludedAttributes.fromJson(Map<String, dynamic> json) {
     id = int.tryParse(json['id']?.toString() ?? '');
     name = json['name']?.toString();
     year = json['year']?.toString();
+    day = json["day"] == null ? null : DateTime.parse(json["day"]);
+    start = json["start"];
+    end = json["end"];
+    longName = json["longName"];
+    shortName = json["shortName"];
+    origin = json["origin"];
+    link = json["link"];
+    hint = json["hint"];
+    thumbnailUri = json["thumbnailUri"];
+    description = json["description"];
+    imageUri = json["imageUri"];
+    years = json["years"] == null ? [] : List<String>.from(json["years"]!.map((x) => x));
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
     data['year'] = year;
+    data["day"] = day?.toIso8601String();
+    data["start"] = start;
+    data["end"] = end;
+    data["longName"] = longName;
+    data["shortName"] = shortName;
+    data["origin"] = origin;
+    data["link"] = link;
+    data["hint"] = hint;
+    data["thumbnailUri"] = thumbnailUri;
+    data["description"] = description;
+    data["imageUri"] = imageUri;
+    data["years"] = years == null ? [] : List<dynamic>.from(years!.map((x) => x));
     return data;
   }
 }

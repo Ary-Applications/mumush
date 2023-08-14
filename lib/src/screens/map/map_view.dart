@@ -47,7 +47,7 @@ class _MapViewState extends State<MapView> {
       mapToolbarEnabled: true,
       onMapCreated: onMapCreated,
       markers: Set<Marker>.of(_markers),
-      mapType: MapType.satellite,
+      mapType: MapType.normal,
       initialCameraPosition: _initialCameraPosition,
     );
 
@@ -142,7 +142,7 @@ class _MapViewState extends State<MapView> {
         addMarker(localMarkers, location, description, entranceMarker);
       } else if (description == "Toilets & Showers") {
         addMarker(localMarkers, location, description, toiShowMarker);
-      } else if (description == "Medical Zone") {
+      } else if (description == "Medical Outpost / Psy help") {
         addMarker(localMarkers, location, description, medMarker);
       } else if (description == "Food court") {
         addMarker(localMarkers, location, description, foodMarker);

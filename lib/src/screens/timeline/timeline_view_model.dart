@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -39,32 +40,56 @@ class TimelineViewModel extends BaseViewModel {
     stages = [placeholderStage];
   }
 
-  List<SquareWidget> makeSquareListsFromPerformances(
-      List<Performance> performances) {
+  List<SquareWidget> makeSquareListsFromPerformances(List<int> scheduledIds,
+      String stageName, List<Performance> performances) {
     List<SquareWidget> squaresToReturn = [];
     for (var performance in performances) {
       var startDate = performance.data.attributes?.start ?? "";
       var endDate = performance.data.attributes?.end ?? "";
       endDate = formatEndDate(endDate);
       var startToEnd = "$startDate-$endDate";
-      var eventName = performance.included?.attributes?.name;
+      var eventName = performance.data.attributes?.activity;
       var eventShortName = performance.included?.attributes?.shortName;
       var eventLongName = performance.included?.attributes?.longName;
 
-      if (eventShortName != null) {
-        var event = Event(eventShortName, "", (startToEnd));
+      if (eventShortName != null && eventShortName != "") {
+        var event = Event(
+            performance.data.id,
+            eventShortName,
+            stageName,
+            (startToEnd),
+            getDateFromNumber(
+                performance.data.relationships?.days?.data?.id ?? 0,
+                performance.data?.attributes?.start ?? "0"));
         var widgetToAdd = SquareWidget(event: event);
         widgetToAdd.isActive = performance.isCurrent;
+        widgetToAdd.isScheduled = scheduledIds.contains(event.id);
         squaresToReturn.add(widgetToAdd);
-      } else if (eventName != null) {
-        var event = Event(eventName, "", (startToEnd));
+      } else if (eventName != null && eventName != "") {
+        var event = Event(
+            performance.data.id,
+            eventName,
+            stageName,
+            (startToEnd),
+            getDateFromNumber(
+                performance.data.relationships?.days?.data?.id ?? 0,
+                performance.data?.attributes?.start ?? "0"));
         var widgetToAdd = SquareWidget(event: event);
         widgetToAdd.isActive = performance.isCurrent;
+        widgetToAdd.isScheduled = scheduledIds.contains(event.id);
         squaresToReturn.add(widgetToAdd);
       } else if (eventLongName != null) {
-        var event = Event(eventLongName, "", (startToEnd));
+        var event = Event(
+            performance.data.id,
+            eventLongName,
+            stageName,
+            (startToEnd),
+            getDateFromNumber(
+                performance.data.relationships?.days?.data?.id ?? 0,
+                performance.data?.attributes?.start ?? "0"));
         var widgetToAdd = SquareWidget(event: event);
         widgetToAdd.isActive = performance.isCurrent;
+        widgetToAdd.isScheduled = scheduledIds.contains(event.id);
         squaresToReturn.add(widgetToAdd);
       } else {
         ScheduleIncluded? foundArtist;
@@ -72,7 +97,7 @@ class TimelineViewModel extends BaseViewModel {
           ScheduleIncludedRelationshipsPerformances?
               singlePerformanceDataForArtist =
               cast<ScheduleIncludedRelationshipsPerformances>(
-                  artist.relationships?.performances);
+                  artist.relationships?.performances[0]);
           var artistId = singlePerformanceDataForArtist?.data?.id;
           var perfDataId = performance.data.attributes?.id;
           if (artistId == perfDataId) {
@@ -85,33 +110,56 @@ class TimelineViewModel extends BaseViewModel {
             print("DEBUG: Could find artist from artists attributes: $name");
           }
           if (name != null) {
-            var event = Event(name, "", (startToEnd));
+            var event = Event(
+                performance.data.id,
+                name,
+                stageName,
+                (startToEnd),
+                getDateFromNumber(
+                    performance.data.relationships?.days?.data?.id ?? 0,
+                    performance.data?.attributes?.start ?? "0"));
             var widgetToAdd = SquareWidget(event: event);
             widgetToAdd.isActive = performance.isCurrent;
+            widgetToAdd.isScheduled = scheduledIds.contains(event.id);
             squaresToReturn.add(widgetToAdd);
           } else {
             var maybeName = performance.data.relationships?.artists?.data?.id;
             if (kDebugMode) {
-              print(
-                "DEBUG: Could not find NAME! Maybe this? : $maybeName");
+              print("DEBUG: Could not find NAME! Maybe this? : $maybeName");
             }
             if (maybeName != null) {
-              var event = Event(maybeName, "", (startToEnd));
+              var event = Event(
+                  performance.data.id,
+                  maybeName,
+                  stageName,
+                  (startToEnd),
+                  getDateFromNumber(
+                      performance.data.relationships?.days?.data?.id ?? 0,
+                      performance.data?.attributes?.start ?? "0"));
               var widgetToAdd = SquareWidget(event: event);
               widgetToAdd.isActive = performance.isCurrent;
+              widgetToAdd.isScheduled = scheduledIds.contains(event.id);
               squaresToReturn.add(widgetToAdd);
             }
           }
         } else {
           if (kDebugMode) {
             print(
-              'DEBUG: Error: Could not find matching ids in artists and performances');
+                'DEBUG: Error: Could not find matching ids in artists and performances');
           }
           var maybeName = performance.data.relationships?.artists?.data?.id;
           if (maybeName != null) {
-            var event = Event(maybeName, "", (startToEnd));
+            var event = Event(
+                performance.data.id,
+                maybeName,
+                stageName,
+                (startToEnd),
+                getDateFromNumber(
+                    performance.data.relationships?.days?.data?.id ?? 0,
+                    performance.data?.attributes?.start ?? "0"));
             var widgetToAdd = SquareWidget(event: event);
             widgetToAdd.isActive = performance.isCurrent;
+            widgetToAdd.isScheduled = scheduledIds.contains(event.id);
             squaresToReturn.add(widgetToAdd);
             if (kDebugMode) {
               print('DEBUG: Name found as artist data id');
@@ -122,9 +170,17 @@ class TimelineViewModel extends BaseViewModel {
             }
             if (performance.data.attributes?.activity != null) {
               var activityName = performance.data.attributes?.activity;
-              var event = Event(activityName ?? "", "", (startToEnd));
+              var event = Event(
+                  performance.data.id,
+                  activityName ?? "",
+                  stageName,
+                  (startToEnd),
+                  getDateFromNumber(
+                      performance.data.relationships?.days?.data?.id ?? 0,
+                      performance.data?.attributes?.start ?? "0"));
               var widgetToAdd = SquareWidget(event: event);
               widgetToAdd.isActive = performance.isCurrent;
+              widgetToAdd.isScheduled = scheduledIds.contains(event.id);
               squaresToReturn.add(widgetToAdd);
             } else {
               if (kDebugMode) {
@@ -192,22 +248,48 @@ class TimelineViewModel extends BaseViewModel {
   getAllScheduleByAllMeans() async {
     final String rawResponse =
         await rootBundle.loadString('assets/rawdata.json');
-    schedule ??= _getDecodedObj<Schedule>(
-        rawResponse, BaseResponseType.performancesResponse);
+
     prefs = await SharedPreferences.getInstance();
     final scheduleFromSharedPrefs = prefs?.getString('json');
-    if (scheduleFromSharedPrefs != null) {
-      schedule = _getDecodedObj<Schedule>(
-          scheduleFromSharedPrefs, BaseResponseType.performancesResponse);
-      await getScheduleByHttp(rawResponse);
-    } else {
-      schedule ??= _getDecodedObj<Schedule>(
-          rawResponse, BaseResponseType.performancesResponse);
-      await getScheduleByHttp(rawResponse);
-    }
 
-    schedule ??= _getDecodedObj<Schedule>(
-        rawResponse, BaseResponseType.performancesResponse);
+    try {
+      final result = await InternetAddress.lookup('api.mumush.world');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        if (kDebugMode) {
+          print('connected');
+        }
+
+        try {
+          final scheduleFromHttp = await _scheduleRepository.getSchedule();
+          if (scheduleFromHttp != null) {
+            schedule = scheduleFromHttp;
+            // Save the schedule fetched from HTTP to SharedPreferences
+            prefs?.setString('json', jsonEncode(schedule));
+          }
+        } catch (e) {
+          debugPrint(e.toString());
+          if (scheduleFromSharedPrefs != null) {
+            schedule = _getDecodedObj<Schedule>(
+                scheduleFromSharedPrefs, BaseResponseType.performancesResponse);
+          } else {
+            schedule = _getDecodedObj<Schedule>(
+                rawResponse, BaseResponseType.performancesResponse);
+          }
+        }
+      }
+    } on SocketException catch (_) {
+      if (kDebugMode) {
+        print('not connected');
+      }
+
+      if (scheduleFromSharedPrefs != null) {
+        schedule = _getDecodedObj<Schedule>(
+            scheduleFromSharedPrefs, BaseResponseType.performancesResponse);
+      } else {
+        schedule = _getDecodedObj<Schedule>(
+            rawResponse, BaseResponseType.performancesResponse);
+      }
+    }
   }
 
   Future<void> getScheduleByHttp(String rawResponse) async {
@@ -240,14 +322,14 @@ class TimelineViewModel extends BaseViewModel {
 
   int? getCurrentDayNumberFromDate(int dayNr) {
     switch (dayNr) {
+      case 17:
+        return 6;
       case 18:
-        return 1;
+        return 7;
       case 19:
-        return 2;
+        return 8;
       case 20:
-        return 3;
-      case 21:
-        return 4;
+        return 9;
       default:
         return null;
     }
@@ -259,6 +341,8 @@ class TimelineViewModel extends BaseViewModel {
     Day? day;
     Day? nextDay;
 
+    debugPrint(
+        "DEBUG: getEventsByStageAndDay request with: stageId: $stageId, and dayId $dayId");
     List<int> eventIds = [];
     List<Performance> eventsToReturn = [];
     if (kDebugMode) {
@@ -272,7 +356,7 @@ class TimelineViewModel extends BaseViewModel {
 
     /// Get one stage by stageName
     for (var element in stages) {
-      if (element.data.attributes?.id == stageId) {
+      if (element.data.id == stageId) {
         stage = element;
       }
     }
@@ -280,10 +364,11 @@ class TimelineViewModel extends BaseViewModel {
     if (stage != null) {
       /// Get one day by dayID
       for (var element in days) {
-        if (element.data.attributes?.id == dayId) {
+        if (element.data.id == dayId) {
+          debugPrint("DEBUG: Found day element with id: $dayId");
           day = element;
         }
-        if (element.data.attributes?.id == dayId + 1) {
+        if (element.data.id == dayId + 1) {
           nextDay = element;
         }
       }
@@ -398,11 +483,7 @@ class TimelineViewModel extends BaseViewModel {
           if (singlePerformanceData?.data?.id == eventId) {
             includedsToAdd.add(include!);
             if (kDebugMode) {
-              String? dtsg = include.attributes?.longName;
-              String? dtsggg = include.attributes?.shortName;
               String? dtsggga = include.attributes?.name;
-              print("DEBUG: GOT SINGLE PERFORMANCE LONG NAME $dtsg");
-              print("DEBUG: OR GOT SINGLE PERFORMANCE SHORT NAME $dtsggg");
               print("DEBUG: OR GOT SINGLE PERFORMANCE NAME $dtsggga");
             }
           }
@@ -500,6 +581,7 @@ class TimelineViewModel extends BaseViewModel {
 
   getAllStageNames() {
     for (var stage in stages) {
+      debugPrint("DEBUG: Stage with ID: ${stage.data.id}");
       debugPrint(stage.data.attributes?.name?.toUpperCase());
     }
   }
@@ -513,5 +595,34 @@ class TimelineViewModel extends BaseViewModel {
         }
       }
     }
+  }
+
+  getDateFromNumber(int number, String hourString) {
+    if (number < 6 || number > 10) {
+      throw ArgumentError('Number should be between 6 and 10');
+    }
+
+    final hourParts = hourString.split(':');
+    if (hourParts.length != 2) {
+      throw ArgumentError('Hour should be in the format "HH:mm"');
+    }
+
+    final hour = int.tryParse(hourParts[0]);
+    final minute = int.tryParse(hourParts[1]);
+
+    if (hour == null ||
+        minute == null ||
+        hour < 0 ||
+        hour >= 24 ||
+        minute < 0 ||
+        minute >= 60) {
+      throw ArgumentError('Invalid hour or minute');
+    }
+
+    final startingDate = DateTime(2023, 8, 17);
+    final daysToAdd = number - 6;
+
+    final dateWithoutTime = startingDate.add(Duration(days: daysToAdd));
+    return dateWithoutTime.add(Duration(hours: hour, minutes: minute));
   }
 }

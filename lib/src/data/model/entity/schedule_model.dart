@@ -9,11 +9,11 @@ import 'package:mumush/src/data/network/decodable.dart';
 class ScheduleMetaPage {
 /*
 {
-  "total": 168,
+  "total": 151,
   "last": 0,
   "number": 0,
-  "size": 168
-} 
+  "size": 151
+}
 */
 
   int? total;
@@ -27,14 +27,12 @@ class ScheduleMetaPage {
     this.number,
     this.size,
   });
-
   ScheduleMetaPage.fromJson(Map<String, dynamic> json) {
     total = int.tryParse(json['total']?.toString() ?? '');
     last = int.tryParse(json['last']?.toString() ?? '');
     number = int.tryParse(json['number']?.toString() ?? '');
     size = int.tryParse(json['size']?.toString() ?? '');
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['total'] = total;
@@ -48,29 +46,32 @@ class ScheduleMetaPage {
 class ScheduleMeta {
 /*
 {
+  "accessor": "id",
   "page": {
-    "total": 168,
+    "total": 151,
     "last": 0,
     "number": 0,
-    "size": 168
+    "size": 151
   }
-} 
+}
 */
 
+  String? accessor;
   ScheduleMetaPage? page;
 
   ScheduleMeta({
+    this.accessor,
     this.page,
   });
-
   ScheduleMeta.fromJson(Map<String, dynamic> json) {
+    accessor = json['accessor']?.toString();
     page = (json['page'] != null && (json['page'] is Map))
         ? ScheduleMetaPage.fromJson(json['page'])
         : null;
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
+    data['accessor'] = accessor;
     if (page != null) {
       data['page'] = page!.toJson();
     }
@@ -82,7 +83,7 @@ class ScheduleIncludedRelationshipsPerformancesData {
 /*
 {
   "type": "performances",
-  "id": 1
+  "id": 194
 }
 */
 
@@ -99,7 +100,6 @@ class ScheduleIncludedRelationshipsPerformancesData {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -113,7 +113,7 @@ class ScheduleIncludedRelationshipsPerformances {
 {
   "data": {
     "type": "performances",
-    "id": 1
+    "id": 194
   }
 }
 */
@@ -130,10 +130,11 @@ class ScheduleIncludedRelationshipsPerformances {
         ? ScheduleIncludedRelationshipsPerformancesData.fromJson(json['data'])
         : null;
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['data'] = this.data!.toJson();
+    if (data != null) {
+      data['data'] = this.data!.toJson();
+    }
     return data;
   }
 }
@@ -145,7 +146,7 @@ class ScheduleIncludedRelationships {
     {
       "data": {
         "type": "performances",
-        "id": 1
+        "id": 194
       }
     }
   ]
@@ -157,7 +158,6 @@ class ScheduleIncludedRelationships {
   ScheduleIncludedRelationships({
     this.performances,
   });
-
   ScheduleIncludedRelationships.fromJson(Map<String, dynamic> json) {
     if (json['performances'] != null && (json['performances'] is List)) {
       final v = json['performances'];
@@ -174,7 +174,6 @@ class ScheduleIncludedRelationships {
       debugPrint("DEBUG ERROR: Could not deserialize json performances");
     }
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (performances != null) {
@@ -192,54 +191,79 @@ class ScheduleIncludedRelationships {
 class ScheduleIncludedAttributes {
 /*
 {
-  "id": 1,
+  "id": 11,
   "name": "Gargantua",
-  "year": "2022"
+  "year": "2023"
 }
 */
 
   int? id;
+  String? name;
+  String? year;
+  DateTime? day;
+  String? start;
+  String? end;
   String? longName;
   String? shortName;
   String? origin;
-  String? day;
-  String? start;
-  String? end;
   String? link;
-  String? name;
-  String? year;
+  String? hint;
+  dynamic thumbnailUri;
+  dynamic description;
+  String? imageUri;
+  List<String>? years;
 
   ScheduleIncludedAttributes({
     this.id,
-    this.longName,
-    this.shortName,
+    this.name,
+    this.year,
     this.day,
     this.start,
     this.end,
+    this.longName,
+    this.shortName,
     this.origin,
     this.link,
-    this.name,
-    this.year,
+    this.hint,
+    this.thumbnailUri,
+    this.description,
+    this.imageUri,
+    this.years,
   });
-
   ScheduleIncludedAttributes.fromJson(Map<String, dynamic> json) {
     id = int.tryParse(json['id']?.toString() ?? '');
-    longName = json['longName']?.toString();
-    shortName = json['shortName']?.toString();
-    day = json['day']?.toString();
-    start = json['start']?.toString();
-    end = json['end']?.toString();
-    origin = json['origin']?.toString();
-    link = json['link']?.toString();
     name = json['name']?.toString();
     year = json['year']?.toString();
+    day = json["day"] == null ? null : DateTime.parse(json["day"]);
+    start = json["start"];
+    end = json["end"];
+    longName = json["longName"];
+    shortName = json["shortName"];
+    origin = json["origin"];
+    link = json["link"];
+    hint = json["hint"];
+    thumbnailUri = json["thumbnailUri"];
+    description = json["description"];
+    imageUri = json["imageUri"];
+    years = json["years"] == null ? [] : List<String>.from(json["years"]!.map((x) => x));
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
     data['year'] = year;
+    data["day"] = day?.toIso8601String();
+    data["start"] = start;
+    data["end"] = end;
+    data["longName"] = longName;
+    data["shortName"] = shortName;
+    data["origin"] = origin;
+    data["link"] = link;
+    data["hint"] = hint;
+    data["thumbnailUri"] = thumbnailUri;
+    data["description"] = description;
+    data["imageUri"] = imageUri;
+    data["years"] = years == null ? [] : List<dynamic>.from(years!.map((x) => x));
     return data;
   }
 }
@@ -248,18 +272,18 @@ class ScheduleIncluded {
 /*
 {
   "type": "stages",
-  "id": 1,
+  "id": 11,
   "attributes": {
-    "id": 1,
+    "id": 11,
     "name": "Gargantua",
-    "year": "2022"
+    "year": "2023"
   },
   "relationships": {
     "performances": [
       {
         "data": {
           "type": "performances",
-          "id": 1
+          "id": 194
         }
       }
     ]
@@ -278,7 +302,6 @@ class ScheduleIncluded {
     this.attributes,
     this.relationships,
   });
-
   ScheduleIncluded.fromJson(Map<String, dynamic> json) {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
@@ -290,7 +313,6 @@ class ScheduleIncluded {
             ? ScheduleIncludedRelationships.fromJson(json['relationships'])
             : null;
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -367,7 +389,7 @@ class ScheduleDataRelationshipsPerformanceDescriptionsData {
 /*
 {
   "type": "performanceDescriptions",
-  "id": 4
+  "id": 48
 }
 */
 
@@ -384,7 +406,6 @@ class ScheduleDataRelationshipsPerformanceDescriptionsData {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -398,7 +419,7 @@ class ScheduleDataRelationshipsPerformanceDescriptions {
 {
   "data": {
     "type": "performanceDescriptions",
-    "id": 4
+    "id": 48
   }
 }
 */
@@ -416,10 +437,11 @@ class ScheduleDataRelationshipsPerformanceDescriptions {
             json['data'])
         : null;
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['data'] = this.data!.toJson();
+    if (data != null) {
+      data['data'] = this.data!.toJson();
+    }
     return data;
   }
 }
@@ -428,7 +450,7 @@ class ScheduleDataRelationshipsDaysData {
 /*
 {
   "type": "days",
-  "id": 1
+  "id": 6
 }
 */
 
@@ -439,12 +461,10 @@ class ScheduleDataRelationshipsDaysData {
     this.type,
     this.id,
   });
-
   ScheduleDataRelationshipsDaysData.fromJson(Map<String, dynamic> json) {
     type = json['type']?.toString();
-    id = int.tryParse(json['id']?.toString() ?? '');
+    id = json['id']?.toInt();
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -458,7 +478,7 @@ class ScheduleDataRelationshipsDays {
 {
   "data": {
     "type": "days",
-    "id": 1
+    "id": 6
   }
 }
 */
@@ -468,16 +488,16 @@ class ScheduleDataRelationshipsDays {
   ScheduleDataRelationshipsDays({
     this.data,
   });
-
   ScheduleDataRelationshipsDays.fromJson(Map<String, dynamic> json) {
     data = (json['data'] != null && (json['data'] is Map))
         ? ScheduleDataRelationshipsDaysData.fromJson(json['data'])
         : null;
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['data'] = this.data!.toJson();
+    if (data != null) {
+      data['data'] = this.data!.toJson();
+    }
     return data;
   }
 }
@@ -486,7 +506,7 @@ class ScheduleDataRelationshipsStagesData {
 /*
 {
   "type": "stages",
-  "id": 2
+  "id": 23
 }
 */
 
@@ -497,12 +517,10 @@ class ScheduleDataRelationshipsStagesData {
     this.type,
     this.id,
   });
-
   ScheduleDataRelationshipsStagesData.fromJson(Map<String, dynamic> json) {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -516,7 +534,7 @@ class ScheduleDataRelationshipsStages {
 {
   "data": {
     "type": "stages",
-    "id": 2
+    "id": 23
   }
 }
 */
@@ -526,13 +544,11 @@ class ScheduleDataRelationshipsStages {
   ScheduleDataRelationshipsStages({
     this.data,
   });
-
   ScheduleDataRelationshipsStages.fromJson(Map<String, dynamic> json) {
     data = (json['data'] != null && (json['data'] is Map))
         ? ScheduleDataRelationshipsStagesData.fromJson(json['data'])
         : null;
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['data'] = this.data!.toJson();
@@ -546,25 +562,19 @@ class ScheduleDataRelationships {
   "stages": {
     "data": {
       "type": "stages",
-      "id": 2
+      "id": 23
     }
   },
   "days": {
     "data": {
       "type": "days",
-      "id": 1
+      "id": 6
     }
   },
   "performanceDescriptions": {
     "data": {
       "type": "performanceDescriptions",
-      "id": 4
-    }
-  }
-  "artists": {
-    "data": {
-      "type": "artists",
-      "id": "mankind"
+      "id": 48
     }
   }
 }
@@ -594,7 +604,6 @@ class ScheduleDataRelationships {
         ? ScheduleDataRelationshipsArtists.fromJson(json['artists'])
         : null;
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (stages != null) {
@@ -616,11 +625,11 @@ class ScheduleDataRelationships {
 class ScheduleDataAttributes {
 /*
 {
-  "id": 5,
-  "start": "09:30",
-  "end": "19:00",
-  "activity": null,
-  "year": "2022",
+  "id": 354,
+  "start": "10:00",
+  "end": "18:00",
+  "activity": "Kids' activities",
+  "year": "2023",
   "parallel": null
 }
 */
@@ -640,7 +649,6 @@ class ScheduleDataAttributes {
     this.year,
     this.parallel,
   });
-
   ScheduleDataAttributes.fromJson(Map<String, dynamic> json) {
     id = int.tryParse(json['id']?.toString() ?? '');
     start = json['start']?.toString();
@@ -649,7 +657,6 @@ class ScheduleDataAttributes {
     year = json['year']?.toString();
     parallel = json['parallel']?.toString();
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
@@ -666,32 +673,32 @@ class ScheduleData {
 /*
 {
   "type": "performances",
-  "id": 5,
+  "id": 354,
   "attributes": {
-    "id": 5,
-    "start": "09:30",
-    "end": "19:00",
-    "activity": null,
-    "year": "2022",
+    "id": 354,
+    "start": "10:00",
+    "end": "18:00",
+    "activity": "Kids' activities",
+    "year": "2023",
     "parallel": null
   },
   "relationships": {
     "stages": {
       "data": {
         "type": "stages",
-        "id": 2
+        "id": 23
       }
     },
     "days": {
       "data": {
         "type": "days",
-        "id": 1
+        "id": 6
       }
     },
     "performanceDescriptions": {
       "data": {
         "type": "performanceDescriptions",
-        "id": 4
+        "id": 48
       }
     }
   }
@@ -709,7 +716,6 @@ class ScheduleData {
     this.attributes,
     this.relationships,
   });
-
   ScheduleData.fromJson(Map<String, dynamic> json) {
     type = json['type']?.toString();
     id = int.tryParse(json['id']?.toString() ?? '');
@@ -721,7 +727,6 @@ class ScheduleData {
             ? ScheduleDataRelationships.fromJson(json['relationships'])
             : null;
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['type'] = type;
@@ -742,32 +747,32 @@ class Schedule implements Decodable {
   "data": [
     {
       "type": "performances",
-      "id": 5,
+      "id": 354,
       "attributes": {
-        "id": 5,
-        "start": "09:30",
-        "end": "19:00",
-        "activity": null,
-        "year": "2022",
+        "id": 354,
+        "start": "10:00",
+        "end": "18:00",
+        "activity": "Kids' activities",
+        "year": "2023",
         "parallel": null
       },
       "relationships": {
         "stages": {
           "data": {
             "type": "stages",
-            "id": 2
+            "id": 23
           }
         },
         "days": {
           "data": {
             "type": "days",
-            "id": 1
+            "id": 6
           }
         },
         "performanceDescriptions": {
           "data": {
             "type": "performanceDescriptions",
-            "id": 4
+            "id": 48
           }
         }
       }
@@ -776,18 +781,18 @@ class Schedule implements Decodable {
   "included": [
     {
       "type": "stages",
-      "id": 1,
+      "id": 11,
       "attributes": {
-        "id": 1,
+        "id": 11,
         "name": "Gargantua",
-        "year": "2022"
+        "year": "2023"
       },
       "relationships": {
         "performances": [
           {
             "data": {
               "type": "performances",
-              "id": 1
+              "id": 194
             }
           }
         ]
@@ -795,11 +800,12 @@ class Schedule implements Decodable {
     }
   ],
   "meta": {
+    "accessor": "id",
     "page": {
-      "total": 168,
+      "total": 151,
       "last": 0,
       "number": 0,
-      "size": 168
+      "size": 151
     }
   }
 }
@@ -814,7 +820,6 @@ class Schedule implements Decodable {
     this.included,
     this.meta,
   });
-
   Schedule.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null && (json['data'] is List)) {
       final v = json['data'];
@@ -836,7 +841,6 @@ class Schedule implements Decodable {
         ? ScheduleMeta.fromJson(json['meta'])
         : null;
   }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (this.data != null) {

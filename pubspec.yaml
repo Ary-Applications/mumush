@@ -4,7 +4,7 @@ description: A new Flutter project.
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-version: 1.0.0+2
+version: 1.0.8+8
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
@@ -27,6 +27,13 @@ dependencies:
   font_awesome_flutter: ^9.2.0
   shared_preferences: ^2.0.15
 
+  # Show local notifications
+  flutter_local_notifications: ^15.1.0+1
+  # Listen for notifications
+  rxdart: ^0.27.7
+  # Timezone
+  timezone: ^0.9.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -44,6 +51,8 @@ dev_dependencies:
   google_maps_flutter: ^2.1.9
   location: ^5.0.1
   permission_handler: ^10.4.3
+  url_launcher: ^6.0.10
+  maps_launcher: ^2.0.0
 
 flutter_icons:
   android: true
@@ -59,12 +68,9 @@ flutter:
     # Add assets from the images directory to the application.
   assets:
     - assets/art/
-    - assets/art/mumush.svg
-    - assets/art/graund.png
-    - assets/art/sky.png
-    - assets/art/backgraund.png
-    - assets/art/landing_right.png
-    - assets/art/landing_left.png
+    - assets/art/concept_2023_Landing_mobile_base.png
+    - assets/art/home_right.png
+    - assets/art/home_left.png
     - assets/map/
     - assets/map/arboretum_stage.png
     - assets/map/artechno_tent.png

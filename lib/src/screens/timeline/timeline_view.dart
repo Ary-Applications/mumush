@@ -4,9 +4,11 @@ import 'package:mumush/src/screens/base/base.dart';
 import 'package:mumush/src/screens/timeline/square_widget.dart';
 import 'package:mumush/src/screens/timeline/timeline_view_model.dart';
 
+import '../../application/resources/colors.dart';
 import '../../data/model/entity/performance.dart';
 import '../../data/model/entity/schedule_model.dart';
 import '../../data/model/entity/stage.dart';
+import '../../notification/pushnotification.dart';
 
 class TimelineView extends StatefulWidget {
   TimelineView(
@@ -27,6 +29,8 @@ class TimelineViewState extends State<TimelineView> {
   late List<SquareWidget> squareList = [];
   late List<Performance> activePerformances = [];
   late List<Stage> stages = [];
+  late List<int> scheduledIds = [];
+
   Stage selectedStage = Stage(
       ScheduleIncluded(
           attributes: ScheduleIncludedAttributes(name: "GARGANTUA")),
@@ -36,8 +40,9 @@ class TimelineViewState extends State<TimelineView> {
           attributes: ScheduleIncludedAttributes(name: "GARGANTUA")),
       true);
   late TimelineViewModel _viewModel;
-  var activeDay = 1;
+  var activeDay = 6;
   var isFirstDropdown = true;
+  final NotificationApi notificationApi = NotificationApi();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +51,8 @@ class TimelineViewState extends State<TimelineView> {
     return BaseStatefulView<TimelineViewModel>(
         viewModel: getIt<TimelineViewModel>(),
         onInit: (viewModel) async {
+          await notificationApi.init();
+          await getScheduledInts();
           _viewModel = viewModel;
           await _viewModel.getAllScheduleOnlyFromRawData();
 
@@ -58,26 +65,20 @@ class TimelineViewState extends State<TimelineView> {
           _viewModel.getAllDays();
           _viewModel.getAllPerformanceDescriptions();
           setState(() {});
-          activePerformances = _viewModel.getEventsByStageAndDay(
-              stages.first.data.attributes?.id ?? 1, 1);
-          squareList =
-              _viewModel.makeSquareListsFromPerformances(activePerformances);
+          activePerformances =
+              _viewModel.getEventsByStageAndDay(stages.first.data.id ?? 11, 6);
+          squareList = _viewModel.makeSquareListsFromPerformances(
+              scheduledIds,
+              selectedStage.data.attributes?.name?.toUpperCase() ?? "",
+              activePerformances);
           setState(() {});
           await _viewModel.getAllScheduleByAllMeans();
         },
         builder: (context, viewModel, child) {
           return Container(
-            color: const Color(0xFF17194E),
+            color: primaryTimelineColor,
             child: Stack(
               children: [
-                SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: const FittedBox(
-                      fit: BoxFit.cover,
-                      child:
-                          Image(image: AssetImage('assets/art/backgraund.png')),
-                    )),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -114,6 +115,7 @@ class TimelineViewState extends State<TimelineView> {
                                     .toList(),
                                 onChanged: (item) {
                                   setState(() {
+                                    getScheduledInts();
                                     selectedStage =
                                         _viewModel.findStageByUpperCasedTitle(
                                                 item!) ??
@@ -121,11 +123,14 @@ class TimelineViewState extends State<TimelineView> {
                                     selectedStage.isActive = true;
                                     activePerformances =
                                         _viewModel.getEventsByStageAndDay(
-                                            selectedStage.data.attributes?.id ??
-                                                1,
+                                            selectedStage.data.id ?? 11,
                                             activeDay);
                                     squareList = _viewModel
                                         .makeSquareListsFromPerformances(
+                                        scheduledIds,
+                                            selectedStage.data.attributes?.name
+                                                    ?.toUpperCase() ??
+                                                "",
                                             activePerformances);
                                   });
                                 },
@@ -141,7 +146,7 @@ class TimelineViewState extends State<TimelineView> {
                         children: [
                           SizedBox(
                               width: daysWidth,
-                              child: activeDay == 1
+                              child: activeDay == 6
                                   ? buildDayOneTextButton(true)
                                   : buildDayOneTextButton(false)),
                           Container(
@@ -151,7 +156,7 @@ class TimelineViewState extends State<TimelineView> {
                                 border: Border(
                               left: BorderSide(width: 3.0, color: Colors.white),
                             )),
-                            child: activeDay == 2
+                            child: activeDay == 7
                                 ? buildDayTwoTextButton(true)
                                 : buildDayTwoTextButton(false),
                           ),
@@ -162,7 +167,7 @@ class TimelineViewState extends State<TimelineView> {
                                 border: Border(
                               left: BorderSide(width: 3.0, color: Colors.white),
                             )),
-                            child: activeDay == 3
+                            child: activeDay == 8
                                 ? buildDayThreeTextButton(true)
                                 : buildDayThreeTextButton(false),
                           ),
@@ -173,7 +178,7 @@ class TimelineViewState extends State<TimelineView> {
                                 border: Border(
                               left: BorderSide(width: 3.0, color: Colors.white),
                             )),
-                            child: activeDay == 4
+                            child: activeDay == 9
                                 ? buildDayFourTextButton(true)
                                 : buildDayFourTextButton(false),
                           ),
@@ -193,11 +198,22 @@ class TimelineViewState extends State<TimelineView> {
                                 mainAxisSpacing: 0),
                         itemBuilder: (BuildContext context, int index) {
                           return squareList.isNotEmpty
-                              ? SizedBox(
-                                  width:
-                                      (MediaQuery.of(context).size.width) / 2,
-                                  height: 500,
-                                  child: Stack(children: [squareList[index]]))
+                              ? GestureDetector(
+                                  onTap: () {
+                                    // setState(() {
+                                    //   toggleBool(squareList[index].isScheduled);
+                                    //   notificationApi.scheduleNotification(
+                                    //       squareList[index].event);
+                                    // });
+                                  },
+                                  child: SizedBox(
+                                      width:
+                                          (MediaQuery.of(context).size.width) /
+                                              2,
+                                      height: 500,
+                                      child:
+                                          Stack(children: [squareList[index]])),
+                                )
                               : const Text("Error: No Data");
                         },
                       ),
@@ -208,6 +224,13 @@ class TimelineViewState extends State<TimelineView> {
             ),
           );
         });
+  }
+
+  Future<void> getScheduledInts() async {
+    var intFromSharedPreferences = await getListFromSharedPreferences();
+    if (!intFromSharedPreferences.isEmpty) {
+      scheduledIds = intFromSharedPreferences;
+    }
   }
 
   DropdownMenuItem<String> buildDropdownMenuItem(Stage item) {
@@ -272,12 +295,15 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 1;
+          getScheduledInts();
+          activeDay = 6;
           setState(() {
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 1);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
+                selectedStage.data.id ?? 11, activeDay);
+            squareList = _viewModel.makeSquareListsFromPerformances(
+              scheduledIds,
+                selectedStage.data.attributes?.name?.toUpperCase() ?? "",
+                activePerformances);
             selectedStage.isActive = true;
           });
         },
@@ -297,12 +323,15 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 1;
+          activeDay = 6;
           setState(() {
+            getScheduledInts();
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 1);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
+                selectedStage.data.id ?? 11, activeDay);
+            squareList = _viewModel.makeSquareListsFromPerformances(
+              scheduledIds,
+                selectedStage.data.attributes?.name?.toUpperCase() ?? "",
+                activePerformances);
             selectedStage.isActive = true;
           });
         },
@@ -326,12 +355,15 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 2;
+          activeDay = 7;
           setState(() {
+            getScheduledInts();
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 2);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
+                selectedStage.data.id ?? 11, activeDay);
+            squareList = _viewModel.makeSquareListsFromPerformances(
+              scheduledIds,
+                selectedStage.data.attributes?.name?.toUpperCase() ?? "",
+                activePerformances);
             selectedStage.isActive = true;
           });
         },
@@ -351,12 +383,15 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 2;
+          activeDay = 7;
           setState(() {
+            getScheduledInts();
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 2);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
+                selectedStage.data.id ?? 11, activeDay);
+            squareList = _viewModel.makeSquareListsFromPerformances(
+                scheduledIds,
+                selectedStage.data.attributes?.name?.toUpperCase() ?? "",
+                activePerformances);
             selectedStage.isActive = true;
           });
         },
@@ -380,12 +415,15 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 3;
+          activeDay = 8;
           setState(() {
+            getScheduledInts();
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 3);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
+                selectedStage.data.id ?? 11, activeDay);
+            squareList = _viewModel.makeSquareListsFromPerformances(
+              scheduledIds,
+                selectedStage.data.attributes?.name?.toUpperCase() ?? "",
+                activePerformances);
             selectedStage.isActive = true;
           });
         },
@@ -405,12 +443,15 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 3;
+          activeDay = 8;
           setState(() {
+            getScheduledInts();
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 3);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
+                selectedStage.data.id ?? 11, activeDay);
+            squareList = _viewModel.makeSquareListsFromPerformances(
+              scheduledIds,
+                selectedStage.data.attributes?.name?.toUpperCase() ?? "",
+                activePerformances);
             selectedStage.isActive = true;
           });
         },
@@ -434,12 +475,15 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 4;
+          activeDay = 9;
           setState(() {
+            getScheduledInts();
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 4);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
+                selectedStage.data.id ?? 11, activeDay);
+            squareList = _viewModel.makeSquareListsFromPerformances(
+              scheduledIds,
+                selectedStage.data.attributes?.name?.toUpperCase() ?? "",
+                activePerformances);
             selectedStage.isActive = true;
           });
         },
@@ -459,12 +503,15 @@ class TimelineViewState extends State<TimelineView> {
         ),
         autofocus: true,
         onPressed: () {
-          activeDay = 4;
+          activeDay = 9;
           setState(() {
+            getScheduledInts();
             activePerformances = _viewModel.getEventsByStageAndDay(
-                selectedStage.data.attributes?.id ?? 1, 4);
-            squareList =
-                _viewModel.makeSquareListsFromPerformances(activePerformances);
+                selectedStage.data.id ?? 11, activeDay);
+            squareList = _viewModel.makeSquareListsFromPerformances(
+              scheduledIds,
+                selectedStage.data.attributes?.name?.toUpperCase() ?? "",
+                activePerformances);
             selectedStage.isActive = true;
           });
         },
@@ -473,5 +520,9 @@ class TimelineViewState extends State<TimelineView> {
         ),
       );
     }
+  }
+
+  bool toggleBool(bool value) {
+    return !value;
   }
 }

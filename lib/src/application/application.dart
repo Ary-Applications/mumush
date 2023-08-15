@@ -70,7 +70,7 @@ class _MumushState extends State<Mumush> {
                   controller: pageController,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    HomeView(),
+                    const HomeView(),
                     TimelineView(
                       day1: 'THU',
                       day2: 'FRI',

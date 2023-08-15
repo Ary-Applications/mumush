@@ -134,7 +134,7 @@ class _MapViewState extends State<MapView> {
         addMarker(localMarkers, location, description, fireSpaceMarker);
       } else if (description == "Fire") {
         addMarker(localMarkers, location, description, fireMarker);
-      } else if ((description == "Toilet") || (description == "Toilets")) {
+      } else if ((description == "Toilet") || (description == "Toilets") || (description == "Toilet @camping")) {
         addMarker(localMarkers, location, description, toiletMarker);
       } else if (description == "The nest") {
         addMarker(localMarkers, location, description, nestMarker);
@@ -142,9 +142,9 @@ class _MapViewState extends State<MapView> {
         addMarker(localMarkers, location, description, entranceMarker);
       } else if (description == "Toilets & Showers") {
         addMarker(localMarkers, location, description, toiShowMarker);
-      } else if (description == "Medical Zone") {
+      } else if (description == "Medical Outpost / Psy help") {
         addMarker(localMarkers, location, description, medMarker);
-      } else if (description == "Food court") {
+      } else if (description == "Mumush kitchen") {
         addMarker(localMarkers, location, description, foodMarker);
       } else {
         addMarker(localMarkers, location, description, pinMarker);

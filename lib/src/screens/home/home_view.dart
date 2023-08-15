@@ -122,8 +122,8 @@ class _HomeViewState extends State<HomeView>
                   ),
                 ),
                 Positioned(
-                    top: 38,
-                    right: 12,
+                    top: 40,
+                    right: 16,
                     child: TextButton(
                         onPressed: () {
                           showInfoPopUp();

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>&quot;We only use your location to find all the stages and important areas in the Festival.:)&quot;</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -29,9 +31,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>"We help you see the locations on the map!"</string>
+	<string>&quot;We help you see the locations on the map!&quot;</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>"We only use your location to find all the stages and important areas in the Festival.:)"</string>
+	<string>&quot;We only use your location to find all the stages and important areas in the Festival.:)&quot;</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

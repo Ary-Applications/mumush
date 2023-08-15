@@ -142,7 +142,7 @@ class _MapViewState extends State<MapView> {
         addMarker(localMarkers, location, description, entranceMarker);
       } else if (description == "Toilets & Showers") {
         addMarker(localMarkers, location, description, toiShowMarker);
-      } else if (description == "Medical Zone") {
+      } else if (description == "Medical Outpost / Psy help") {
         addMarker(localMarkers, location, description, medMarker);
       } else if (description == "Food court") {
         addMarker(localMarkers, location, description, foodMarker);

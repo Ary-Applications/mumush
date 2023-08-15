@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -51,12 +52,12 @@ class TimelineViewModel extends BaseViewModel {
       var eventShortName = performance.included?.attributes?.shortName;
       var eventLongName = performance.included?.attributes?.longName;
 
-      if (eventShortName != null) {
+      if (eventShortName != null && eventShortName != "") {
         var event = Event(eventShortName, "", (startToEnd));
         var widgetToAdd = SquareWidget(event: event);
         widgetToAdd.isActive = performance.isCurrent;
         squaresToReturn.add(widgetToAdd);
-      } else if (eventName != null) {
+      } else if (eventName != null && eventName != "") {
         var event = Event(eventName, "", (startToEnd));
         var widgetToAdd = SquareWidget(event: event);
         widgetToAdd.isActive = performance.isCurrent;
@@ -191,22 +192,48 @@ class TimelineViewModel extends BaseViewModel {
   getAllScheduleByAllMeans() async {
     final String rawResponse =
         await rootBundle.loadString('assets/rawdata.json');
-    schedule ??= _getDecodedObj<Schedule>(
-        rawResponse, BaseResponseType.performancesResponse);
+
     prefs = await SharedPreferences.getInstance();
     final scheduleFromSharedPrefs = prefs?.getString('json');
-    if (scheduleFromSharedPrefs != null) {
-      schedule = _getDecodedObj<Schedule>(
-          scheduleFromSharedPrefs, BaseResponseType.performancesResponse);
-      await getScheduleByHttp(rawResponse);
-    } else {
-      schedule ??= _getDecodedObj<Schedule>(
-          rawResponse, BaseResponseType.performancesResponse);
-      await getScheduleByHttp(rawResponse);
-    }
 
-    schedule ??= _getDecodedObj<Schedule>(
-        rawResponse, BaseResponseType.performancesResponse);
+    try {
+      final result = await InternetAddress.lookup('api.mumush.world');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        if (kDebugMode) {
+          print('connected');
+        }
+
+        try {
+          final scheduleFromHttp = await _scheduleRepository.getSchedule();
+          if (scheduleFromHttp != null) {
+            schedule = scheduleFromHttp;
+            // Save the schedule fetched from HTTP to SharedPreferences
+            prefs?.setString('json', jsonEncode(schedule));
+          }
+        } catch (e) {
+          debugPrint(e.toString());
+          if (scheduleFromSharedPrefs != null) {
+            schedule = _getDecodedObj<Schedule>(
+                scheduleFromSharedPrefs, BaseResponseType.performancesResponse);
+          } else {
+            schedule = _getDecodedObj<Schedule>(
+                rawResponse, BaseResponseType.performancesResponse);
+          }
+        }
+      }
+    } on SocketException catch (_) {
+      if (kDebugMode) {
+        print('not connected');
+      }
+
+      if (scheduleFromSharedPrefs != null) {
+        schedule = _getDecodedObj<Schedule>(
+            scheduleFromSharedPrefs, BaseResponseType.performancesResponse);
+      } else {
+        schedule = _getDecodedObj<Schedule>(
+            rawResponse, BaseResponseType.performancesResponse);
+      }
+    }
   }
 
   Future<void> getScheduleByHttp(String rawResponse) async {

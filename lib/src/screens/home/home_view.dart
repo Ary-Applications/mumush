@@ -51,9 +51,6 @@ class _HomeViewState extends State<HomeView>
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return BaseStatefulView<HomeViewModel>(
         viewModel: getIt<HomeViewModel>(),
         onInit: (viewModel) {
@@ -107,7 +104,8 @@ class _HomeViewState extends State<HomeView>
                       return TextButton(
                         onPressed: () {
                           // Show map options dialog
-                          showMapOptions(context, followLink as void Function());
+                          showMapOptions(
+                              context, followLink as void Function());
                         },
                         child: AnimatedBuilder(
                           animation: _colorAnimation,
@@ -124,7 +122,7 @@ class _HomeViewState extends State<HomeView>
                   ),
                 ),
                 Positioned(
-                    top: 20,
+                    top: 38,
                     right: 12,
                     child: TextButton(
                         onPressed: () {

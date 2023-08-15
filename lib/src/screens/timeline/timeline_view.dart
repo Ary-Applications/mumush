@@ -59,8 +59,8 @@ class TimelineViewState extends State<TimelineView> {
           _viewModel.getAllDays();
           _viewModel.getAllPerformanceDescriptions();
           setState(() {});
-          activePerformances = _viewModel.getEventsByStageAndDay(
-              stages.first.data.id ?? 11, 6);
+          activePerformances =
+              _viewModel.getEventsByStageAndDay(stages.first.data.id ?? 11, 6);
           squareList =
               _viewModel.makeSquareListsFromPerformances(activePerformances);
           setState(() {});
@@ -114,8 +114,7 @@ class TimelineViewState extends State<TimelineView> {
                                     selectedStage.isActive = true;
                                     activePerformances =
                                         _viewModel.getEventsByStageAndDay(
-                                            selectedStage.data.id ??
-                                                11,
+                                            selectedStage.data.id ?? 11,
                                             activeDay);
                                     squareList = _viewModel
                                         .makeSquareListsFromPerformances(

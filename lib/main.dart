@@ -5,7 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   // Set up injectable
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  SharedPreferences.setMockInitialValues({});
+  await SharedPreferences.getInstance();
+  // SharedPreferences.setMockInitialValues({});
   runApp(const Mumush());
 }

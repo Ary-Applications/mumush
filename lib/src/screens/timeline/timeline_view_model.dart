@@ -40,8 +40,8 @@ class TimelineViewModel extends BaseViewModel {
     stages = [placeholderStage];
   }
 
-  List<SquareWidget> makeSquareListsFromPerformances(
-      List<Performance> performances) {
+  List<SquareWidget> makeSquareListsFromPerformances(List<int> scheduledIds,
+      String stageName, List<Performance> performances) {
     List<SquareWidget> squaresToReturn = [];
     for (var performance in performances) {
       var startDate = performance.data.attributes?.start ?? "";
@@ -53,19 +53,43 @@ class TimelineViewModel extends BaseViewModel {
       var eventLongName = performance.included?.attributes?.longName;
 
       if (eventShortName != null && eventShortName != "") {
-        var event = Event(eventShortName, "", (startToEnd));
+        var event = Event(
+            performance.data.id,
+            eventShortName,
+            stageName,
+            (startToEnd),
+            getDateFromNumber(
+                performance.data.relationships?.days?.data?.id ?? 0,
+                performance.data?.attributes?.start ?? "0"));
         var widgetToAdd = SquareWidget(event: event);
         widgetToAdd.isActive = performance.isCurrent;
+        widgetToAdd.isScheduled = scheduledIds.contains(event.id);
         squaresToReturn.add(widgetToAdd);
       } else if (eventName != null && eventName != "") {
-        var event = Event(eventName, "", (startToEnd));
+        var event = Event(
+            performance.data.id,
+            eventName,
+            stageName,
+            (startToEnd),
+            getDateFromNumber(
+                performance.data.relationships?.days?.data?.id ?? 0,
+                performance.data?.attributes?.start ?? "0"));
         var widgetToAdd = SquareWidget(event: event);
         widgetToAdd.isActive = performance.isCurrent;
+        widgetToAdd.isScheduled = scheduledIds.contains(event.id);
         squaresToReturn.add(widgetToAdd);
       } else if (eventLongName != null) {
-        var event = Event(eventLongName, "", (startToEnd));
+        var event = Event(
+            performance.data.id,
+            eventLongName,
+            stageName,
+            (startToEnd),
+            getDateFromNumber(
+                performance.data.relationships?.days?.data?.id ?? 0,
+                performance.data?.attributes?.start ?? "0"));
         var widgetToAdd = SquareWidget(event: event);
         widgetToAdd.isActive = performance.isCurrent;
+        widgetToAdd.isScheduled = scheduledIds.contains(event.id);
         squaresToReturn.add(widgetToAdd);
       } else {
         ScheduleIncluded? foundArtist;
@@ -86,9 +110,17 @@ class TimelineViewModel extends BaseViewModel {
             print("DEBUG: Could find artist from artists attributes: $name");
           }
           if (name != null) {
-            var event = Event(name, "", (startToEnd));
+            var event = Event(
+                performance.data.id,
+                name,
+                stageName,
+                (startToEnd),
+                getDateFromNumber(
+                    performance.data.relationships?.days?.data?.id ?? 0,
+                    performance.data?.attributes?.start ?? "0"));
             var widgetToAdd = SquareWidget(event: event);
             widgetToAdd.isActive = performance.isCurrent;
+            widgetToAdd.isScheduled = scheduledIds.contains(event.id);
             squaresToReturn.add(widgetToAdd);
           } else {
             var maybeName = performance.data.relationships?.artists?.data?.id;
@@ -96,9 +128,17 @@ class TimelineViewModel extends BaseViewModel {
               print("DEBUG: Could not find NAME! Maybe this? : $maybeName");
             }
             if (maybeName != null) {
-              var event = Event(maybeName, "", (startToEnd));
+              var event = Event(
+                  performance.data.id,
+                  maybeName,
+                  stageName,
+                  (startToEnd),
+                  getDateFromNumber(
+                      performance.data.relationships?.days?.data?.id ?? 0,
+                      performance.data?.attributes?.start ?? "0"));
               var widgetToAdd = SquareWidget(event: event);
               widgetToAdd.isActive = performance.isCurrent;
+              widgetToAdd.isScheduled = scheduledIds.contains(event.id);
               squaresToReturn.add(widgetToAdd);
             }
           }
@@ -109,9 +149,17 @@ class TimelineViewModel extends BaseViewModel {
           }
           var maybeName = performance.data.relationships?.artists?.data?.id;
           if (maybeName != null) {
-            var event = Event(maybeName, "", (startToEnd));
+            var event = Event(
+                performance.data.id,
+                maybeName,
+                stageName,
+                (startToEnd),
+                getDateFromNumber(
+                    performance.data.relationships?.days?.data?.id ?? 0,
+                    performance.data?.attributes?.start ?? "0"));
             var widgetToAdd = SquareWidget(event: event);
             widgetToAdd.isActive = performance.isCurrent;
+            widgetToAdd.isScheduled = scheduledIds.contains(event.id);
             squaresToReturn.add(widgetToAdd);
             if (kDebugMode) {
               print('DEBUG: Name found as artist data id');
@@ -122,9 +170,17 @@ class TimelineViewModel extends BaseViewModel {
             }
             if (performance.data.attributes?.activity != null) {
               var activityName = performance.data.attributes?.activity;
-              var event = Event(activityName ?? "", "", (startToEnd));
+              var event = Event(
+                  performance.data.id,
+                  activityName ?? "",
+                  stageName,
+                  (startToEnd),
+                  getDateFromNumber(
+                      performance.data.relationships?.days?.data?.id ?? 0,
+                      performance.data?.attributes?.start ?? "0"));
               var widgetToAdd = SquareWidget(event: event);
               widgetToAdd.isActive = performance.isCurrent;
+              widgetToAdd.isScheduled = scheduledIds.contains(event.id);
               squaresToReturn.add(widgetToAdd);
             } else {
               if (kDebugMode) {
@@ -266,14 +322,14 @@ class TimelineViewModel extends BaseViewModel {
 
   int? getCurrentDayNumberFromDate(int dayNr) {
     switch (dayNr) {
+      case 17:
+        return 6;
       case 18:
-        return 1;
+        return 7;
       case 19:
-        return 2;
+        return 8;
       case 20:
-        return 3;
-      case 21:
-        return 4;
+        return 9;
       default:
         return null;
     }
@@ -539,5 +595,34 @@ class TimelineViewModel extends BaseViewModel {
         }
       }
     }
+  }
+
+  getDateFromNumber(int number, String hourString) {
+    if (number < 6 || number > 10) {
+      throw ArgumentError('Number should be between 6 and 10');
+    }
+
+    final hourParts = hourString.split(':');
+    if (hourParts.length != 2) {
+      throw ArgumentError('Hour should be in the format "HH:mm"');
+    }
+
+    final hour = int.tryParse(hourParts[0]);
+    final minute = int.tryParse(hourParts[1]);
+
+    if (hour == null ||
+        minute == null ||
+        hour < 0 ||
+        hour >= 24 ||
+        minute < 0 ||
+        minute >= 60) {
+      throw ArgumentError('Invalid hour or minute');
+    }
+
+    final startingDate = DateTime(2023, 8, 17);
+    final daysToAdd = number - 6;
+
+    final dateWithoutTime = startingDate.add(Duration(days: daysToAdd));
+    return dateWithoutTime.add(Duration(hours: hour, minutes: minute));
   }
 }
